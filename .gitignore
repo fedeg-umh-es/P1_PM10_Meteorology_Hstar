@@ -9,3 +9,10 @@ figures/*
 !data_processed/.gitkeep
 !results/.gitkeep
 !figures/.gitkeep
+# Allow rvvcca subdirectory structure (data files remain ignored)
+!data_raw/rvvcca/
+data_raw/rvvcca/*
+!data_raw/rvvcca/.gitkeep
+!data_raw/rvvcca/official_drop/
+data_raw/rvvcca/official_drop/*
+!data_raw/rvvcca/official_drop/.gitkeep
