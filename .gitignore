@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.DS_Store
+data_raw/*
+data_processed/*
+results/*
+figures/*
+!data_raw/.gitkeep
+!data_processed/.gitkeep
+!results/.gitkeep
+!figures/.gitkeep
