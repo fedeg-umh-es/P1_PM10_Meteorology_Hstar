@@ -1,0 +1,40 @@
+{
+  "experiment_name": "e2_met_madrid_pm10",
+  "dataset_path": "/Users/federicogarciacrespi/Public/P1_PM10_Meteorology_Hstar/data_processed/madrid_pm10_meteorology_experiment_base.csv",
+  "results_dir": "/Users/federicogarciacrespi/Public/P1_PM10_Meteorology_Hstar/results/e2_met_madrid_pm10",
+  "timestamp_col": "timestamp",
+  "target_col": "PM10",
+  "train_start": "2019-01-01 00:00:00",
+  "test_start": "2023-01-01 00:00:00",
+  "test_end": "2023-12-31 23:00:00",
+  "horizon_max": 24,
+  "origin_stride_hours": 24,
+  "min_train_rows": 8760,
+  "lags": [1, 2, 3, 6, 12, 24, 48, 168],
+  "calendar_features": ["hour_of_day", "day_of_week", "month", "julian_day"],
+  "meteo_features": [
+    "temp_c",
+    "humidity_pct",
+    "pressure_hpa",
+    "wind_speed_ms",
+    "wind_dir_deg",
+    "solar_rad_wm2",
+    "precip_mm"
+  ],
+  "xgboost_params": {
+    "n_estimators": 300,
+    "max_depth": 4,
+    "learning_rate": 0.05,
+    "subsample": 0.9,
+    "colsample_bytree": 0.9,
+    "objective": "reg:squarederror",
+    "random_state": 42,
+    "n_jobs": 1
+  },
+  "include_sarima": true,
+  "sarima_order": [1, 0, 1],
+  "sarima_seasonal_order": [1, 0, 0, 24],
+  "dm_horizons": [1, 7],
+  "dm_loss": "squared_error",
+  "random_seed": 42
+}
