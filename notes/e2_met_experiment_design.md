@@ -1,5 +1,9 @@
 # E2-MET Madrid PM10 Experiment Design
 
+## Canonical Protocol
+
+`E2-MET canonical protocol = Madrid PM10, h=1..24, full expanding rolling-origin over 2023 origins, train-only preprocessing inside each fold, persistence primary baseline, SARIMA secondary baseline, XGBoost-direct main comparison model, lags_only vs lags_meteo under identical splits/metrics, and DM-HLN inference only on the full run.`
+
 ## Scope
 
 - Dataset: `data_processed/madrid_pm10_meteorology_experiment_base.csv`
@@ -108,3 +112,4 @@
   - `delta_H* ≈ 0`
   - DM is non-significant
 - That null result remains publishable because both conditions are evaluated under identical rolling-origin evidence.
+- Smoke-run outputs are pipeline-validation artifacts only and are not manuscript evidence.
