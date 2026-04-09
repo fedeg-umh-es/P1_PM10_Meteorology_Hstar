@@ -26,10 +26,11 @@ python3 code/madrid_sarima_make_figures.py
 |------|-------------|
 | `figure_skill_vs_persistence.{png,pdf}` | Figure 1: Horizon-wise skill curves (C1, C2, C3, SARIMA) vs persistence with 95% bootstrap CI bands. |
 | `figure_skill_vs_sarima.{png,pdf}` | Figure 2: Horizon-wise skill curves (C1, C2, C3) vs SARIMA with 95% bootstrap CI bands. |
-| `figure_dm_panel.{png,pdf}` | Figure 3: DM significance dot-plot panel. Filled circles = DM p < 0.05; open circles = not significant. Green = positive skill, red = negative skill. |
+| `figure_dm_vs_persistence.{png,pdf}` | Figure 3A: DM significance dot-plot vs persistence. Filled circles = DM p < 0.05; open circles = not significant. Green = positive skill, red = negative skill. |
+| `figure_dm_vs_sarima.{png,pdf}` | Figure 3B: DM significance dot-plot vs SARIMA. Filled circles = DM p < 0.05; open circles = not significant. Green = positive skill, red = negative skill. |
 | `figure_hstar_summary.{png,pdf}` | Figure 4: Grouped bar chart of H* strict and H* relax for all model/baseline combinations. |
 
-All figures exported at 300 dpi.
+PNG figures exported at 600 dpi. PDF figures exported as vector outputs.
 
 ## Limitations and assumptions
 

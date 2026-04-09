@@ -14,7 +14,8 @@ Input tables (results/madrid_sarima/):
 Outputs (results/madrid_sarima/figures/):
   - figure_skill_vs_persistence.{png,pdf}
   - figure_skill_vs_sarima.{png,pdf}
-  - figure_dm_panel.{png,pdf}
+  - figure_dm_vs_persistence.{png,pdf}
+  - figure_dm_vs_sarima.{png,pdf}
   - figure_hstar_summary.{png,pdf}
 """
 
@@ -51,22 +52,34 @@ COLORS = {
 }
 LINESTYLES = {"C1": "-", "C2": "-", "C3": "--", "SARIMA": ":"}
 ALPHA_CI   = 0.15
-LW         = 1.6
-TICK_FS    = 9
-LABEL_FS   = 10
-LEGEND_FS  = 9
+LW         = 2.0
+TICK_FS    = 11
+LABEL_FS   = 12
+LEGEND_FS  = 11
+TITLE_FS   = 14
+MARKER_MS  = 8
 
 plt.rcParams.update({
     "font.family":      "sans-serif",
     "axes.spines.top":  False,
     "axes.spines.right":False,
-    "axes.linewidth":   0.8,
-    "xtick.major.size": 3,
-    "ytick.major.size": 3,
+    "font.size":        12,
+    "axes.titlesize":   TITLE_FS,
+    "axes.labelsize":   LABEL_FS,
+    "axes.linewidth":   1.2,
+    "xtick.major.size": 4,
+    "ytick.major.size": 4,
+    "xtick.major.width":1.0,
+    "ytick.major.width":1.0,
     "xtick.labelsize":  TICK_FS,
     "ytick.labelsize":  TICK_FS,
     "legend.frameon":   False,
     "legend.fontsize":  LEGEND_FS,
+    "text.color":       "#000000",
+    "axes.labelcolor":  "#000000",
+    "axes.edgecolor":   "#000000",
+    "xtick.color":      "#000000",
+    "ytick.color":      "#000000",
 })
 
 HORIZONS = np.arange(1, 25)
@@ -74,7 +87,10 @@ HORIZONS = np.arange(1, 25)
 def _save(fig, name):
     for ext in ("png", "pdf"):
         path = os.path.join(FIG_DIR, f"{name}.{ext}")
-        fig.savefig(path, dpi=300, bbox_inches="tight")
+        if ext == "png":
+            fig.savefig(path, dpi=600, bbox_inches="tight")
+        else:
+            fig.savefig(path, bbox_inches="tight")
         print(f"  saved: {path}")
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -146,138 +162,127 @@ def make_fig2():
     plt.close(fig)
 
 # ──────────────────────────────────────────────────────────────────────────────
-# FIGURE 3 — DM significance panel (dot-plot style)
+# FIGURE 3A / 3B — DM significance figures (split for manuscript legibility)
 # ──────────────────────────────────────────────────────────────────────────────
-def make_fig3():
-    """
-    Two sub-panels:
-      Panel A: vs persistence — rows: SARIMA, C1, C2, C3
-      Panel B: vs SARIMA      — rows: C1, C2, C3
-    Each cell: filled circle = DM significant (p<0.05), open circle otherwise.
-    Circle color encodes skill sign: green = positive skill, red = negative, grey = near-zero.
-    """
+def _build_dm_lookups():
     rows_A = ["SARIMA", "C1", "C2", "C3"]
     rows_B = ["C1", "C2", "C3"]
-
-    # build lookup dicts: (condition, horizon) -> (skill, significant)
-    def build_lookup(df):
-        lk = {}
-        for _, row in df.iterrows():
-            key = (row["condition"] if "condition" in df.columns else row.get("baseline", row.get("condition")),
-                   int(row["horizon"]))
-            lk[key] = (row["skill"], row["significant_0.05"] if isinstance(row["significant_0.05"], bool)
-                        else str(row["significant_0.05"]).lower() == "true")
-        return lk
 
     lk_A = {}
     for _, row in dm_A.iterrows():
         cond = row["condition"] if "condition" in dm_A.columns else None
-        base = row["baseline"]
-        h    = int(row["horizon"])
-        sk   = row["skill"]
-        sig  = str(row["significant_0.05"]).lower() == "true"
-        # key by condition; for SARIMA rows use condition == "SARIMA" (it's in baseline col when it's the model)
-        # Actually dm_A has baseline=persistence, condition=C1/C2/C3 AND a separate SARIMA row
-        # Let's check:
-        key = (cond, h)
-        lk_A[key] = (sk, sig)
+        h = int(row["horizon"])
+        lk_A[(cond, h)] = (
+            row["skill"],
+            str(row["significant_0.05"]).lower() == "true",
+        )
 
-    # SARIMA vs persistence is in metrics table
     for _, row in met.iterrows():
-        h   = int(row["horizon"])
-        sk  = row["skill_sarima_vs_persist"]
-        # get DM p from dm_A where condition == "SARIMA" if present, else use DM stat directly
-        # dm_A only has C1,C2,C3 so we derive from the SARIMA DM panel if it exists
-        # For SARIMA significance, we'll read from dm_A filtering baseline==persistence and look for SARIMA
-        # Actually check dm_A columns:
-        lk_A[("SARIMA", h)] = (sk, None)  # placeholder
+        h = int(row["horizon"])
+        lk_A[("SARIMA", h)] = (row["skill_sarima_vs_persist"], None)
 
-    # Override SARIMA significance from dm_A if a SARIMA condition row exists
     sarima_in_dm_A = dm_A[dm_A["condition"].str.upper() == "SARIMA"] if "condition" in dm_A.columns else pd.DataFrame()
     if not sarima_in_dm_A.empty:
         for _, row in sarima_in_dm_A.iterrows():
-            h   = int(row["horizon"])
-            sk  = row["skill"]
-            sig = str(row["significant_0.05"]).lower() == "true"
-            lk_A[("SARIMA", h)] = (sk, sig)
-    else:
-        # derive from metrics: use p from dm_A SARIMA rows if available via panel_B approach
-        # As fallback, mark SARIMA significance as unknown (None) — will be shown as open circle
-        pass
+            h = int(row["horizon"])
+            lk_A[("SARIMA", h)] = (
+                row["skill"],
+                str(row["significant_0.05"]).lower() == "true",
+            )
 
     lk_B = {}
     for _, row in dm_B.iterrows():
         cond = row["condition"]
-        h    = int(row["horizon"])
-        sk   = row["skill"]
-        sig  = str(row["significant_0.05"]).lower() == "true"
-        lk_B[(cond, h)] = (sk, sig)
+        h = int(row["horizon"])
+        lk_B[(cond, h)] = (
+            row["skill"],
+            str(row["significant_0.05"]).lower() == "true",
+        )
 
-    def skill_color(sk):
-        if sk is None:
-            return "#aaaaaa"
-        if sk > 0.02:
-            return "#2ca25f"
-        if sk < -0.02:
-            return "#de2d26"
+    return rows_A, rows_B, lk_A, lk_B
+
+
+def _skill_color(sk):
+    if sk is None:
         return "#aaaaaa"
+    if sk > 0.02:
+        return "#2ca25f"
+    if sk < -0.02:
+        return "#de2d26"
+    return "#aaaaaa"
 
-    fig, axes = plt.subplots(2, 1, figsize=(7.5, 4.8),
-                              gridspec_kw={"height_ratios": [4, 3], "hspace": 0.55})
 
-    for ax, rows, lk, subtitle in [
-        (axes[0], rows_A, lk_A, "A — vs persistence"),
-        (axes[1], rows_B, lk_B, "B — vs SARIMA"),
-    ]:
-        for ri, row_label in enumerate(rows):
-            for h in HORIZONS:
-                val = lk.get((row_label, h), None)
-                if val is None:
-                    # no data
-                    ax.plot(h, ri, "x", color="#cccccc", ms=4, zorder=2)
-                    continue
-                sk, sig = val
-                c = skill_color(sk)
-                if sig:
-                    ax.plot(h, ri, "o", color=c, ms=6, zorder=3, mew=0)
-                else:
-                    ax.plot(h, ri, "o", color="white", ms=6, zorder=3,
-                            mew=1.0, mec=c)
-
-        # h=5-10 band
-        ax.axvspan(4.5, 10.5, color="gold", alpha=0.10, zorder=0)
-        ax.set_yticks(range(len(rows)))
-        ax.set_yticklabels(rows, fontsize=TICK_FS)
-        ax.set_xlim(0.5, 24.5)
-        ax.set_xticks([1, 5, 10, 15, 20, 24])
-        ax.set_xlabel("Forecast horizon h (hours)", fontsize=LABEL_FS)
-        ax.set_title(subtitle, fontsize=LABEL_FS, loc="left", pad=4)
-        ax.axhline(-0.5, color="#dddddd", lw=0.5)
-        for r in range(len(rows) - 1):
-            ax.axhline(r + 0.5, color="#dddddd", lw=0.5)
-        ax.tick_params(axis="y", length=0)
-
-    # legend
-    legend_elements = [
+def _dm_legend_elements():
+    return [
         Line2D([0], [0], marker="o", color="w", markerfacecolor="#2ca25f",
-               markersize=7, label="skill > 0, DM p < 0.05"),
+               markersize=9, label="positive skill, DM p < 0.05"),
         Line2D([0], [0], marker="o", color="w", markerfacecolor="white",
-               markersize=7, markeredgecolor="#2ca25f", markeredgewidth=1,
-               label="skill > 0, DM p ≥ 0.05"),
+               markersize=9, markeredgecolor="#2ca25f", markeredgewidth=1.4,
+               label="positive skill, DM p ≥ 0.05"),
         Line2D([0], [0], marker="o", color="w", markerfacecolor="white",
-               markersize=7, markeredgecolor="#de2d26", markeredgewidth=1,
-               label="skill < 0, not significant"),
+               markersize=9, markeredgecolor="#de2d26", markeredgewidth=1.4,
+               label="negative skill, DM p ≥ 0.05"),
         Line2D([0], [0], marker="o", color="w", markerfacecolor="#de2d26",
-               markersize=7, label="skill < 0, DM p < 0.05"),
-        mpatches.Patch(facecolor="gold", alpha=0.4, label="h = 5–10"),
+               markersize=9, label="negative skill, DM p < 0.05"),
+        Line2D([0], [0], marker="x", color="#bdbdbd", linestyle="None",
+               markersize=8, markeredgewidth=1.2, label="no data"),
+        mpatches.Patch(facecolor="#f6e27a", alpha=0.55, label="highlighted interval h = 5–10"),
     ]
-    axes[0].legend(handles=legend_elements, loc="upper right",
-                   fontsize=8, ncol=2, frameon=False)
 
-    fig.suptitle("DM significance panel — Madrid station 24, 2023", fontsize=LABEL_FS, y=1.01)
-    fig.tight_layout()
-    _save(fig, "figure_dm_panel")
+
+def _make_dm_single_figure(rows, lk, title, output_name):
+    fig, ax = plt.subplots(figsize=(7.2, 5.2))
+
+    for ri, row_label in enumerate(rows):
+        for h in HORIZONS:
+            val = lk.get((row_label, h), None)
+            if val is None:
+                ax.plot(h, ri, "x", color="#bdbdbd", ms=6, mew=1.2, zorder=2)
+                continue
+            sk, sig = val
+            c = _skill_color(sk)
+            if sig:
+                ax.plot(h, ri, "o", color=c, ms=MARKER_MS, zorder=3, mew=0)
+            else:
+                ax.plot(h, ri, "o", color="white", ms=MARKER_MS, zorder=3, mew=1.4, mec=c)
+
+    ax.axvspan(4.5, 10.5, color="#f6e27a", alpha=0.20, zorder=0)
+    ax.set_yticks(range(len(rows)))
+    ax.set_yticklabels(rows, fontsize=TICK_FS)
+    ax.set_xlim(0.5, 24.5)
+    ax.set_xticks([1, 5, 10, 15, 20, 24])
+    ax.set_xlabel("Forecast horizon h (hours)", fontsize=LABEL_FS)
+    ax.axhline(-0.5, color="#d9d9d9", lw=0.8)
+    for r in range(len(rows) - 1):
+        ax.axhline(r + 0.5, color="#d9d9d9", lw=0.8)
+    ax.grid(axis="x", color="#e6e6e6", linewidth=0.8)
+    ax.tick_params(axis="y", length=0)
+    ax.tick_params(axis="x", pad=4)
+
+    fig.legend(
+        handles=_dm_legend_elements(),
+        loc="lower center",
+        bbox_to_anchor=(0.5, 0.02),
+        fontsize=LEGEND_FS,
+        ncol=2,
+        frameon=False,
+        columnspacing=1.6,
+        handletextpad=0.6,
+    )
+    fig.suptitle(
+        f"{title} — Madrid station 24, 2023\n"
+        r"$\bf{shaded:}$" + " h = 5–10 (strong-claim window)",
+        fontsize=TITLE_FS - 1, y=0.97,
+    )
+    fig.subplots_adjust(left=0.12, right=0.98, top=0.82, bottom=0.28)
+    _save(fig, output_name)
     plt.close(fig)
+
+
+def make_fig3():
+    rows_A, rows_B, lk_A, lk_B = _build_dm_lookups()
+    _make_dm_single_figure(rows_A, lk_A, "DM significance vs persistence", "figure_dm_vs_persistence")
+    _make_dm_single_figure(rows_B, lk_B, "DM significance vs SARIMA", "figure_dm_vs_sarima")
 
 # ──────────────────────────────────────────────────────────────────────────────
 # FIGURE 4 — H* summary bar chart
