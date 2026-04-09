@@ -16,6 +16,16 @@
 - Classical reference: SARIMA
 - Core ML model: XGBoost-direct
 
+## Scientific Question
+
+Does adding meteorological exogenous variables improve operational predictability beyond lag-only information under identical rolling-origin evaluation?
+
+The core result may be null:
+- `delta_skill ≈ 0`
+- `delta_H* ≈ 0`
+
+That null result remains publishable and scientifically informative.
+
 ## Minimum Viable Design
 
 - Train window:
@@ -29,6 +39,21 @@
   - `h = 1..24`
   - taken from the already implemented Madrid branch in the repo
 - Same origins, same horizons, same metrics, same persistence baseline for both conditions.
+
+## Two Conditions, Identical Protocol
+
+| Element | Condition A | Condition B |
+|---|---|---|
+| Label | `lags_only` | `lags_meteo` |
+| Features | PM10 lags + calendar | PM10 lags + calendar + meteorology |
+| Main model | XGBoost-direct | XGBoost-direct |
+| Primary baseline | persistence | persistence |
+| Secondary baseline | SARIMA | SARIMA |
+| Folds | identical | identical |
+| Horizon set | identical | identical |
+| Metrics | identical | identical |
+
+The only intended difference between A and B is the inclusion of meteorological covariates.
 
 ## Features
 
@@ -63,6 +88,16 @@
 - Feature imputation for XGBoost uses train-window medians only.
 - No scaler or imputer is fitted on the full dataset.
 
+## Leakage Controls
+
+| Risk | Control |
+|---|---|
+| Global preprocessing | Feature imputation statistics are fitted on fold-train only |
+| Future target leakage | Train window ends strictly before each origin |
+| Asymmetric folds between A/B | Both conditions reuse the same rolling origins |
+| Random split contamination | No random splits are used anywhere |
+| Meteorological leakage | Only meteorology available at the forecast origin timestamp may be used |
+
 ## Models
 
 - Persistence:
@@ -79,6 +114,8 @@
   - one model per horizon
   - same hyperparameters in both conditions
   - no aggressive tuning
+
+SARIMA is part of the canonical workflow as an active secondary baseline.
 
 ## Metrics
 
@@ -97,6 +134,21 @@
   - default horizons: `h=1` and `h=7`
   - default loss: squared error
 
+## Outputs
+
+Per-run outputs:
+- `predictions_all_models.csv`
+- `metrics_all_models.csv`
+- `hstar_summary.csv`
+- `dm_lags_meteo_vs_lags_only.csv`
+
+Manuscript-facing outputs:
+- `table_metrics_long.csv`
+- `table_hstar_summary.csv`
+- `table_dm_lags_meteo_vs_lags_only.csv`
+- `table_xgboost_horizon_wide.csv`
+- `table_delta_lags_meteo_vs_lags_only.csv`
+
 ## Output Layout
 
 - `results/e2_met_madrid_pm10/rolling_origins.csv`
@@ -113,3 +165,19 @@
   - DM is non-significant
 - That null result remains publishable because both conditions are evaluated under identical rolling-origin evidence.
 - Smoke-run outputs are pipeline-validation artifacts only and are not manuscript evidence.
+
+## Interpretation Matrix
+
+| Result pattern | Interpretation |
+|---|---|
+| `delta_H* > 0` and DM significant | Meteorological variables improve operational predictability |
+| `delta_H* ≈ 0` and DM non-significant | Meteorology adds no measurable operational value beyond lags |
+| `delta_H* < 0` and DM significant | Meteorological variables degrade operational skill and require inspection |
+| Positive numerical deltas without significance | Directional trend only; report as inconclusive |
+
+## Manual Confirmations Before Full Run
+
+1. The canonical Madrid base dataset covers the intended 2019 to 2023 window without unexpected shrinkage.
+2. Meteorological columns used by `lags_meteo` are observed at the prediction origin timestamp and are not future values.
+3. The SARIMA order in the canonical config is accepted as the final paper baseline setting, or is updated once before the full run and then frozen.
+4. The full run, not the smoke run, is the source of any manuscript claims.
