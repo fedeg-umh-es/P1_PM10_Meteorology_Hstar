@@ -18,3 +18,12 @@ data_raw/rvvcca/*
 !data_raw/rvvcca/official_drop/
 data_raw/rvvcca/official_drop/*
 !data_raw/rvvcca/official_drop/.gitkeep
+
+# Raw data — not tracked (large files, public sources)
+# Download instructions: see README.md under Data Sources
+data_raw/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
