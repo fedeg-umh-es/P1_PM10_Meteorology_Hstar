@@ -219,6 +219,13 @@ def predict_sarima(train_df: pd.DataFrame, config: dict[str, Any]) -> dict[int, 
         return {h: np.nan for h in range(1, horizon_max + 1)}
 
     y_train = impute_target_train_only(train_df[target_col])
+
+    # Cap training window to avoid Kalman-filter memory crash on long series.
+    # 2 years of hourly data is sufficient for SARIMA convergence.
+    sarima_max_rows = int(config.get("sarima_max_train_rows", 17520))
+    if len(y_train) > sarima_max_rows:
+        y_train = y_train.iloc[-sarima_max_rows:]
+
     try:
         model = SARIMAX(
             y_train,

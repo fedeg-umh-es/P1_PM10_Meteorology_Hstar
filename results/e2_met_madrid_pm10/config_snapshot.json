@@ -46,6 +46,7 @@
     "n_jobs": 1
   },
   "include_sarima": true,
+  "sarima_max_train_rows": 17520,
   "sarima_order": [
     1,
     0,
@@ -59,7 +60,9 @@
   ],
   "dm_horizons": [
     1,
-    7
+    6,
+    12,
+    24
   ],
   "dm_loss": "squared_error",
   "random_seed": 42,
