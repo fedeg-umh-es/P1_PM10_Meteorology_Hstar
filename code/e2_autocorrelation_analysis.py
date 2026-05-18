@@ -176,7 +176,7 @@ plt.rcParams.update({
 # all with ΔH*=0 except Dublin Airport (ΔH*=1).
 LABEL_OFFSETS = {
     # station_name          : (dx_points, dy_points, ha)
-    "Edenderry":   (-48,  8,  "left"),
+    "Edenderry":   (  6,  8,  "left"),
     "Birr":        (-10, -16, "center"),   # below
     "Dublin Airp.":( 6,   5,  "left"),    # above-right
     "Pearse St.":  (-48, -16, "left"),    # below-left
