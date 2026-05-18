@@ -1,5 +1,5 @@
 % cover_letter.tex
-% Cover letter for submission to Aerosol Science and Engineering (Springer)
+% Cover letter for submission to Atmospheric Research (Elsevier, ISSN 0169-8095)
 % Compile: pdflatex manuscripts/cover_letter.tex
 
 \documentclass[12pt,a4paper]{article}
@@ -48,7 +48,7 @@ A multi-city, multi-horizon skill analysis with XGBoost and SARIMA''},
 \end{quote}
 
 for consideration for publication in
-\textit{Aerosol Science and Engineering}.
+\textit{Atmospheric Research}.
 The manuscript is original, has not been published previously, and is not
 currently under consideration elsewhere.
 
@@ -88,22 +88,26 @@ capture the dominant variance and meteorology adds little.
 
 % ── relevance to journal ──────────────────────────────────────────────────────
 
-\textbf{Relevance to \textit{Aerosol Science and Engineering}.}
-PM$_{10}$ is by definition an aerosol-phase quantity, and the question of
-how far into the future its concentration can be reliably predicted sits
-squarely within the journal's scope on aerosol measurement, modelling, and
-atmospheric behaviour.  Our study provides the first systematic
-multi-city analysis of the \emph{forecast horizon} for PM$_{10}$, using a
-rigorous leakage-free backtesting protocol and a compact metric ($H^*$) that
-translates directly into operational guidance for air quality management
-systems.  The mechanistic interpretation --- linking the meteorology benefit
-to the local autocorrelation-persistence regime of the aerosol time series ---
-contributes new understanding of how atmospheric dynamics govern PM$_{10}$
-predictability.  The revised EU Directive 2024/2881/EU, which halves the
-annual PM$_{10}$ limit to 20\,\si{\micro\gram\per\cubic\metre} by 2030,
-makes accurate medium-horizon (12--18\,h) forecasting increasingly urgent;
-our results provide evidence-based guidance on when and where meteorological
-data pipelines justify their cost in an operational context.
+\textbf{Relevance to \textit{Atmospheric Research}.}
+PM$_{10}$ is the dominant coarse aerosol fraction in the urban boundary layer,
+and its concentration dynamics are governed by the same boundary-layer and
+mesoscale processes that sit at the core of the journal's scope: stable
+nocturnal mixing layers that trap aerosol under anticyclonic blocking,
+frontal passages and precipitation events that scavenge it, and synoptic-scale
+wind fields that advect it.  Our paper connects these physical mechanisms
+directly to the statistical predictability of surface PM$_{10}$: we show that
+the lag-1 autocorrelation of the hourly aerosol time series — a proxy for
+boundary-layer ventilation frequency — governs both the skill of data-driven
+forecasting models and the incremental value of explicit meteorological
+covariates.  The study covers two contrasting European regimes (continental
+Madrid and maritime Ireland) under a rigorous rolling-origin backtesting
+protocol and applies the Diebold--Mariano significance test to validate the
+observed horizon gains.  The revised EU Directive 2024/2881/EU, which halves
+the annual PM$_{10}$ limit to 20\,\si{\micro\gram\per\cubic\metre} by 2030,
+makes accurate medium-horizon (12--18\,h) aerosol forecasting increasingly
+urgent; our results provide evidence-based guidance on when and where
+meteorological data pipelines justify their cost — a finding of direct
+relevance to the journal's SDG~13 (Climate Action) commitment.
 
 % ── comparison with prior rejection (AQAH) ───────────────────────────────────
 

@@ -1,6 +1,6 @@
 % manuscript_main.tex
 % P1 — Meteorology value for PM10 multi-horizon forecasting
-% Target journal: Aerosol Science and Engineering (Springer)
+% Target journal: Atmospheric Research (Elsevier, ISSN 0169-8095)
 % Compile: pdflatex → bibtex → pdflatex × 2
 %
 % Figures are referenced from ../results/
@@ -83,16 +83,20 @@ mean $\Delta H^*_{\text{strict}} = +0.9$~h, with XGBoost already extracting
 most of the predictable signal from lagged \PMten{} alone.  Diebold--Mariano
 significance testing confirms that the meteorology benefit at Madrid is
 statistically significant at $h = 12$ ($p = 0.012$) but not at shorter or
-longer horizons.  These findings suggest that the value of meteorological
-covariates in \PMten{} forecasting is context-dependent, governed primarily by
-the autocorrelation-persistence regime of the local series, and that $H^*$
-provides a compact, operationally meaningful summary of that value.
+longer horizons.  We interpret the contrast in terms of boundary-layer
+dynamics: high $\rho_1$ reflects stable, stagnant boundary-layer conditions
+under which aerosol concentrations evolve slowly and meteorological forcing
+becomes decisive only beyond $h \approx 9$~h, when advection and mixing
+begin to dominate over in-situ accumulation.  These findings indicate that the
+value of meteorological covariates in \PMten{} forecasting is governed by the
+local boundary-layer persistence regime, and that $H^*$ provides a compact,
+operationally meaningful diagnostic of that dependence.
 
 \medskip
 \noindent
-\textbf{Keywords:} PM\textsubscript{10} forecasting; meteorological covariates;
-XGBoost; SARIMA; forecast horizon; skill score; Diebold--Mariano test; Madrid;
-Ireland; air quality.
+\textbf{Keywords:} PM\textsubscript{10}; atmospheric aerosol; boundary layer;
+meteorological covariates; forecast horizon; XGBoost; SARIMA; skill score;
+Diebold--Mariano test; air quality.
 \end{abstract}
 
 \newpage
@@ -103,11 +107,16 @@ Ireland; air quality.
 % ─────────────────────────────────────────────────────────────────────────────
 
 Particulate matter with aerodynamic diameter below 10~\si{\micro\metre}
-(\PMten{}) remains one of the most consequential atmospheric pollutants in
-European cities.  Sustained exposure is associated with cardiovascular and
-respiratory morbidity, premature mortality, and reduced quality of life
-\citep{WHO2021, EEA2023}.  The European regulatory framework has progressively
-tightened in response: Directive 2008/50/EC established the current limit of
+(\PMten{}) is the dominant coarse aerosol fraction in the urban boundary layer
+and one of the most consequential atmospheric pollutants in European cities.
+Its surface concentration integrates contributions from primary crustal and
+traffic-related emissions, long-range transported dust, and secondary aerosol
+formation, all modulated by boundary-layer mixing, wet scavenging, and
+synoptic-scale advection \citep{Seinfeld2006, Kumar2016}.  Sustained exposure
+is associated with cardiovascular and respiratory morbidity, premature
+mortality, and reduced quality of life \citep{WHO2021, EEA2023}.  The European
+regulatory framework has progressively tightened in response: Directive
+2008/50/EC established the current limit of
 40~\si{\micro\gram\per\cubic\metre} as an annual mean, and the revised
 Directive 2024/2881/EU, which entered into force in December 2024, halves that
 threshold to 20~\si{\micro\gram\per\cubic\metre} by 2030 \citep{EU2024_2881}.
@@ -115,15 +124,19 @@ Against this backdrop, accurate \PMten{} forecasts are increasingly valuable
 both for triggering episode-specific abatement measures and for guiding
 longer-term urban planning.
 
-Ambient \PMten{} concentrations result from a complex interplay of emission
-sources (traffic, industry, natural dust, secondary aerosol formation) and
-meteorological transport and dispersion processes.  Wind speed, wind direction,
-precipitation, temperature, relative humidity, and boundary-layer dynamics all
-modulate how emissions are diluted or concentrated \citep{Seinfeld2006,
-Kumar2016}.  This physical coupling motivates the hypothesis that incorporating
-meteorological predictors into statistical or machine-learning forecasting
-models should improve forecast skill, particularly at medium-to-long lead times
-where persistence of the pollutant signal weakens.
+The temporal evolution of near-surface \PMten{} is tightly coupled to
+boundary-layer dynamics.  Under stable nocturnal or anticyclonic conditions,
+the mixing layer is shallow and aerosol concentrations build up through
+in-situ accumulation, producing high lag-1 autocorrelation.  Conversely,
+deep daytime convective mixing, frontal passages, and precipitation scavenging
+all accelerate aerosol dispersal, reducing persistence.  Wind speed and
+direction govern horizontal transport of aerosol plumes from upwind sources,
+while relative humidity influences hygroscopic growth and optical properties
+of the coarse fraction \citep{Seinfeld2006, Kumar2016}.  This physical coupling
+motivates the hypothesis that incorporating meteorological predictors into
+statistical or machine-learning forecasting models should improve forecast
+skill, particularly at medium-to-long lead times where the aerosol signal can
+no longer be extrapolated from its recent history alone.
 
 Empirical evidence, however, is mixed.  Several studies report clear gains
 when meteorological inputs are added to neural networks or gradient boosting
@@ -499,10 +512,31 @@ inputs.  In this regime, meteorology provides marginal additional value because
 the non-meteorological predictors already capture the dominant source of
 variance.
 
+The physical basis of this statistical distinction lies in boundary-layer
+dynamics.  Madrid Casa de Campo is a continental urban-background site
+characterised by frequent anticyclonic blocking episodes, especially in
+autumn and winter, during which a shallow, stable mixing layer traps \PMten{}
+near the surface for periods of 12--36~h.  Under such conditions the aerosol
+loading evolves slowly and is effectively ''remembered'' by the lagged
+concentration series for many hours; the persistence forecast exploits this
+memory efficiently.  Only when the boundary layer deepens or a synoptic
+disturbance (frontal passage, precipitation event) forces rapid dilution does
+the lagged-only model lose its edge and meteorological covariates —
+particularly mean sea-level pressure, wind speed, and relative humidity —
+provide the additional predictive information captured by $\Delta H^* = +8$~h.
+Ireland, by contrast, is dominated by maritime westerlies that sustain deeper
+mixing and more frequent precipitation scavenging, producing a lower
+background autocorrelation.  In this regime the boundary layer is already
+well-ventilated on hourly timescales and the lagged \PMten{} series decays
+faster toward the climatological mean, allowing XGBoost to beat persistence
+over the full 24-h horizon without meteorological assistance.
+
 This mechanism has a concrete operational implication: the benefit of investing
-in meteorological data pipelines depends on the local autocorrelation structure
-of the target pollutant.  Sites with $\rho_1 \gtrsim 0.88$ are prime
-candidates for meteorologically enriched forecasting, while sites with lower
+in meteorological data pipelines depends on the local boundary-layer persistence
+regime, which is well-proxied by the lag-1 autocorrelation of the hourly
+\PMten{} series.  Sites with $\rho_1 \gtrsim 0.88$ — indicative of stable,
+slow-ventilating boundary layers — are prime candidates for meteorologically
+enriched forecasting, while more maritime or convective sites with lower
 autocorrelation may not justify the added data complexity.
 
 \subsection{Comparison with the literature}
