@@ -368,6 +368,22 @@ $H^*_{\text{relax}}$ across all four model classes for Madrid.
 
 \subsection{Ireland: station-level $H^*$ and meteorology benefit}
 
+Figure~\ref{fig:ireland_skill} shows the RMSE skill curves for all eight Irish
+stations as a 2$\times$4 panel grid.  A common pattern is visible: both the
+lags-only and lags-plus-meteorology XGBoost models achieve positive skill across
+most or all of the 1--24~h horizon at the majority of stations, in marked
+contrast to Madrid where skill turned negative beyond $h \approx 9$--$11$.
+The two curves are largely overlapping at most stations, foreshadowing the small
+$\Delta H^*$ values reported below.
+
+Figure~\ref{fig:ireland_delta} plots the pointwise meteorology benefit
+$\Delta S(h) = S_{\text{lags+met}}(h) - S_{\text{lags only}}(h)$ for each
+station.  Values cluster near zero across the full horizon range for most
+stations, confirming that the lags-only model already captures the dominant
+predictable variance.  Henry Street Limerick stands out as the station with
+the largest positive $\Delta S$ at intermediate horizons, consistent with its
+being the only station to show a notable $\Delta H^*_{\text{strict}} = +6$~h.
+
 Table~\ref{tab:ireland_hstar} reports $H^*_{\text{strict}}$ and
 $H^*_{\text{relax}}$ for all eight Irish stations and all four model classes.
 A striking feature is that both XGBoost conditions achieve near-maximum
@@ -380,7 +396,9 @@ exceptions are Dublin Airport ($\Delta H^*_{\text{strict}} = +1$~h) and Henry
 Street Limerick ($\Delta H^*_{\text{strict}} = +6$~h); at the remaining six
 stations the increment is zero.  SARIMA performance is more variable: mean
 $H^*_{\text{strict}} = 14.3$~h, with a low of 4~h at Henry Street Limerick and
-a high of 24~h at Dublin Airport.
+a high of 24~h at Dublin Airport.  Figure~\ref{fig:ireland_hstar} presents
+these results as a grouped bar chart, facilitating direct station-by-station
+comparison.
 
 \begin{table}[htbp]
 \centering
@@ -412,9 +430,9 @@ $\Delta H^*$ (mean)     & \multicolumn{4}{c}{$+0.9$~h} & \multicolumn{2}{c}{---}
 \end{tabular}
 \end{table}
 
-DM-HLN tests for Ireland (Table~\ref{tab:ireland_dm}) show that statistically
-significant advantages of lags-plus-meteorology over lags-only are rare and
-inconsistent across stations.  At $h = 1$ significant improvements appear at
+DM-HLN tests for Ireland (Figure~\ref{fig:ireland_dm} and
+Table~\ref{tab:ireland_dm}) show that statistically significant advantages of
+lags-plus-meteorology over lags-only are rare and inconsistent across stations.  At $h = 1$ significant improvements appear at
 Birr ($p = 0.003$) and Pearse Street Dublin ($p = 0.030$); at $h = 6$ Dundalk
 ($p = 0.004$) and Pearse Street Dublin ($p = 0.009$) reach significance.  No
 station shows consistent significance across multiple horizons.  At several
@@ -663,6 +681,54 @@ The author declares no competing interests.
     persistence; green: SARIMA; blue: XGBoost lags only; red: XGBoost lags +
     met.  Numbers above each bar show the value in hours.}
   \label{fig:madrid_hstar}
+\end{figure}
+
+% ── Ireland figures ───────────────────────────────────────────────────────────
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{%
+    ../results/e2_met_ireland_pm10/figures/figure_skill_by_station.png}
+  \caption{RMSE skill score $S(h)$ relative to persistence as a function of
+    forecast horizon $h$ for all eight Irish \PMten{} monitoring stations
+    (2023 evaluation window).  Each panel shows one station.  Blue solid:
+    XGBoost lags only; red dashed: XGBoost lags + meteorology.  Horizontal
+    dotted line at $S = 0$.}
+  \label{fig:ireland_skill}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.85\textwidth]{%
+    ../results/e2_met_ireland_pm10/figures/figure_delta_skill.png}
+  \caption{Pointwise meteorology benefit $\Delta S(h) = S_{\text{lags+met}}(h)
+    - S_{\text{lags only}}(h)$ for each Irish station (one coloured line per
+    station).  The horizontal dashed line marks $\Delta S = 0$.  Values near
+    zero at most stations and most horizons indicate that lags-only XGBoost
+    already captures the dominant predictable variance.}
+  \label{fig:ireland_delta}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.78\textwidth]{%
+    ../results/e2_met_ireland_pm10/figures/figure_dm_significance.png}
+  \caption{DM-HLN test results for Ireland: lags + met.\ vs.\ lags only at
+    $h \in \{1, 6, 12, 24\}$.  Each row is a station; each column a horizon.
+    Filled circles: $p < 0.05$; open circles: $p \ge 0.05$.  Green: lags + met.\
+    favoured; red: lags only favoured.}
+  \label{fig:ireland_dm}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{%
+    ../results/e2_met_ireland_pm10/figures/figure_hstar_summary.png}
+  \caption{$H^*$ summary for all eight Irish stations.  Left panel:
+    $H^*_{\text{strict}}$; right panel: $H^*_{\text{relax}}$.  Blue bars:
+    XGBoost lags only; red bars: XGBoost lags + meteorology.  Numbers above
+    each bar show the value in hours.}
+  \label{fig:ireland_hstar}
 \end{figure}
 
 % ─────────────────────────────────────────────────────────────────────────────
