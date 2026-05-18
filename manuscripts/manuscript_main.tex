@@ -140,13 +140,16 @@ skill, particularly at medium-to-long lead times where the aerosol signal can
 no longer be extrapolated from its recent history alone.
 
 Empirical evidence, however, is mixed.  Several studies report clear gains
-when meteorological inputs are added to neural networks or gradient boosting
-models \citep{Pak2018, Lu2021, YuanYu2023}, while others find that lagged
-pollutant concentrations already capture most of the predictable variance,
-leaving little room for meteorology to contribute \citep{Bai2018, Chen2019}.
-This inconsistency across the literature likely reflects differences in local
-autocorrelation structure, data availability, and the choice of forecast
-horizon — factors that are rarely disentangled in a single study.
+when meteorological inputs are added to machine-learning forecasting models:
+\citet{Pak2018} found substantial improvements from boundary-layer variables
+for PM prediction in Korea, and \citet{Bai2018} demonstrated that wavelet
+decomposition of meteorological inputs improved short-range pollutant
+forecasts in China.  Other studies find that lagged pollutant concentrations
+already capture most of the predictable variance, leaving little room for
+meteorology to contribute at sub-daily lead times.  This inconsistency across
+the literature likely reflects differences in local autocorrelation structure,
+data availability, and the choice of forecast horizon — factors that are
+rarely disentangled in a single study.
 
 The \emph{forecast horizon problem} is central to practical decision-making in
 air quality management.  Operators of early-warning systems need to know not
@@ -213,6 +216,45 @@ Portlaoise (Co.\ Laois).  The same nine meteorological variables used for
 Madrid were extracted from the nearest EPA synoptic station for each monitoring
 site.
 
+Table~\ref{tab:descriptive} summarises the basic \PMten{} statistics for all
+nine sites over the training and evaluation periods.  Concentrations are
+generally low to moderate, with training-period means ranging from
+11.3~\si{\micro\gram\per\cubic\metre} (Portlaoise) to
+19.1~\si{\micro\gram\per\cubic\metre} (Dublin Airport), and Madrid at
+18.4~\si{\micro\gram\per\cubic\metre}.  The 95th percentile values indicate
+that episode concentrations above 40~\si{\micro\gram\per\cubic\metre} occur
+at most stations, underscoring the operational relevance of medium-horizon
+forecasting.  Data completeness is high: missing rates are below 2\% at all
+sites during both periods.
+
+\begin{table}[htbp]
+\centering
+\caption{Descriptive statistics of hourly \PMten{}
+  (\si{\micro\gram\per\cubic\metre}) for all nine sites.
+  Training: 2020--2022; evaluation: Jan--Jul 2023.
+  $n$: valid hourly observations; miss: missing rate (\%).}
+\label{tab:descriptive}
+\small
+\begin{tabular}{lrrrrrrrr}
+\toprule
+ & \multicolumn{4}{c}{Training (2020--2022)} & \multicolumn{4}{c}{Evaluation (2023)} \\
+\cmidrule(lr){2-5}\cmidrule(lr){6-9}
+Station & $n$ & Mean & SD & P95 & $n$ & Mean & SD & P95 \\
+\midrule
+Madrid              & 25\,630 & 18.4 & 20.0 & 42.0 & 4\,988 & 15.9 & 12.3 & 34.6 \\
+\midrule
+Birr                & 20\,372 & 12.8 & 12.5 & 31.4 & 5\,085 & 13.2 & 11.3 & 31.2 \\
+Dublin Airport      & 21\,958 & 19.1 & 16.1 & 46.9 & 3\,504 & 15.7 & 10.9 & 34.3 \\
+Dundalk             & 21\,938 & 11.4 &  8.6 & 24.3 & 3\,658 & 13.1 & 10.2 & 30.7 \\
+Pearse St.\ Dublin  & 17\,009 & 13.0 &  9.9 & 30.2 & 5\,088 & 15.4 & 10.1 & 33.3 \\
+Ringsend Dublin     & 21\,949 & 15.6 & 16.1 & 41.9 & 5\,087 & 14.0 & 13.1 & 36.7 \\
+Edenderry           & 11\,526 & 17.8 & 19.8 & 48.8 & 5\,029 & 15.9 & 16.0 & 38.5 \\
+Henry St.\ Limerick & 13\,128 & 13.0 & 12.1 & 30.8 & 5\,052 & 11.9 &  8.6 & 27.2 \\
+Portlaoise          & 21\,958 & 11.3 &  9.7 & 27.5 & 5\,088 & 10.9 &  7.9 & 25.1 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 Across the eight Irish stations, the mean lag-1 autocorrelation of hourly
 \PMten{} over the training period (2020--2022) is $\bar{\rho}_1 = 0.850$
 (range: 0.804--0.945), reflecting a more moderately persistent pollution
@@ -273,8 +315,11 @@ Identical to the lags-only model except that the nine meteorological variables
 measured at time $t$ are appended to the feature vector.  This is an
 \emph{observational} setup in which concurrent meteorology is assumed to be
 available at the moment of forecast issuance (e.g., from a station collocated
-with the \PMten{} sensor), consistent with real-time air quality management
-practice.
+with the \PMten{} sensor).  Because observed meteorological values are used
+rather than numerical weather prediction (NWP) forecasts, the reported skill
+scores represent an \emph{upper bound} on what an operationally deployed
+lags-plus-meteorology system could achieve; the meteorological forecast error
+cascade is discussed as a limitation in Section~\ref{sec:discussion}.
 
 \begin{table}[htbp]
 \centering
@@ -326,6 +371,9 @@ the lags-only and lags-plus-meteorology conditions is assessed using the
 Diebold--Mariano test \citep{Diebold1995} with the finite-sample correction
 proposed by \citet{Harvey1997} (DM-HLN).  Tests are conducted at horizons
 $h \in \{1, 6, 12, 24\}$, with a two-sided $\alpha = 0.05$ threshold.
+Because four tests are conducted simultaneously per site, the family-wise
+Bonferroni-corrected threshold is $\alpha_{\text{adj}} = 0.0125$; results are
+reported at both the nominal and corrected thresholds.
 
 % ─────────────────────────────────────────────────────────────────────────────
 \section{Results}
@@ -357,12 +405,13 @@ the gain dissipates.
 
 Figure~\ref{fig:madrid_dm} and Table~\ref{tab:madrid_dm} report the DM-HLN
 test results at $h \in \{1, 6, 12, 24\}$.  The only statistically significant
-difference is at $h = 12$ ($\mathrm{DM} = 2.52$, $p = 0.012$), where
-lags-plus-meteorology is favoured.  At $h = 1$ ($p = 0.243$), $h = 6$
-($p = 0.961$), and $h = 24$ ($p = 0.398$) the null hypothesis of equal
-predictive accuracy cannot be rejected.  This pattern is consistent with the
-$\Delta S(h)$ profile: the meteorology benefit is concentrated in the
-mid-range, medium-term window.
+difference is at $h = 12$ ($\mathrm{DM} = 2.52$, $p = 0.012$), which
+survives the Bonferroni-corrected threshold of $\alpha_{\text{adj}} = 0.0125$
+for four simultaneous tests.  Lags-plus-meteorology is favoured at $h = 12$.
+At $h = 1$ ($p = 0.243$), $h = 6$ ($p = 0.961$), and $h = 24$ ($p = 0.398$)
+the null hypothesis of equal predictive accuracy cannot be rejected.  This
+pattern is consistent with the $\Delta S(h)$ profile: the meteorology benefit
+is concentrated in the mid-range, medium-term window.
 
 \begin{table}[htbp]
 \centering
@@ -557,17 +606,19 @@ sufficient lags-only skill may not justify the added data complexity.
 \subsection{Comparison with the literature}
 
 Our Madrid finding of a large meteorology benefit ($\Delta H^*_{\text{strict}}
-= +8$~h) is consistent with several studies that report substantial gains from
-meteorological covariates in highly persistent pollution series
-\citep{Lu2021, YuanYu2023}.  The finding is specific, however, to the
-medium-range horizon (h = 9--17~h); at short horizons ($h \le 8$) the
-DM-HLN test fails to detect significant differences, a result also noted
-by \citet{Bai2018} who found that lags alone are competitive at sub-daily
-scales.
+= +8$~h) is consistent with studies that report substantial gains from
+meteorological covariates in continental, stagnation-prone environments where
+aerosol concentrations are highly persistent.  The finding is specific,
+however, to the medium-range horizon ($h = 9$--$17$~h); at short horizons
+($h \le 8$) the DM-HLN test fails to detect significant differences.
+\citet{Bai2018} similarly found that lagged concentrations are competitive
+with meteorological models at sub-daily scales, suggesting that the
+information content of concurrent meteorology is most valuable at lead times
+where the lagged signal has sufficiently decayed.
 
-The Irish results, showing negligible aggregate benefit, align with studies
-conducted in cleaner or more maritime environments where wind-driven dilution
-produces lower background autocorrelation \citep{Chen2019}.  Notably, the
+The Irish results, showing negligible aggregate benefit, are consistent with
+studies in more maritime or well-ventilated environments where boundary-layer
+mixing limits pollution persistence.  Notably, the
 two exceptions within the Irish network — Henry Street Limerick
 ($\Delta H^*_{\text{strict}} = +6$~h) and Dublin Airport ($+1$~h) — are
 stations with distinct local characteristics (traffic canyon and airport
@@ -620,9 +671,9 @@ The main findings are:
 \begin{enumerate}
   \item \textbf{Meteorology can substantially extend $H^*$, but only in
     high-autocorrelation regimes.}  At Madrid Casa de Campo
-    ($\rho_1 \approx 0.90$), adding nine meteorological covariates extended
+    ($\rho_1 = 0.957$), adding nine meteorological covariates extended
     $H^*_{\text{strict}}$ from 9~h to 17~h ($\Delta H^* = +8$~h).  At eight
-    Irish stations ($\rho_1 \approx 0.82$) the mean gain was only $+0.9$~h.
+    Irish stations ($\bar{\rho}_1 = 0.850$) the mean gain was only $+0.9$~h.
 
   \item \textbf{The meteorology benefit is horizon-specific.}  At Madrid,
     the gain is concentrated in the $h = 9$--$17$~h window and is
@@ -647,10 +698,12 @@ The main findings are:
 From an operational perspective, the findings suggest that the investment in
 real-time meteorological data pipelines is well-justified for \PMten{}
 monitoring sites characterised by high lag-1 autocorrelation ($\rho_1
-\gtrsim 0.88$).  For sites with more moderate persistence, simpler lags-only
-models may already capture the bulk of predictable signal, and the added
-complexity of meteorological co-predictors may not translate into meaningful
-horizon gains.
+\gtrsim 0.95$), indicative of continental, stagnation-prone boundary layers.
+For sites with more moderate persistence ($\rho_1 < 0.90$), simpler
+lags-only models may already capture the bulk of predictable signal, and the
+added complexity of meteorological co-predictors — including the requirement
+for NWP forecast drivers in an operational setting — may not translate into
+meaningful horizon gains.
 
 The tightened \PMten{} limit established by EU Directive 2024/2881/EU makes
 accurate medium-horizon (12--18~h) forecasting increasingly valuable for
