@@ -742,8 +742,7 @@ The author declares no competing interests.
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.85\textwidth]{%
-    ../results/e2_met_madrid_pm10/figures/figure_skill_curves.png}
+  \includegraphics[width=0.85\textwidth]{figures/madrid_figure_skill_curves.png}
   \caption{RMSE skill score $S(h)$ relative to persistence as a function of
     forecast horizon $h$ for Madrid Casa de Campo \PMten{} (2023 evaluation
     window).  Positive values indicate improvement over persistence.
@@ -754,8 +753,7 @@ The author declares no competing interests.
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.85\textwidth]{%
-    ../results/e2_met_madrid_pm10/figures/figure_delta_skill.png}
+  \includegraphics[width=0.85\textwidth]{figures/madrid_figure_delta_skill.png}
   \caption{Pointwise difference in RMSE skill score,
     $\Delta S(h) = S_{\text{lags+met}}(h) - S_{\text{lags only}}(h)$,
     for Madrid Casa de Campo \PMten{}.  Filled areas above zero (shaded red)
@@ -766,8 +764,7 @@ The author declares no competing interests.
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.75\textwidth]{%
-    ../results/e2_met_madrid_pm10/figures/figure_dm_significance.png}
+  \includegraphics[width=0.75\textwidth]{figures/madrid_figure_dm_significance.png}
   \caption{DM-HLN test results for Madrid at $h \in \{1, 6, 12, 24\}$.
     Filled circles: $p < 0.05$; open circles: $p \ge 0.05$.  Green: lags + met.\
     favoured; red: lags only favoured.  $p$-values annotated above each symbol.}
@@ -776,8 +773,7 @@ The author declares no competing interests.
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.88\textwidth]{%
-    ../results/e2_met_madrid_pm10/figures/figure_hstar_summary.png}
+  \includegraphics[width=0.88\textwidth]{figures/madrid_figure_hstar_summary.png}
   \caption{$H^*$ summary bar chart for Madrid Casa de Campo.  Left panel:
     $H^*_{\text{strict}}$; right panel: $H^*_{\text{relax}}$.  Grey:
     persistence; green: SARIMA; blue: XGBoost lags only; red: XGBoost lags +
@@ -825,8 +821,7 @@ Ireland mean             &         & 0.850 & 22.0 & 22.9 & $+0.9$ & \\
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=\textwidth]{%
-    ../results/e2_met_ireland_pm10/figures/figure_skill_by_station.png}
+  \includegraphics[width=\textwidth]{figures/ireland_figure_skill_by_station.png}
   \caption{RMSE skill score $S(h)$ relative to persistence as a function of
     forecast horizon $h$ for all eight Irish \PMten{} monitoring stations
     (2023 evaluation window).  Each panel shows one station.  Blue solid:
@@ -837,8 +832,7 @@ Ireland mean             &         & 0.850 & 22.0 & 22.9 & $+0.9$ & \\
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.85\textwidth]{%
-    ../results/e2_met_ireland_pm10/figures/figure_delta_skill.png}
+  \includegraphics[width=0.85\textwidth]{figures/ireland_figure_delta_skill.png}
   \caption{Pointwise meteorology benefit $\Delta S(h) = S_{\text{lags+met}}(h)
     - S_{\text{lags only}}(h)$ for each Irish station (one coloured line per
     station).  The horizontal dashed line marks $\Delta S = 0$.  Values near
@@ -849,8 +843,7 @@ Ireland mean             &         & 0.850 & 22.0 & 22.9 & $+0.9$ & \\
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.78\textwidth]{%
-    ../results/e2_met_ireland_pm10/figures/figure_dm_significance.png}
+  \includegraphics[width=0.78\textwidth]{figures/ireland_figure_dm_significance.png}
   \caption{DM-HLN test results for Ireland: lags + met.\ vs.\ lags only at
     $h \in \{1, 6, 12, 24\}$.  Each row is a station; each column a horizon.
     Filled circles: $p < 0.05$; open circles: $p \ge 0.05$.  Green: lags + met.\
@@ -860,8 +853,7 @@ Ireland mean             &         & 0.850 & 22.0 & 22.9 & $+0.9$ & \\
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=\textwidth]{%
-    ../results/e2_met_ireland_pm10/figures/figure_hstar_summary.png}
+  \includegraphics[width=\textwidth]{figures/ireland_figure_hstar_summary.png}
   \caption{$H^*$ summary for all eight Irish stations.  Left panel:
     $H^*_{\text{strict}}$; right panel: $H^*_{\text{relax}}$.  Blue bars:
     XGBoost lags only; red bars: XGBoost lags + meteorology.  Numbers above
@@ -873,8 +865,7 @@ Ireland mean             &         & 0.850 & 22.0 & 22.9 & $+0.9$ & \\
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.82\textwidth]{%
-    ../results/e2_met_madrid_pm10/figures/figure_rho1_vs_delta_hstar.png}
+  \includegraphics[width=0.82\textwidth]{figures/figure_rho1_vs_delta_hstar.png}
   \caption{Lag-1 autocorrelation $\rho_1$ of hourly \PMten{} vs.\
     $\Delta H^*_{\text{strict}}$ (meteorology benefit, in hours) across all
     nine sites.  Blue circles: Irish stations; red square: Madrid.  Dashed
