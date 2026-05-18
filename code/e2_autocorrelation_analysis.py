@@ -153,7 +153,6 @@ print("=" * 60)
 COLOR_IRE = "#2166ac"
 COLOR_MAD = "#d6604d"
 MS        = 9
-LW        = 1.8
 LABEL_FS  = 10
 TICK_FS   = 9
 LEG_FS    = 9
@@ -172,50 +171,76 @@ plt.rcParams.update({
     "legend.fontsize":   LEG_FS,
 })
 
-STATION_SHORT = {
-    "Birr co offlay":       "Birr",
-    "Dublin Airport":       "Dublin Airp.",
-    "Dundalk Co Louth":     "Dundalk",
-    "Pearse street dublin": "Pearse St.",
-    "Ringsend dublin":      "Ringsend",
-    "edenderry co offlay":  "Edenderry",
-    "henry street Limerick":"Henry St.",
-    "porrlaoise co laois":  "Portlaoise",
-    "Madrid Casa de Campo": "Madrid",
+# Manual label offsets (x_pt, y_pt) to avoid overlaps.
+# Key challenge: Birr/Dublin Airport share ρ₁≈0.815; Pearse/Ringsend ≈0.842-0.843;
+# all with ΔH*=0 except Dublin Airport (ΔH*=1).
+LABEL_OFFSETS = {
+    # station_name          : (dx_points, dy_points, ha)
+    "Edenderry":   (-48,  8,  "left"),
+    "Birr":        (-10, -16, "center"),   # below
+    "Dublin Airp.":( 6,   5,  "left"),    # above-right
+    "Pearse St.":  (-48, -16, "left"),    # below-left
+    "Ringsend":    (-48,  8,  "left"),    # above-left
+    "Portlaoise":  (  6, -16, "left"),    # below-right
+    "Henry St.":   (  6,   5, "left"),    # above-right
+    "Dundalk":     (  6, -16, "left"),    # below-right
+    "Madrid":      (  6,   5, "left"),    # above-right
 }
 
-fig, ax = plt.subplots(figsize=(7.5, 5.0))
+STATION_SHORT = {
+    "Birr co offlay":        "Birr",
+    "Dublin Airport":        "Dublin Airp.",
+    "Dundalk Co Louth":      "Dundalk",
+    "Pearse street dublin":  "Pearse St.",
+    "Ringsend dublin":       "Ringsend",
+    "edenderry co offlay":   "Edenderry",
+    "henry street Limerick": "Henry St.",
+    "porrlaoise co laois":   "Portlaoise",
+    "Madrid Casa de Campo":  "Madrid",
+}
+
+# OLS first (need r/p for legend)
+all_rho   = list(ire_delta["rho1"]) + [rho1_madrid]
+all_delta = list(ire_delta["delta_hstar"].astype(float)) + [float(mad_delta)]
+slope, intercept, r_val, p_val, _ = stats.linregress(all_rho, all_delta)
+print(f"  OLS: slope={slope:.2f}, intercept={intercept:.2f}, "
+      f"r={r_val:.3f}, p={p_val:.4f}")
+
+fig, ax = plt.subplots(figsize=(8.5, 5.5))
+
+# OLS line
+x_line = np.linspace(min(all_rho) - 0.008, max(all_rho) + 0.008, 200)
+ax.plot(x_line, slope * x_line + intercept,
+        color="#aaaaaa", lw=1.3, ls="--", zorder=2)
+
+ax.axhline(0, color="black", lw=0.7, ls=":", zorder=1)
+
+def _annotate(ax, label, x, y, color):
+    dx, dy, ha = LABEL_OFFSETS.get(label, (6, 5, "left"))
+    ax.annotate(
+        label,
+        xy=(x, y),
+        xytext=(dx, dy),
+        textcoords="offset points",
+        fontsize=8,
+        color=color,
+        ha=ha,
+        va="center",
+        arrowprops=dict(arrowstyle="-", color="#bbbbbb", lw=0.7)
+        if abs(dx) > 10 or abs(dy) > 10 else None,
+    )
 
 # Ireland points
 for _, row in ire_delta.iterrows():
     ax.plot(row["rho1"], row["delta_hstar"],
             "o", color=COLOR_IRE, ms=MS, mew=0, alpha=0.85, zorder=3)
     label = STATION_SHORT.get(row["station"], row["station"])
-    ax.annotate(label, xy=(row["rho1"], row["delta_hstar"]),
-                xytext=(4, 3), textcoords="offset points",
-                fontsize=8, color="#333333")
+    _annotate(ax, label, row["rho1"], row["delta_hstar"], "#333333")
 
 # Madrid point
 ax.plot(rho1_madrid, mad_delta,
-        "s", color=COLOR_MAD, ms=MS + 2, mew=0, alpha=0.90, zorder=4,
-        label="Madrid")
-ax.annotate("Madrid", xy=(rho1_madrid, mad_delta),
-            xytext=(4, 3), textcoords="offset points",
-            fontsize=8, color="#333333", fontweight="bold")
-
-# OLS regression line through all 9 points
-all_rho = list(ire_delta["rho1"]) + [rho1_madrid]
-all_delta = list(ire_delta["delta_hstar"].astype(float)) + [float(mad_delta)]
-slope, intercept, r_val, p_val, se = stats.linregress(all_rho, all_delta)
-x_line = np.linspace(min(all_rho) - 0.01, max(all_rho) + 0.01, 100)
-ax.plot(x_line, slope * x_line + intercept,
-        color="#888888", lw=1.2, ls="--", zorder=2,
-        label=f"OLS  $r = {r_val:.2f}$,  $p = {p_val:.3f}$")
-
-print(f"  OLS: slope={slope:.2f}, intercept={intercept:.2f}, "
-      f"r={r_val:.3f}, p={p_val:.4f}")
-
-ax.axhline(0, color="black", lw=0.7, ls=":", zorder=1)
+        "s", color=COLOR_MAD, ms=MS + 2, mew=0, alpha=0.90, zorder=4)
+_annotate(ax, "Madrid", rho1_madrid, mad_delta, "#8b1a00")
 
 from matplotlib.lines import Line2D
 legend_handles = [
@@ -223,16 +248,19 @@ legend_handles = [
            ms=MS, label="Ireland stations"),
     Line2D([0], [0], marker="s", color="w", markerfacecolor=COLOR_MAD,
            ms=MS + 1, label="Madrid"),
-    Line2D([0], [0], color="#888888", lw=1.2, ls="--",
-           label=f"OLS  $r = {r_val:.2f}$,  $p = {p_val:.3f}$"),
+    Line2D([0], [0], color="#aaaaaa", lw=1.3, ls="--",
+           label=f"OLS  ($r = {r_val:.2f}$,  $p = {p_val:.2f}$, $n = 9$)"),
 ]
 ax.legend(handles=legend_handles, fontsize=LEG_FS, loc="upper left")
 
-ax.set_xlabel("Lag-1 autocorrelation $\\rho_1$ of hourly PM$_{10}$", fontsize=LABEL_FS)
-ax.set_ylabel("$\\Delta H^*_{\\mathrm{strict}}$ (hours, lags+met $-$ lags only)", fontsize=LABEL_FS)
-ax.set_title("Boundary-layer persistence regime governs meteorology benefit\n"
-             "for PM$_{10}$ forecast horizon", fontsize=LABEL_FS)
-ax.set_ylim(-2, max(all_delta) + 3)
+ax.set_xlabel("Lag-1 autocorrelation $\\rho_1$ of hourly PM$_{10}$ (training period)",
+              fontsize=LABEL_FS)
+ax.set_ylabel("$\\Delta H^*_{\\mathrm{strict}}$ (h)  [lags+met $-$ lags only]",
+              fontsize=LABEL_FS)
+ax.set_title("Boundary-layer persistence regime and PM$_{10}$ forecast horizon gain",
+             fontsize=LABEL_FS)
+ax.set_ylim(-2.5, max(all_delta) + 3)
+ax.set_xlim(min(all_rho) - 0.015, max(all_rho) + 0.015)
 
 fig.tight_layout()
 
