@@ -1,0 +1,133 @@
+% cover_letter.tex
+% Cover letter for submission to [JOURNAL NAME — fill in before sending]
+% Compile: pdflatex manuscripts/cover_letter.tex
+
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{parskip}
+\usepackage{microtype}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, urlcolor=blue, linkcolor=blue}
+
+\pagestyle{empty}
+
+\begin{document}
+
+% ── sender ────────────────────────────────────────────────────────────────────
+
+\noindent
+Federico García Crespí\\
+Universidad Miguel Hernández de Elche\\
+\href{mailto:fedeg@umh.es}{fedeg@umh.es}
+
+\bigskip
+\noindent
+18 May 2026
+
+\bigskip
+
+% ── addressee ─────────────────────────────────────────────────────────────────
+
+\noindent
+Dear Editor-in-Chief,  % ← replace with name if known
+
+\bigskip
+
+% ── opening ───────────────────────────────────────────────────────────────────
+
+I am pleased to submit our manuscript,
+
+\begin{quote}
+\textbf{``Does meteorology extend the useful forecast horizon for urban
+PM$_{10}$?\
+A multi-city, multi-horizon skill analysis with XGBoost and SARIMA''},
+\end{quote}
+
+for consideration for publication in
+\textit{[JOURNAL FULL NAME HERE]}.  % ← fill in journal name
+The manuscript is original, has not been published previously, and is not
+currently under consideration elsewhere.
+
+% ── what the paper does ───────────────────────────────────────────────────────
+
+\textbf{What we do.}
+The paper addresses a practical question that is directly relevant to
+operational air quality management: over how many lead hours does a
+data-driven PM$_{10}$ forecasting model reliably outperform a naïve persistence
+benchmark, and does the addition of concurrent meteorological covariates extend
+that window?  We formalise this as the \emph{useful forecast horizon}~$H^*$,
+define strict and relaxed variants, and measure it under a rigorous
+rolling-origin expanding-window backtesting protocol at two European sites ---
+Madrid Casa de Campo (Spain) and a network of eight stations in Ireland ---
+covering a 42-month study window (January~2020 -- July~2023).
+
+Three model classes are evaluated at each of $h = 1, \ldots, 24$ lead hours:
+persistence (benchmark), SARIMA(1,0,1)(1,0,0)$_{24}$ (linear statistical
+reference), and XGBoost fitted with and without nine meteorological covariates.
+The Diebold--Mariano test with Harvey--Leybourne--Newbold correction is used
+to assess whether observed skill differences are statistically significant.
+
+% ── main findings ─────────────────────────────────────────────────────────────
+
+\textbf{Main findings.}
+At Madrid (lag-1 autocorrelation $\rho_1 \approx 0.90$), adding meteorology
+extends $H^*_{\text{strict}}$ from 9\,h to 17\,h
+($\Delta H^* = +8$\,h), a gain that is statistically significant at
+$h = 12$ ($p = 0.012$, DM-HLN).  At the eight Irish stations
+($\rho_1 \approx 0.82$), the mean gain is only $+0.9$\,h, with lags-only
+XGBoost already achieving near-maximum horizon skill.  We show that this
+contrast is mechanistically explained by the local autocorrelation-persistence
+regime: when autocorrelation is high, persistence is a formidable baseline at
+short leads and meteorology fills the gap that lagged-pollutant models leave
+open at medium leads; when autocorrelation is moderate, lagged values already
+capture the dominant variance and meteorology adds little.
+
+% ── relevance to journal ──────────────────────────────────────────────────────
+
+\textbf{Relevance to the journal.}
+% ← Adapt this paragraph to the specific journal
+This work is directly relevant to the journal's scope on atmospheric
+measurement, modelling, and the impact of air quality on health and
+environment.  Our use of operationally realistic, leakage-free backtesting
+on two geographically distinct European datasets, combined with a compact
+and interpretable $H^*$ metric, provides findings that are actionable for
+both researchers and practitioners managing air quality early-warning systems.
+The revised EU Directive 2024/2881/EU, which halves the annual PM$_{10}$ limit
+to 20\,\si{\micro\gram\per\cubic\metre} by 2030, makes accurate medium-horizon
+(12--18\,h) forecasting increasingly urgent; our results provide evidence-based
+guidance on when and where meteorological data pipelines justify their cost.
+
+% ── comparison with prior rejection (AQAH) ───────────────────────────────────
+
+\textbf{Note on prior submission.}
+An earlier version of this work was submitted to \textit{Air Quality,
+Atmosphere \& Health} and was not accepted following review.  The present
+manuscript has been substantially revised to address the reviewers' concerns:
+(i)~the mechanistic explanation linking autocorrelation regime to meteorology
+benefit has been developed into a dedicated Discussion subsection; (ii)~the
+multi-city design explicitly disentangles site-level predictability from model
+architecture; and (iii)~both the backtesting protocol and the $H^*$ definition
+are now formally specified in the Methods section.
+
+% ── closing ───────────────────────────────────────────────────────────────────
+
+We believe this manuscript makes a clear and timely contribution to the
+literature on data-driven air quality forecasting and is well matched to your
+readership.  We look forward to receiving your decision.
+
+\bigskip
+
+Yours sincerely,
+
+\bigskip\bigskip
+
+\noindent
+Federico García Crespí\\
+Universidad Miguel Hernández de Elche\\
+\href{mailto:fedeg@umh.es}{fedeg@umh.es}
+
+\end{document}
