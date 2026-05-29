@@ -1,0 +1,41 @@
+{
+  "stations": [
+    "Birr co offlay",
+    "Dublin Airport",
+    "Dundalk Co Louth",
+    "Pearse street dublin",
+    "Ringsend dublin",
+    "edenderry co offlay",
+    "henry street Limerick",
+    "porrlaoise co laois"
+  ],
+  "model": "xgboost_direct",
+  "horizons": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24
+  ],
+  "rows_master_table": 384,
+  "verdict": "go: meteorology improves accuracy but fidelity gains are mixed"
+}
