@@ -1,0 +1,44 @@
+{
+  "experiment_id": "e2_met_ireland_pm10",
+  "repository": "fedeg-umh-es/P1_PM10_Meteorology_Hstar",
+  "code_commit": "54569072ae525974838a84950cb0e31cf83cd5a2",
+  "generated_at": "NOT_VERIFIED",
+  "dataset": "data_processed/ireland_pm10_meteorology_hourly.csv (never committed to this repository; only reachable, per code/e2_met_ireland_config.json, at an absolute path on the original author's local machine)",
+  "stations": [
+    "Birr co offlay",
+    "Dublin Airport",
+    "Dundalk Co Louth",
+    "Pearse street dublin",
+    "Ringsend dublin",
+    "edenderry co offlay",
+    "henry street Limerick",
+    "porrlaoise co laois"
+  ],
+  "target": "PM10",
+  "frequency": "hourly",
+  "forecast_horizons": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24],
+  "rolling_origin": {
+    "enabled": true,
+    "training_window": "expanding from train_start=2020-01-01 00:00:00 to origin (per code/e2_met_ireland_config.json and code/e2_met_ireland_run.py get_train_window)",
+    "stride": "origin_stride_hours=24 (daily), per code/e2_met_ireland_config.json",
+    "n_origins": "NOT_VERIFIED — manuscript prose states approximately 210-365 origins per station (manuscripts/manuscript_main.tex:280-281) but no per-station n_origins value is recoverable from any committed artifact"
+  },
+  "models": ["persistence", "sarima", "xgboost_direct"],
+  "baseline": "persistence",
+  "information_condition": "lags_only | lags_meteo (repo-internal aliases lag_only | lag_plus_met used by the later, separate outputs/tables/master_meteorology_diagnostic_table.csv pipeline — see validation report)",
+  "meteorological_source": "concurrent (same-timestep) observations from the nearest EPA synoptic station per manuscripts/manuscript_main.tex Section 2.2, not NWP forecasts",
+  "operational_status": "retrospective",
+  "config_file": "code/e2_met_ireland_config.json",
+  "entry_point": "code/e2_met_ireland_run.py",
+  "prediction_files": [],
+  "metric_files": [],
+  "manuscript_claims_verified": false,
+  "notes": [
+    "No run_metadata.json for the original e2_met_ireland_pm10 run exists anywhere in this repository's git history (all branches, all commits, verified after a full `git fetch --unshallow`) or in this session's workspace.",
+    "code/e2_met_ireland_config.json hardcodes dataset_path and results_dir to /Users/federicogarciacrespi/Public/P1_PM10_Meteorology_Hstar/..., a path on the original author's local machine outside this repository. Running code/e2_met_ireland_run.py with its committed default config therefore never wrote outputs under this repo's own results/e2_met_ireland_pm10/ tree, which explains why that directory was never populated in git even though the manuscript cites it extensively.",
+    "reports/output_versioning_policy.md (committed, same commit 7f97608 that added the Ireland pipeline) explicitly instructs NOT to track results/e2_met_ireland_pm10/predictions/*.csv, metrics/*.csv, or stats/*.csv by default, and to track manuscript_tables/*.csv, figures, config_snapshot.json and run_metadata.json only 'selectively if the paper needs frozen artifacts' -- the paper does cite them, but this selective tracking step was never carried out.",
+    "operational_status is set to 'retrospective' based on the manuscript's own explicit self-classification (manuscripts/manuscript_main.tex:316-322: concurrent, not NWP, meteorology; results described as an upper bound), not on any machine-readable flag in the code -- no such flag exists in this repository.",
+    "code/run_meteorology_dynamic_experiment.py (added in the same commit as this recovery's HEAD, 5456907) hardcodes SOURCE_PREDICTIONS = results/e2_met_ireland_pm10/predictions/predictions_all_models.csv as a required input and raises FileNotFoundError if it is absent. Its own downstream outputs (outputs/tables/master_meteorology_diagnostic_table.csv, outputs/metrics/predictions_meteorology_experiment.csv) prove that this exact file existed on the author's local disk at some point after the original Ireland run, but it was never committed to git and no longer exists anywhere this session can reach.",
+    "The only committed, git-tracked document that reproduces manuscript-consistent Ireland numbers is reports/ireland_e2_met_results_interpretation.md (commit 7f97608). Its H*_strict values for Dublin Airport (22->23) and Henry St. Limerick (18->24), and its DM-HLN favours breakdown (lags_meteo=23, lags_only=8, undetermined=1, with an identical per-station table), match manuscripts/manuscript_main.tex exactly. See the validation report for the full comparison."
+  ]
+}
