@@ -18,6 +18,22 @@ figures/*
 # reports/output_versioning_policy.md.
 !results/e2_met_ireland_pm10/
 !results/e2_met_ireland_pm10/**
+# Ireland evidence regeneration (from recovered source CSVs, 2026-07-26):
+# unlike results/e2_met_ireland_pm10/ above, this regenerated run's raw
+# predictions/metrics/stats ARE tracked, because they are the row-level
+# evidence this regeneration exists to produce -- see
+# results/e2_met_ireland_pm10_regenerated/README.md.
+!results/e2_met_ireland_pm10_regenerated/
+!results/e2_met_ireland_pm10_regenerated/**
+# Per-station-condition prediction files are a strict subset of
+# predictions/predictions_all_models.csv (same rows, already merged) --
+# tracking both would duplicate ~14MB of row-level data for no additional
+# evidentiary value, so only the combined file is tracked.
+results/e2_met_ireland_pm10_regenerated/predictions/predictions_*_lags_*.csv
+# The 8 recovered source CSVs and per-station shard scratch directories are
+# never tracked (large, not the manuscript-facing artifact; manifest with
+# hashes is tracked instead).
+results/_ireland_regen_shards/
 # Allow rvvcca subdirectory structure (data files remain ignored)
 !data_raw/rvvcca/
 data_raw/rvvcca/*

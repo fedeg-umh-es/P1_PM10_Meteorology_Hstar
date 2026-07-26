@@ -1,0 +1,5 @@
+zip_file: 51d5f493-Finalised_merged_datasets20260508T212701Z3001.zip
+zip_sha256: 8036a0b60a34a07a62a51bcbb5b65ec6d8416557ffcadb97803892302c35851d
+expected_sha256: 8036a0b60a34a07a62a51bcbb5b65ec6d8416557ffcadb97803892302c35851d
+zip_size_bytes: 5536093
+file_count: 9

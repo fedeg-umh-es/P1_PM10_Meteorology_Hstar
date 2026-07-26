@@ -20,6 +20,7 @@ Report: reports/ireland_experiment_setup.md
 
 from __future__ import annotations
 
+import argparse
 import json
 from pathlib import Path
 
@@ -232,23 +233,48 @@ def write_report(combined: pd.DataFrame, quality_reports: list[dict], out_path: 
 def main() -> None:
     print("=== Ireland Experiment Base Builder ===\n")
 
-    if not INPUT_DIR.exists():
+    parser = argparse.ArgumentParser(
+        description="Build the canonical Ireland PM10 + meteorology hourly dataset."
+    )
+    parser.add_argument(
+        "--input-dir",
+        default=str(INPUT_DIR),
+        help="Directory containing the 9 Finalised_merged_datasets CSV files "
+        "(portability override only; defaults to ~/Downloads/Finalised_merged_datasets).",
+    )
+    parser.add_argument(
+        "--out-csv",
+        default=str(OUT_CSV),
+        help="Output path for the consolidated hourly CSV.",
+    )
+    parser.add_argument(
+        "--out-md",
+        default=str(OUT_MD),
+        help="Output path for the setup report markdown.",
+    )
+    args = parser.parse_args()
+
+    input_dir = Path(args.input_dir).expanduser().resolve()
+    out_csv = Path(args.out_csv).expanduser().resolve()
+    out_md = Path(args.out_md).expanduser().resolve()
+
+    if not input_dir.exists():
         raise FileNotFoundError(
-            f"Input directory not found: {INPUT_DIR}\n"
-            "Place the Finalised_merged_datasets folder in ~/Downloads/"
+            f"Input directory not found: {input_dir}\n"
+            "Place the Finalised_merged_datasets folder in ~/Downloads/ or pass --input-dir."
         )
 
-    OUT_CSV.parent.mkdir(parents=True, exist_ok=True)
-    OUT_MD.parent.mkdir(parents=True, exist_ok=True)
+    out_csv.parent.mkdir(parents=True, exist_ok=True)
+    out_md.parent.mkdir(parents=True, exist_ok=True)
 
     print("Loading and cleaning stations...")
-    combined, quality_reports = build_dataset(INPUT_DIR)
+    combined, quality_reports = build_dataset(input_dir)
 
-    combined.to_csv(OUT_CSV, index=False)
-    print(f"\nExported: {OUT_CSV}  ({len(combined)} rows, {combined['station'].nunique()} stations)")
+    combined.to_csv(out_csv, index=False)
+    print(f"\nExported: {out_csv}  ({len(combined)} rows, {combined['station'].nunique()} stations)")
 
-    write_report(combined, quality_reports, OUT_MD)
-    print(f"Exported: {OUT_MD}")
+    write_report(combined, quality_reports, out_md)
+    print(f"Exported: {out_md}")
 
     print("\nStation row counts:")
     for stn, grp in combined.groupby("station"):
