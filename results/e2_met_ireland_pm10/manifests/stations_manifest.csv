@@ -1,0 +1,10 @@
+station,manuscript_train_n,manuscript_eval_n,manuscript_train_plus_eval,setup_report_total_rows,row_count_diff,row_count_status,setup_report_source,included_in_experiment_base,exclusion_reason
+Birr (Co. Offaly),20372,5085,25457,25465,8,MISMATCH,reports/ireland_experiment_setup.md,TRUE,
+Dublin Airport,21958,3504,25462,25462,0,ROUNDING_MATCH,reports/ireland_experiment_setup.md,TRUE,
+Dundalk (Co. Louth),21938,3658,25596,25675,79,MISMATCH,reports/ireland_experiment_setup.md,TRUE,PM10 values > 500.0 ug/m3 set to NaN: 11 (per reports/ireland_experiment_setup.md)
+Pearse St. Dublin,17009,5088,22097,22098,1,ROUNDING_MATCH,reports/ireland_experiment_setup.md,TRUE,
+Ringsend Dublin,21949,5087,27036,27047,11,MISMATCH,reports/ireland_experiment_setup.md,TRUE,PM10 negatives set to NaN: 9; duplicate timestamps resolved (per reports/ireland_experiment_setup.md)
+Edenderry (Co. Offaly),11526,5029,16555,16784,229,MISMATCH,reports/ireland_experiment_setup.md,TRUE,
+Henry St. Limerick,13128,5052,18180,18279,99,MISMATCH,reports/ireland_experiment_setup.md,TRUE,
+Portlaoise (Co. Laois),21958,5088,27046,27047,1,ROUNDING_MATCH,reports/ireland_experiment_setup.md,TRUE,
+Rathmines Dublin,,,,0,NOT_APPLICABLE,reports/ireland_experiment_setup.md,FALSE,"Strong negative PM10 values (PM10_min=-488); excluded before experiment base was built; not one of the 8 stations the manuscript reports"

@@ -11,6 +11,13 @@ figures/*
 !data_processed/.gitkeep
 !results/.gitkeep
 !figures/.gitkeep
+# Ireland evidence recovery: frozen documentary artifacts only (config
+# snapshot, reconstructed metadata, manifests, manuscript-claim comparison
+# table, validation report). No raw predictions/metrics/stats are tracked
+# here, consistent with the "do not track by default" policy in
+# reports/output_versioning_policy.md.
+!results/e2_met_ireland_pm10/
+!results/e2_met_ireland_pm10/**
 # Allow rvvcca subdirectory structure (data files remain ignored)
 !data_raw/rvvcca/
 data_raw/rvvcca/*
