@@ -1,0 +1,10 @@
+file_name,station,size_bytes,sha256,rows,columns,period_start,period_end,included_in_experiment
+Birr co offlay _finalised_merged_NA.csv,Birr co offlay,1882637,88e5c82b6eb23fac8957e184e68385d6ba5781dd2d643580ffcd33d1ba8dad6e,25465,14,2020-09-04 00:00:00,2023-08-01 00:00:00,True
+Dublin Airport_finalised_merged_dublin_NA.csv,Dublin Airport,2379135,ee45c87e619bf325ca8d242ba3f01aa44d3db56b0000a370863b340d80da8360,25462,20,2020-06-30 02:00:00,2023-05-26 23:00:00,True
+Dundalk Co Louth_finalised merged_NA.csv,Dundalk Co Louth,1836139,4f0027fc40de0bad61ad26fb06f6191d090d83618c6594347d5e4345ae419e57,25675,14,2020-06-30 02:00:00,2023-06-04 20:00:00,True
+Pearse street dublin_finalised merging_NA.csv,Pearse street dublin,2086746,3f501a0340a464273f413da7628f26be1fdbfad019f95cd31a438772abc26910,22098,20,2021-01-22 07:00:00,2023-08-01 00:00:00,True
+Rathmines_Dublin_finalised merged_NA.csv,Rathmines Dublin,2689826,1ecc451d1ddf2f11a856574acbd996be21dd450942046b7a0b20300d0439cedf,27047,21,2020-06-30 02:00:00,2023-08-01 00:00:00,False
+Ringsend_dublin_merging finalised_NA.csv,Ringsend dublin,2541700,78656bd498ba898f431c5f61f1e4392da00b50ebedbf5b66f8c1e688429721a4,27238,20,2020-06-30 02:00:00,2023-08-01 00:00:00,True
+edenderry co offlay_merged_NA.csv,edenderry co offlay,1221266,bdff1060d740e3b0af7d8e76962e2c5a3081328496d709489fc2c2c3ab13ceab,16784,14,2021-08-31 17:00:00,2023-08-03 13:00:00,True
+henry street Limerick_merged_NA.csv,henry street Limerick,1700898,ce154edf9c04bbd7bef20e4db4364b0b3e796730e51af3f9898653285a74790b,18279,20,2021-06-30 10:00:00,2023-08-03 18:00:00,True
+porrlaoise co laois_finalised merged_NA.csv,porrlaoise co laois,2044045,c6c0756f24b66ba3f585565f25ab58f27b0bb398058b81f844ca576eb569945f,27047,15,2020-06-30 02:00:00,2023-08-01 00:00:00,True

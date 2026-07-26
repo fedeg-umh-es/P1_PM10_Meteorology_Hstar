@@ -1,0 +1,77 @@
+claim_id,manuscript_value,regenerated_value,absolute_difference,status,source_file,source_row
+IE-001,24,24,0.0,MATCH,results/e2_met_ireland_pm10_regenerated/metrics/hstar_summary_both_definitions.csv,H_strict_max_run=24 (used); H_strict_from_h1=24
+IE-002,24,24,0.0,MATCH,results/e2_met_ireland_pm10_regenerated/metrics/hstar_summary_both_definitions.csv,H_strict_max_run=24 (used); H_strict_from_h1=24
+IE-003,24,24,0.0,MATCH,results/e2_met_ireland_pm10_regenerated/metrics/hstar_summary_both_definitions.csv,H_strict_max_run=24 (used); H_strict_from_h1=24
+IE-004,24,24,0.0,MATCH,results/e2_met_ireland_pm10_regenerated/metrics/hstar_summary_both_definitions.csv,H_strict_max_run=24 (used); H_strict_from_h1=24
+IE-005,22,22,0.0,MATCH,results/e2_met_ireland_pm10_regenerated/metrics/hstar_summary_both_definitions.csv,H_strict_max_run=22 (used); H_strict_from_h1=0
+IE-006,22,22,0.0,MATCH,results/e2_met_ireland_pm10_regenerated/metrics/hstar_summary_both_definitions.csv,H_strict_max_run=22 (used); H_strict_from_h1=0
+IE-007,23,23,0.0,MATCH,results/e2_met_ireland_pm10_regenerated/metrics/hstar_summary_both_definitions.csv,H_strict_max_run=23 (used); H_strict_from_h1=0
+IE-008,23,23,0.0,MATCH,results/e2_met_ireland_pm10_regenerated/metrics/hstar_summary_both_definitions.csv,H_strict_max_run=23 (used); H_strict_from_h1=0
+IE-009,24,24,0.0,MATCH,results/e2_met_ireland_pm10_regenerated/metrics/hstar_summary_both_definitions.csv,H_strict_max_run=24 (used); H_strict_from_h1=24
+IE-010,24,24,0.0,MATCH,results/e2_met_ireland_pm10_regenerated/metrics/hstar_summary_both_definitions.csv,H_strict_max_run=24 (used); H_strict_from_h1=24
+IE-011,24,24,0.0,MATCH,results/e2_met_ireland_pm10_regenerated/metrics/hstar_summary_both_definitions.csv,H_strict_max_run=24 (used); H_strict_from_h1=24
+IE-012,24,24,0.0,MATCH,results/e2_met_ireland_pm10_regenerated/metrics/hstar_summary_both_definitions.csv,H_strict_max_run=24 (used); H_strict_from_h1=24
+IE-013,24,24,0.0,MATCH,results/e2_met_ireland_pm10_regenerated/metrics/hstar_summary_both_definitions.csv,H_strict_max_run=24 (used); H_strict_from_h1=24
+IE-014,24,24,0.0,MATCH,results/e2_met_ireland_pm10_regenerated/metrics/hstar_summary_both_definitions.csv,H_strict_max_run=24 (used); H_strict_from_h1=24
+IE-015,24,24,0.0,MATCH,results/e2_met_ireland_pm10_regenerated/metrics/hstar_summary_both_definitions.csv,H_strict_max_run=24 (used); H_strict_from_h1=24
+IE-016,24,24,0.0,MATCH,results/e2_met_ireland_pm10_regenerated/metrics/hstar_summary_both_definitions.csv,H_strict_max_run=24 (used); H_strict_from_h1=24
+IE-017,24,24,0.0,MATCH,results/e2_met_ireland_pm10_regenerated/metrics/hstar_summary_both_definitions.csv,H_strict_max_run=24 (used); H_strict_from_h1=24
+IE-018,24,24,0.0,MATCH,results/e2_met_ireland_pm10_regenerated/metrics/hstar_summary_both_definitions.csv,H_strict_max_run=24 (used); H_strict_from_h1=24
+IE-019,24,24,0.0,MATCH,results/e2_met_ireland_pm10_regenerated/metrics/hstar_summary_both_definitions.csv,H_strict_max_run=24 (used); H_strict_from_h1=24
+IE-020,24,24,0.0,MATCH,results/e2_met_ireland_pm10_regenerated/metrics/hstar_summary_both_definitions.csv,H_strict_max_run=24 (used); H_strict_from_h1=24
+IE-021,16,16,0.0,MATCH,results/e2_met_ireland_pm10_regenerated/metrics/hstar_summary_both_definitions.csv,H_strict_max_run=16 (used); H_strict_from_h1=7
+IE-022,16,16,0.0,MATCH,results/e2_met_ireland_pm10_regenerated/metrics/hstar_summary_both_definitions.csv,H_strict_max_run=16 (used); H_strict_from_h1=7
+IE-023,16,16,0.0,MATCH,results/e2_met_ireland_pm10_regenerated/metrics/hstar_summary_both_definitions.csv,H_strict_max_run=16 (used); H_strict_from_h1=7
+IE-024,16,16,0.0,MATCH,results/e2_met_ireland_pm10_regenerated/metrics/hstar_summary_both_definitions.csv,H_strict_max_run=16 (used); H_strict_from_h1=7
+IE-025,18,17,1.0,ROUNDING_MATCH,results/e2_met_ireland_pm10_regenerated/metrics/hstar_summary_both_definitions.csv,H_strict_max_run=17 (used); H_strict_from_h1=1
+IE-026,18,17,1.0,ROUNDING_MATCH,results/e2_met_ireland_pm10_regenerated/metrics/hstar_summary_both_definitions.csv,H_strict_max_run=17 (used); H_strict_from_h1=1
+IE-027,24,24,0.0,MATCH,results/e2_met_ireland_pm10_regenerated/metrics/hstar_summary_both_definitions.csv,H_strict_max_run=24 (used); H_strict_from_h1=24
+IE-028,24,24,0.0,MATCH,results/e2_met_ireland_pm10_regenerated/metrics/hstar_summary_both_definitions.csv,H_strict_max_run=24 (used); H_strict_from_h1=24
+IE-029,24,24,0.0,MATCH,results/e2_met_ireland_pm10_regenerated/metrics/hstar_summary_both_definitions.csv,H_strict_max_run=24 (used); H_strict_from_h1=24
+IE-030,24,24,0.0,MATCH,results/e2_met_ireland_pm10_regenerated/metrics/hstar_summary_both_definitions.csv,H_strict_max_run=24 (used); H_strict_from_h1=24
+IE-031,24,24,0.0,MATCH,results/e2_met_ireland_pm10_regenerated/metrics/hstar_summary_both_definitions.csv,H_strict_max_run=24 (used); H_strict_from_h1=24
+IE-032,24,24,0.0,MATCH,results/e2_met_ireland_pm10_regenerated/metrics/hstar_summary_both_definitions.csv,H_strict_max_run=24 (used); H_strict_from_h1=24
+IE-033,24,24,0.0,MATCH,results/e2_met_ireland_pm10_regenerated/metrics/hstar_summary_both_definitions.csv,"min=24, max=24, all_values=[24]"
+IE-034,24,24,0.0,MATCH,results/e2_met_ireland_pm10_regenerated/metrics/hstar_summary_both_definitions.csv,"min=24, max=24, all_values=[24]"
+IE-035,0.9,1.0,0.1,ROUNDING_MATCH,results/e2_met_ireland_pm10_regenerated/metrics/hstar_summary_both_definitions.csv,computed using H_strict_max_run (see note on H_star_strict_hours rows)
+IE-036,23/8/1,24/7/1,,MISMATCH,results/e2_met_ireland_pm10_regenerated/stats/dm_lags_meteo_vs_lags_only.csv,
+IE-037,25457,25465,8.0,ROUNDING_MATCH,reports/ireland_experiment_setup.md (regenerated),
+IE-038,25462,25462,0.0,MATCH,reports/ireland_experiment_setup.md (regenerated),
+IE-039,25596,25675,79.0,ROUNDING_MATCH,reports/ireland_experiment_setup.md (regenerated),
+IE-040,22097,22098,1.0,ROUNDING_MATCH,reports/ireland_experiment_setup.md (regenerated),
+IE-041,27036,27047,11.0,ROUNDING_MATCH,reports/ireland_experiment_setup.md (regenerated),
+IE-042,16555,16784,229.0,MISMATCH,reports/ireland_experiment_setup.md (regenerated),
+IE-043,18180,18279,99.0,ROUNDING_MATCH,reports/ireland_experiment_setup.md (regenerated),
+IE-044,27046,27047,1.0,ROUNDING_MATCH,reports/ireland_experiment_setup.md (regenerated),
+IE-045,12.8,12.8,0.0,MATCH,data_processed/ireland_pm10_meteorology_hourly.csv,manuscript_value resolved from manuscript_main.tex tab:descriptive (was a placeholder in the original claims CSV)
+IE-046,12.5,12.5,0.0,MATCH,data_processed/ireland_pm10_meteorology_hourly.csv,manuscript_value resolved from manuscript_main.tex tab:descriptive (was a placeholder in the original claims CSV)
+IE-047,31.4,31.4,0.0,MATCH,data_processed/ireland_pm10_meteorology_hourly.csv,manuscript_value resolved from manuscript_main.tex tab:descriptive (was a placeholder in the original claims CSV)
+IE-048,19.1,19.1,0.0,MATCH,data_processed/ireland_pm10_meteorology_hourly.csv,manuscript_value resolved from manuscript_main.tex tab:descriptive (was a placeholder in the original claims CSV)
+IE-049,16.1,16.1,0.0,MATCH,data_processed/ireland_pm10_meteorology_hourly.csv,manuscript_value resolved from manuscript_main.tex tab:descriptive (was a placeholder in the original claims CSV)
+IE-050,46.9,46.9,0.0,MATCH,data_processed/ireland_pm10_meteorology_hourly.csv,manuscript_value resolved from manuscript_main.tex tab:descriptive (was a placeholder in the original claims CSV)
+IE-051,11.4,11.4,0.0,MATCH,data_processed/ireland_pm10_meteorology_hourly.csv,manuscript_value resolved from manuscript_main.tex tab:descriptive (was a placeholder in the original claims CSV)
+IE-052,8.6,8.6,0.0,MATCH,data_processed/ireland_pm10_meteorology_hourly.csv,manuscript_value resolved from manuscript_main.tex tab:descriptive (was a placeholder in the original claims CSV)
+IE-053,24.3,24.3,0.0,MATCH,data_processed/ireland_pm10_meteorology_hourly.csv,manuscript_value resolved from manuscript_main.tex tab:descriptive (was a placeholder in the original claims CSV)
+IE-054,13.0,13.0,0.0,MATCH,data_processed/ireland_pm10_meteorology_hourly.csv,manuscript_value resolved from manuscript_main.tex tab:descriptive (was a placeholder in the original claims CSV)
+IE-055,9.9,9.9,0.0,MATCH,data_processed/ireland_pm10_meteorology_hourly.csv,manuscript_value resolved from manuscript_main.tex tab:descriptive (was a placeholder in the original claims CSV)
+IE-056,30.2,30.2,0.0,MATCH,data_processed/ireland_pm10_meteorology_hourly.csv,manuscript_value resolved from manuscript_main.tex tab:descriptive (was a placeholder in the original claims CSV)
+IE-057,15.6,15.6,0.0,MATCH,data_processed/ireland_pm10_meteorology_hourly.csv,manuscript_value resolved from manuscript_main.tex tab:descriptive (was a placeholder in the original claims CSV)
+IE-058,16.1,16.1,0.0,MATCH,data_processed/ireland_pm10_meteorology_hourly.csv,manuscript_value resolved from manuscript_main.tex tab:descriptive (was a placeholder in the original claims CSV)
+IE-059,41.9,41.9,0.0,MATCH,data_processed/ireland_pm10_meteorology_hourly.csv,manuscript_value resolved from manuscript_main.tex tab:descriptive (was a placeholder in the original claims CSV)
+IE-060,17.8,17.8,0.0,MATCH,data_processed/ireland_pm10_meteorology_hourly.csv,manuscript_value resolved from manuscript_main.tex tab:descriptive (was a placeholder in the original claims CSV)
+IE-061,19.8,19.8,0.0,MATCH,data_processed/ireland_pm10_meteorology_hourly.csv,manuscript_value resolved from manuscript_main.tex tab:descriptive (was a placeholder in the original claims CSV)
+IE-062,48.8,48.8,0.0,MATCH,data_processed/ireland_pm10_meteorology_hourly.csv,manuscript_value resolved from manuscript_main.tex tab:descriptive (was a placeholder in the original claims CSV)
+IE-063,13.0,13.0,0.0,MATCH,data_processed/ireland_pm10_meteorology_hourly.csv,manuscript_value resolved from manuscript_main.tex tab:descriptive (was a placeholder in the original claims CSV)
+IE-064,12.1,12.1,0.0,MATCH,data_processed/ireland_pm10_meteorology_hourly.csv,manuscript_value resolved from manuscript_main.tex tab:descriptive (was a placeholder in the original claims CSV)
+IE-065,30.8,30.8,0.0,MATCH,data_processed/ireland_pm10_meteorology_hourly.csv,manuscript_value resolved from manuscript_main.tex tab:descriptive (was a placeholder in the original claims CSV)
+IE-066,11.3,11.3,0.0,MATCH,data_processed/ireland_pm10_meteorology_hourly.csv,manuscript_value resolved from manuscript_main.tex tab:descriptive (was a placeholder in the original claims CSV)
+IE-067,9.7,9.7,0.0,MATCH,data_processed/ireland_pm10_meteorology_hourly.csv,manuscript_value resolved from manuscript_main.tex tab:descriptive (was a placeholder in the original claims CSV)
+IE-068,27.5,27.5,0.0,MATCH,data_processed/ireland_pm10_meteorology_hourly.csv,manuscript_value resolved from manuscript_main.tex tab:descriptive (was a placeholder in the original claims CSV)
+IE-069,0.945,0.9446,0.0004,ROUNDING_MATCH,data_processed/ireland_pm10_meteorology_hourly.csv,
+IE-070,0.876,0.8758,0.0002,ROUNDING_MATCH,data_processed/ireland_pm10_meteorology_hourly.csv,
+IE-071,0.864,0.8636,0.0004,ROUNDING_MATCH,data_processed/ireland_pm10_meteorology_hourly.csv,
+IE-072,0.843,0.8433,0.0003,ROUNDING_MATCH,data_processed/ireland_pm10_meteorology_hourly.csv,
+IE-073,0.842,0.8424,0.0004,ROUNDING_MATCH,data_processed/ireland_pm10_meteorology_hourly.csv,
+IE-074,0.815,0.8148,0.0002,ROUNDING_MATCH,data_processed/ireland_pm10_meteorology_hourly.csv,
+IE-075,0.815,0.8147,0.0003,ROUNDING_MATCH,data_processed/ireland_pm10_meteorology_hourly.csv,
+IE-076,0.804,0.8043,0.0003,ROUNDING_MATCH,data_processed/ireland_pm10_meteorology_hourly.csv,
