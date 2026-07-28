@@ -1,6 +1,6 @@
 # PROG-P2-00 — Canonical repository, datasets and configuration freeze
 
-**Status:** completed
+**Status:** superseded by `docs/PROG_P2_00_PROVENANCE_AUDIT.md` (the repository identity is frozen, but the raw-data provenance closure remains partial)
 **Freeze date:** 2026-07-28
 **Canonical branch:** `main`
 **Canonical commit at freeze:** `1aad811dab0083396dc5c7eee5abebc34276514c`
