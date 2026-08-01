@@ -383,8 +383,8 @@ reported at both the nominal and corrected thresholds.
 Figure~\ref{fig:madrid_skill} shows the RMSE skill score $S(h)$ as a function
 of lead time for all three model classes at Madrid Casa de Campo.  All three
 models outperform persistence at short horizons.  The lags-only XGBoost
-achieves positive skill from $h = 1$ through approximately $h = 11$ before
-falling below zero, yielding $H^*_{\text{strict}} = 9$~h and
+achieves its longest contiguous run of positive skill from $h = 3$ through $h = 11$,
+yielding $H^*_{\text{strict}} = 9$~h and
 $H^*_{\text{relax}} = 15$~h.  SARIMA achieves $H^*_{\text{strict}} = 8$~h
 and $H^*_{\text{relax}} = 20$~h; its skill curve rises more steeply at
 intermediate horizons but is less consistent than XGBoost.  Adding
