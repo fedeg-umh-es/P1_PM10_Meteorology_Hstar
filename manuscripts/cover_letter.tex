@@ -74,13 +74,13 @@ to assess whether observed skill differences are statistically significant.
 % ── main findings ─────────────────────────────────────────────────────────────
 
 \textbf{Main findings.}
-At Madrid (lag-1 autocorrelation $\rho_1 \approx 0.90$), adding meteorology
-extends $H^*_{\text{strict}}$ from 9\,h to 17\,h
-($\Delta H^* = +8$\,h), a gain that is statistically significant at
-$h = 12$ ($p = 0.012$, DM-HLN).  At the eight Irish stations
-($\rho_1 \approx 0.82$), the mean gain is only $+0.9$\,h, with lags-only
-XGBoost already achieving near-maximum horizon skill.  We show that this
-contrast is mechanistically explained by the local autocorrelation-persistence
+At Madrid (lag-1 autocorrelation $\rho_1 \approx 0.96$), adding meteorology
+extends $H^*_{\text{strict}}$ (longest contiguous positive-skill run) from
+9\,h to 17\,h ($\Delta H^* = +8$\,h), a gain that is statistically significant
+at $h = 12$ ($p = 0.012$, DM-HLN).  At the eight Irish stations
+($\rho_1 \approx 0.85$), the mean gain is only $+1.0$\,h, with lags-only
+XGBoost already achieving near-maximum horizon skill.  We interpret this
+contrast in terms of the local autocorrelation-persistence
 regime: when autocorrelation is high, persistence is a formidable baseline at
 short leads and meteorology fills the gap that lagged-pollutant models leave
 open at medium leads; when autocorrelation is moderate, lagged values already
@@ -90,24 +90,26 @@ capture the dominant variance and meteorology adds little.
 
 \textbf{Relevance to \textit{Atmospheric Research}.}
 PM$_{10}$ is the dominant coarse aerosol fraction in the urban boundary layer,
-and its concentration dynamics are governed by the same boundary-layer and
+and its concentration dynamics are shaped by the same boundary-layer and
 mesoscale processes that sit at the core of the journal's scope: stable
 nocturnal mixing layers that trap aerosol under anticyclonic blocking,
 frontal passages and precipitation events that scavenge it, and synoptic-scale
 wind fields that advect it.  Our paper connects these physical mechanisms
 directly to the statistical predictability of surface PM$_{10}$: we show that
 the lag-1 autocorrelation of the hourly aerosol time series — a proxy for
-boundary-layer ventilation frequency — governs both the skill of data-driven
-forecasting models and the incremental value of explicit meteorological
-covariates.  The study covers two contrasting European regimes (continental
+boundary-layer ventilation frequency — is associated with both the skill of
+data-driven forecasting models and the incremental value of explicit
+meteorological covariates.  The study covers two contrasting European regimes (continental
 Madrid and maritime Ireland) under a rigorous rolling-origin backtesting
 protocol and applies the Diebold--Mariano significance test to validate the
 observed horizon gains.  The revised EU Directive 2024/2881/EU, which halves
 the annual PM$_{10}$ limit to 20\,\si{\micro\gram\per\cubic\metre} by 2030,
 makes accurate medium-horizon (12--18\,h) aerosol forecasting increasingly
-urgent; our results provide evidence-based guidance on when and where
-meteorological data pipelines justify their cost — a finding of direct
-relevance to the journal's SDG~13 (Climate Action) commitment.
+urgent.  Because our meteorological inputs are retrospective observations rather
+than origin-time forecasts, the results characterise a retrospective upper bound
+and a testable hypothesis for where meteorological data pipelines are most likely
+to help, rather than demonstrated operational value — a question of direct
+relevance to the journal's scope.
 
 % ── comparison with prior rejection (AQAH) ───────────────────────────────────
 
