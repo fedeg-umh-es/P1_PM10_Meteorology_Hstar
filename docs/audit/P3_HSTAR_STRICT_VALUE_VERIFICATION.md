@@ -20,7 +20,7 @@
 - H_strict_from_h1 values: `lags_meteo` = 17 h, `lags_only` = 9 h
 - Maximum-run horizons: `lags_meteo` $h \in [1, 17]$, `lags_only` $h \in [1, 9]$
 - Delta: $\Delta H^*_{\text{strict,max-run}} = 17 - 9 = +8$ h
-- Status of +8 h claim: `VERIFIED_UNDER_H_STRICT_MAX_RUN`
+- Status of +8 h claim: `MADRID_PLUS_8_BLOCKED_BY_INSUFFICIENT_EVIDENCE`
 - Supporting files: `results/e2_met_madrid_pm10/metrics/hstar_summary.csv`, `results/e2_met_madrid_pm10/metrics/metrics_all_models.csv`
 
 ## Ireland
@@ -54,7 +54,7 @@
 - Status: `VERIFIED`
 
 ## Evidence provenance
-- Madrid: `VERIFIED_PRIMARY` (Full row-level predictions, metrics, and metadata committed)
+- Madrid: `BLOCKED_BY_INSUFFICIENT_EVIDENCE` (Base dataset missing; run_metadata.json contradicts combined outputs, despite row-level predictions reproducing metrics)
 - Ireland: `VERIFIED_REGENERATED_ONLY` (Regenerated from recovered source datasets; original run row-level predictions not committed in Git history)
 
 ## Verification verdict

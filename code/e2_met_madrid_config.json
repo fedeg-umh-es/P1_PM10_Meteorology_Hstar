@@ -1,7 +1,7 @@
 {
   "experiment_name": "e2_met_madrid_pm10",
-  "dataset_path": "/Users/federicogarciacrespi/Public/P1_PM10_Meteorology_Hstar/data_processed/madrid_pm10_meteorology_experiment_base.csv",
-  "results_dir": "/Users/federicogarciacrespi/Public/P1_PM10_Meteorology_Hstar/results/e2_met_madrid_pm10",
+  "dataset_path": "data_processed/madrid_pm10_meteorology_experiment_base.csv",
+  "results_dir": "results/e2_met_madrid_pm10",
   "timestamp_col": "timestamp",
   "target_col": "PM10",
   "train_start": "2019-01-01 00:00:00",

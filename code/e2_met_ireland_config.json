@@ -1,7 +1,7 @@
 {
   "experiment_name": "e2_met_ireland_pm10",
-  "dataset_path": "/Users/federicogarciacrespi/Public/P1_PM10_Meteorology_Hstar/data_processed/ireland_pm10_meteorology_hourly.csv",
-  "results_dir": "/Users/federicogarciacrespi/Public/P1_PM10_Meteorology_Hstar/results/e2_met_ireland_pm10",
+  "dataset_path": "data_processed/ireland_pm10_meteorology_hourly.csv",
+  "results_dir": "results/e2_met_ireland_pm10",
   "timestamp_col": "timestamp",
   "station_col": "station",
   "target_col": "PM10",

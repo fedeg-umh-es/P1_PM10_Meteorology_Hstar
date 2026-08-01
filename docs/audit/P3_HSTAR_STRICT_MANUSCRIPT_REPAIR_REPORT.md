@@ -11,9 +11,9 @@
 - Auxiliary metric: `H_strict_from_h1` (uninterrupted positive-skill run starting at $h=1$)
 
 ## Evidence verification
-- Madrid: Verified under `H_strict_max_run` (`lags_only` = 9 h, `lags_meteo` = 17 h, $\Delta H^* = +8$ h)
-- Ireland: Verified under `H_strict_max_run` across 8 stations
-- +8 h claim: `VERIFIED_UNDER_H_STRICT_MAX_RUN` (Madrid)
+- Madrid: `BLOCKED_BY_INSUFFICIENT_EVIDENCE` under `H_strict_max_run` (base dataset missing, conflicting metadata)
+- Ireland: Verified under `H_strict_max_run` across 8 stations (regenerated)
+- +8 h claim: `MADRID_PLUS_8_BLOCKED_BY_INSUFFICIENT_EVIDENCE` (Madrid)
 - Henry Street: `lags_only` = 17 h, `lags_meteo` = 24 h, $\Delta H^* = +7$ h (Updated from +6 h / 18 h)
 - Ireland mean: `lags_only` = 21.9 h, `lags_meteo` = 22.9 h, $\Delta H^* = +1.0$ h (Updated from +0.9 h / 22.0 h)
 
@@ -53,8 +53,8 @@
 | `figures/madrid_figure_03_hstar.png` | YES | $H^*$ summary | VALID_UNDER_MAX_RUN | Kept |
 | `figures/ireland_figure_01_skill.png` | YES | Skill curves $S(h)$ | VALID_UNDER_MAX_RUN | Kept |
 | `figures/ireland_figure_02_dm.png` | YES | DM-HLN tests | VALID_UNDER_MAX_RUN | Kept |
-| `figures/ireland_figure_03_hstar.png` | YES | $H^*$ summary | VALID_UNDER_MAX_RUN | Kept |
-| `figures/ireland_figure_04_rho1_vs_deltahstar.png` | YES | $\rho_1$ vs $\Delta H^*$ | VALID_UNDER_MAX_RUN | Kept |
+| `figures/ireland_figure_03_hstar.png` | YES | $H^*$ summary | OBSOLETE_REQUIRES_REGENERATION | Regenerate |
+| `figures/ireland_figure_04_rho1_vs_deltahstar.png` | YES | $\rho_1$ vs $\Delta H^*$ | OBSOLETE_REQUIRES_REGENERATION | Regenerate |
 
 ## Irish evidence provenance
 - Original-run artefacts: MISSING (Row-level prediction files for original run not committed in Git history)
@@ -62,7 +62,7 @@
 - Disclosure added: Explicitly incorporated in Methods, Data and Code Availability, and Table 5 footnote.
 
 ## Claims retained
-- Madrid meteorology benefit: $\Delta H^*_{\text{strict,max-run}} = +8$~h (verified under `H_strict_max_run`).
+- Madrid meteorology benefit: $\Delta H^*_{\text{strict,max-run}} = +8$~h (reproduces from tracked outputs but `BLOCKED_BY_INSUFFICIENT_EVIDENCE`).
 - Autocorrelation-persistence mechanism: $\rho_1$ association with predictability gains.
 
 ## Claims changed or removed
