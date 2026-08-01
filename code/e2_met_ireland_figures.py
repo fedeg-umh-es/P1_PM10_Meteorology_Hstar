@@ -28,6 +28,15 @@ import pandas as pd
 
 from e2_met_madrid_shared import ensure_results_dirs, load_json_config
 
+# ── canonical paths (P3 canon v1.3) ───────────────────────────────────────────
+# Script lives in <repo>/code. The H* summary figure must be built from the
+# validated REGENERATED Ireland bundle (regenerated-not-original) using the
+# primary strict metric H_strict_max_run, and written to the manuscript figure
+# directory under the manuscript's expected filename.
+REPO = Path(__file__).resolve().parents[1]
+IRELAND_HSTAR_REGEN = REPO / "results/e2_met_ireland_pm10_regenerated/metrics/hstar_summary_both_definitions.csv"
+MANUSCRIPT_FIGS = REPO / "manuscripts/figures"
+
 # ── style ──────────────────────────────────────────────────────────────────────
 
 COLOR_LAGS  = "#2166ac"   # lags_only
@@ -218,8 +227,21 @@ def make_fig3(dm: pd.DataFrame, delta: pd.DataFrame, fig_dir: Path) -> None:
 
 # ── Figure 4: H*_strict bar chart per station ─────────────────────────────────
 
-def make_fig4(hstar: pd.DataFrame, fig_dir: Path) -> None:
-    xgb = hstar[hstar["model"] == "xgboost_direct"].copy()
+def make_fig4(hstar: pd.DataFrame | None, fig_dir: Path) -> None:
+    """Ireland H* summary bar chart.
+
+    CANONICAL: reads the validated REGENERATED bundle
+    (results/e2_met_ireland_pm10_regenerated/metrics/hstar_summary_both_definitions.csv)
+    and uses the primary strict metric ``H_strict_max_run`` (auxiliary
+    ``H_strict_from_h1`` is not plotted as the primary strict bar). The relax
+    bars use ``H_relax``. The figure is written to the manuscript figures
+    directory as ``ireland_figure_hstar_summary`` so the manuscript picks up the
+    corrected values (Henry St. lags-only = 17, lags + met. = 24). The ``hstar``
+    argument and ``fig_dir`` argument are ignored on purpose; the canonical
+    source and destination are fixed. No model is rerun.
+    """
+    xgb = pd.read_csv(IRELAND_HSTAR_REGEN)
+    xgb = xgb[xgb["model"] == "xgboost_direct"].copy()
     stations = [s for s in STATION_ORDER if s in xgb["station"].unique()]
     labels = [STATION_LABELS.get(s, s) for s in stations]
 
@@ -237,8 +259,8 @@ def make_fig4(hstar: pd.DataFrame, fig_dir: Path) -> None:
                                     constrained_layout=True)
 
     for ax, metric, title in [
-        (ax1, "H_star_strict", "H* strict"),
-        (ax2, "H_star_relax",  "H* relax"),
+        (ax1, "H_strict_max_run", "H* strict (max-run)"),
+        (ax2, "H_relax",          "H* relax"),
     ]:
         vals_lags  = [_get_hstar(s, "lags_only",  metric) for s in stations]
         vals_meteo = [_get_hstar(s, "lags_meteo", metric) for s in stations]
@@ -266,8 +288,9 @@ def make_fig4(hstar: pd.DataFrame, fig_dir: Path) -> None:
 
     ax1.set_ylabel("H* (hours)", fontsize=LABEL_FS)
     ax1.legend(fontsize=LEG_FS, loc="lower right")
-    fig.suptitle("H* summary — Ireland PM10, 2023", fontsize=LABEL_FS + 1)
-    _save(fig, fig_dir, "figure_hstar_summary")
+    fig.suptitle("H* summary — Ireland PM10, 2023 (regenerated bundle)", fontsize=LABEL_FS + 1)
+    MANUSCRIPT_FIGS.mkdir(parents=True, exist_ok=True)
+    _save(fig, MANUSCRIPT_FIGS, "ireland_figure_hstar_summary")
     plt.close(fig)
 
 
@@ -284,24 +307,28 @@ def main() -> None:
     fig_dir.mkdir(parents=True, exist_ok=True)
 
     tables = paths["manuscript_tables"]
-    metrics = pd.read_csv(tables / "table_metrics_long.csv")
-    delta   = pd.read_csv(tables / "table_delta_skill_meteo_vs_lags.csv")
-    dm      = pd.read_csv(tables / "table_dm_lags_meteo_vs_lags_only.csv")
-    hstar   = pd.read_csv(tables / "table_station_hstar_summary.csv")
 
-    print("Figure 1: skill by station...")
-    make_fig1(metrics, fig_dir)
+    # Figures 1-3 (skill, delta-skill, DM) are out of scope for the P3 controlled
+    # repair and are only regenerated when the original-tree manuscript tables are
+    # present. Figure 4 (H* summary) is the in-scope canonical repair: it reads
+    # the regenerated bundle directly and writes to manuscripts/figures/.
+    try:
+        metrics = pd.read_csv(tables / "table_metrics_long.csv")
+        delta   = pd.read_csv(tables / "table_delta_skill_meteo_vs_lags.csv")
+        dm      = pd.read_csv(tables / "table_dm_lags_meteo_vs_lags_only.csv")
+        print("Figure 1: skill by station...")
+        make_fig1(metrics, fig_dir)
+        print("Figure 2: delta skill...")
+        make_fig2(delta, fig_dir)
+        print("Figure 3: DM significance...")
+        make_fig3(dm, delta, fig_dir)
+    except FileNotFoundError as exc:
+        print(f"Figures 1-3 skipped (source table absent, out of P3 repair scope): {exc}")
 
-    print("Figure 2: delta skill...")
-    make_fig2(delta, fig_dir)
+    print("Figure 4: H* summary (canonical, regenerated bundle -> manuscript)...")
+    make_fig4(None, fig_dir)
 
-    print("Figure 3: DM significance...")
-    make_fig3(dm, delta, fig_dir)
-
-    print("Figure 4: H* summary...")
-    make_fig4(hstar, fig_dir)
-
-    print(f"\nDone. Figures in: {fig_dir}")
+    print(f"\nDone. Canonical H* figure written under: {MANUSCRIPT_FIGS}")
 
 
 if __name__ == "__main__":
