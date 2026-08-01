@@ -1,4 +1,8 @@
-# P1_PM10_Meteorology_Hstar
+# P2 — Operational Meteorology
+
+Canonical programme identity: **P2 — Operational Meteorology** (historically
+E2-MET). The configured remote name `P1_PM10_Meteorology_Hstar` is a historical
+repository alias and is not the current programme number.
 
 Experiments and results for the paper:
 
@@ -52,7 +56,7 @@ autocorrelation regime of the PM10 series.
 ## Repository structure
 
 ```
-P1_PM10_Meteorology_Hstar/
+P2_Operational_Meteorology/
 ├── code/                          # training and evaluation scripts
 │   └── models/                    # XGBoost, ARIMA, persistence, LSTM
 ├── data_processed/                # curated input data (raw data not tracked)
