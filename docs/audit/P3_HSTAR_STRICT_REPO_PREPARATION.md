@@ -69,5 +69,19 @@
 ## Blocking issues
 - None for repository preparation phase. Local TeX compilation unavailable due to missing local `pdflatex` binary (Overleaf cloud environment used for rendering).
 
+## Canonical repository relocation
+- Previous non-canonical path: `/Users/fede/repos/P3_Madrid_Ireland`
+- Canonical path: `/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/P3_Madrid_Ireland`
+- Source commit: `aa00a1821786509b7028fb689478ced476aebc6a`
+- Canonical-copy commit before relocation report: `aa00a1821786509b7028fb689478ced476aebc6a`
+- Source tree hash: `d707355dc988d9129a9b969c7b2e947158b9b2ee`
+- Target tree hash: `d707355dc988d9129a9b969c7b2e947158b9b2ee`
+- Integrity check: `PASSED` (100% tree hash match, fsck clean, critical files present)
+- External remote: `origin` (`https://github.com/fedeg-umh-es/P1_PM10_Meteorology_Hstar.git`)
+- Local backup remote: `source-local` (`/Users/fede/repos/P3_Madrid_Ireland`)
+- Repository identity verdict: `VERIFIED_P3_REPOSITORY_WITH_HISTORICAL_REMOTE_NAME`
+- Local TeX availability: `ABSENT` (pdflatex / latexmk not present in local OS PATH)
+- Required compilation environment: `OVERLEAF_COMPILATION_REQUIRED_BEFORE_FINAL_COMMIT`
+
 ## Readiness verdict
 - READY_FOR_MANUSCRIPT_REPAIR
