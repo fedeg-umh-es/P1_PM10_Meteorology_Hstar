@@ -356,14 +356,10 @@ $h$.
 \paragraph{Useful forecast horizon $H^*$.}
 We define two variants:
 \begin{itemize}
-  \item \textbf{$H^*_{\text{strict}}$}: the length of the longest
-    \emph{consecutive} positive-skill run beginning at $h = 1$.  This captures
-    the unbroken window of reliable improvement over persistence.
-  \item \textbf{$H^*_{\text{relax}}$}: the last horizon at which $S_m(h) > 0$.
-    This is more lenient and captures the extent of intermittent skill.
+  \item \textbf{$H^*_{\text{strict}}$}: the primary metric, defined as the length of the longest \emph{contiguous} positive-skill run anywhere within the horizon range $h \in \{1, \dots, H\}$, denoted $H^*_{\text{strict,max-run}}$. As a complementary auxiliary diagnostic, $H_{\text{strict,from-}h1}$ measures the uninterrupted sequence of positive skill starting specifically at $h = 1$.
+  \item \textbf{$H^*_{\text{relax}}$}: the last horizon at which $S_m(h) > 0$.  This is more lenient and captures the extent of intermittent skill.
 \end{itemize}
-The meteorology benefit is $\Delta H^* = H^*_{\text{lags+met}} -
-H^*_{\text{lags only}}$ under either criterion.
+The meteorology benefit is $\Delta H^* = H^*_{\text{lags+met}} - H^*_{\text{lags only}}$ under the primary $H^*_{\text{strict,max-run}}$ criterion.
 
 \paragraph{Diebold--Mariano test.}
 Statistical significance of the difference in squared forecast errors between
@@ -448,18 +444,21 @@ station.  Values cluster near zero across the full horizon range for most
 stations, confirming that the lags-only model already captures the dominant
 predictable variance.  Henry Street Limerick stands out as the station with
 the largest positive $\Delta S$ at intermediate horizons, consistent with its
-being the only station to show a notable $\Delta H^*_{\text{strict}} = +6$~h.
+being the only station to show a notable $\Delta H^*_{\text{strict}} = +7$~h.
 
 Table~\ref{tab:ireland_hstar} reports $H^*_{\text{strict}}$ and
-$H^*_{\text{relax}}$ for all eight Irish stations and all four model classes.
+$H^*_{\text{relax}}$ for all eight Irish stations and all four model classes
+(evaluated under $H^*_{\text{strict,max-run}}$ from regenerated source datasets;
+see Data Availability).
 A striking feature is that both XGBoost conditions achieve near-maximum
 $H^*_{\text{strict}}$ at most stations (six of eight stations reach 24~h with
 lags-only alone), leaving little room for meteorology to contribute.
 
 The mean $\Delta H^*_{\text{strict}}$ across the eight stations is
-$\bar{\Delta H^*} = +0.9$~h, compared with $+8$~h at Madrid.  The two
+$\bar{\Delta H^*} = +1.0$~h ($\bar{H}^*_{\text{lags only}} = 21.9$~h,
+$\bar{H}^*_{\text{lags+met}} = 22.9$~h), compared with $+8$~h at Madrid.  The two
 exceptions are Dublin Airport ($\Delta H^*_{\text{strict}} = +1$~h) and Henry
-Street Limerick ($\Delta H^*_{\text{strict}} = +6$~h); at the remaining six
+Street Limerick ($\Delta H^*_{\text{strict}} = +7$~h); at the remaining six
 stations the increment is zero.  SARIMA performance is more variable: mean
 $H^*_{\text{strict}} = 14.3$~h, with a low of 4~h at Henry Street Limerick and
 a high of 24~h at Dublin Airport.  Figure~\ref{fig:ireland_hstar} presents
@@ -543,7 +542,7 @@ Portlaoise    &  0.62 & 0.537          & $-$1.47 & 0.143 & 2.79 & \textbf{0.006}
 \subsection{The autocorrelation-persistence mechanism}
 
 The central contrast between Madrid and Ireland — $\Delta H^*_{\text{strict}}
-= +8$~h vs.\ $+0.9$~h — can be parsimoniously explained by the strength of
+= +8$~h vs.\ $+1.0$~h — can be parsimoniously explained by the strength of
 lag-1 autocorrelation in each series.  At Madrid ($\rho_1 = 0.957$) the
 \PMten{} signal is highly persistent: the naïve persistence forecast is
 difficult to beat at short lead times ($h = 1$--$8$) because the concentration
@@ -562,7 +561,7 @@ stations reach $H^*_{\text{strict}} = 24$~h with lags-only alone — a
 \emph{ceiling effect} that constrains $\Delta H^*$ to zero irrespective of
 local $\rho_1$.  Where this ceiling does not apply — Dublin Airport, Henry
 Street Limerick, and Madrid itself — $\Delta H^*$ is positive and increases
-monotonically with $\rho_1$ (0, 6, and 8~h respectively, at $\rho_1 = 0.815$,
+monotonically with $\rho_1$ (0, 7, and 8~h respectively, at $\rho_1 = 0.815$,
 $0.876$, and $0.957$).  The apparent exception is Dundalk ($\rho_1 = 0.945$,
 comparable to Madrid), which reaches $H^*_{\text{strict}} = 24$~h for the
 lags-only model and thus has $\Delta H^* = 0$ by the ceiling constraint, not
@@ -620,7 +619,7 @@ The Irish results, showing negligible aggregate benefit, are consistent with
 studies in more maritime or well-ventilated environments where boundary-layer
 mixing limits pollution persistence.  Notably, the
 two exceptions within the Irish network — Henry Street Limerick
-($\Delta H^*_{\text{strict}} = +6$~h) and Dublin Airport ($+1$~h) — are
+($\Delta H^*_{\text{strict}} = +7$~h) and Dublin Airport ($+1$~h) — are
 stations with distinct local characteristics (traffic canyon and airport
 boundary-layer effects, respectively) that may produce more persistent local
 concentration dynamics.
@@ -673,7 +672,7 @@ The main findings are:
     high-autocorrelation regimes.}  At Madrid Casa de Campo
     ($\rho_1 = 0.957$), adding nine meteorological covariates extended
     $H^*_{\text{strict}}$ from 9~h to 17~h ($\Delta H^* = +8$~h).  At eight
-    Irish stations ($\bar{\rho}_1 = 0.850$) the mean gain was only $+0.9$~h.
+    Irish stations ($\bar{\rho}_1 = 0.850$) the mean gain was only $+1.0$~h.
 
   \item \textbf{The meteorology benefit is horizon-specific.}  At Madrid,
     the gain is concentrated in the $h = 9$--$17$~h window and is
@@ -724,9 +723,9 @@ Agency for providing open-access air quality and meteorological data.
 % ─────────────────────────────────────────────────────────────────────────────
 
 Processed data, model code, and figure-generation scripts are available at
-\url{https://github.com/fedeg/P1_PM10_Meteorology_Hstar} under an MIT licence.
+\url{https://github.com/fedeg-umh-es/P1_PM10_Meteorology_Hstar} under an MIT licence.
 Raw data are available from the respective national agencies under their
-standard open-data licences.
+standard open-data licences. The Irish station evaluations reported in this revision were regenerated from recovered source datasets; they do not correspond to the originally archived computational run, whose row-level prediction files were not retained in the repository.
 
 % ─────────────────────────────────────────────────────────────────────────────
 \section*{Declaration of competing interests}
@@ -794,13 +793,13 @@ The author declares no competing interests.
 \begin{tabular}{llrrrrr}
 \toprule
 Site & Country & $\rho_1$ &
-$H^*_{\text{strict}}$ (only) &
-$H^*_{\text{strict}}$ (met.) &
+$H^*_{\text{strict,max-run}}$ (only) &
+$H^*_{\text{strict,max-run}}$ (met.) &
 $\Delta H^*$ & Ceiling \\
 \midrule
 Madrid Casa de Campo     & Spain   & 0.957 &  9 & 17 & $+8$ & No \\
 Dundalk (Co.\ Louth)     & Ireland & 0.945 & 24 & 24 &  0   & Yes \\
-Henry St.\ Limerick      & Ireland & 0.876 & 18 & 24 & $+6$ & No \\
+Henry St.\ Limerick      & Ireland & 0.876 & 17 & 24 & $+7$ & No \\
 Portlaoise (Co.\ Laois)  & Ireland & 0.864 & 24 & 24 &  0   & Yes \\
 Ringsend Dublin          & Ireland & 0.843 & 24 & 24 &  0   & Yes \\
 Pearse St.\ Dublin       & Ireland & 0.842 & 24 & 24 &  0   & Yes \\
@@ -808,12 +807,13 @@ Dublin Airport           & Ireland & 0.815 & 22 & 23 & $+1$ & No \\
 Birr (Co.\ Offaly)       & Ireland & 0.815 & 24 & 24 &  0   & Yes \\
 Edenderry (Co.\ Offaly)  & Ireland & 0.804 & 16 & 16 &  0   & No$^a$ \\
 \midrule
-Ireland mean             &         & 0.850 & 22.0 & 22.9 & $+0.9$ & \\
+Ireland mean             &         & 0.850 & 21.9 & 22.9 & $+1.0$ & \\
 \bottomrule
 \multicolumn{7}{l}{$^a$ Edenderry does not hit the 24 h ceiling but both
   models share the same $H^*$, implying}\\
 \multicolumn{7}{l}{\phantom{$^a$} low predictability rather than a ceiling
-  effect.}
+  effect. Note: Irish values reflect}\\
+\multicolumn{7}{l}{\phantom{$^a$} $H^*_{\text{strict,max-run}}$ evaluated from regenerated source datasets.}
 \end{tabular}
 \end{table}
 
