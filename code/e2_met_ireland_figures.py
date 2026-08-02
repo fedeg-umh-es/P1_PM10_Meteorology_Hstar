@@ -26,6 +26,9 @@ from matplotlib.lines import Line2D
 import numpy as np
 import pandas as pd
 
+import sys
+from unittest.mock import MagicMock
+sys.modules['xgboost'] = MagicMock()
 from e2_met_madrid_shared import ensure_results_dirs, load_json_config
 
 # ── canonical paths (P3 canon v1.3) ───────────────────────────────────────────
@@ -154,7 +157,7 @@ def make_fig2(delta: pd.DataFrame, fig_dir: Path) -> None:
     ax.set_ylabel("ΔSkill_RMSE (lags+met − lags only)", fontsize=LABEL_FS)
     ax.set_title("Meteorology benefit per station — Ireland PM10, 2023",
                  fontsize=LABEL_FS + 1)
-    ax.legend(loc="upper right", ncol=2, fontsize=LEG_FS - 1)
+    ax.legend(loc="center left", bbox_to_anchor=(1.02, 0.5), fontsize=LEG_FS - 1)
 
     fig.tight_layout()
     _save(fig, fig_dir, "figure_delta_skill")
@@ -278,7 +281,7 @@ def make_fig4(hstar: pd.DataFrame | None, fig_dir: Path) -> None:
                         fontsize=7, color="#333333")
 
         ax.set_xticks(x)
-        ax.set_xticklabels(labels, rotation=30, ha="right", fontsize=TICK_FS)
+        ax.set_xticklabels(labels, rotation=45, ha="right", fontsize=TICK_FS)
         ax.set_title(title, fontsize=LABEL_FS, loc="left")
         ax.set_ylim(0, 27)
         ax.set_yticks([0, 6, 12, 18, 24])
@@ -287,7 +290,7 @@ def make_fig4(hstar: pd.DataFrame | None, fig_dir: Path) -> None:
         ax.axhline(0, color="#999999", lw=0.6)
 
     ax1.set_ylabel("H* (hours)", fontsize=LABEL_FS)
-    ax1.legend(fontsize=LEG_FS, loc="lower right")
+    ax1.legend(fontsize=LEG_FS, loc="upper center", bbox_to_anchor=(1.0, -0.25), ncol=2)
     fig.suptitle("H* summary — Ireland PM10, 2023 (regenerated bundle)", fontsize=LABEL_FS + 1)
     MANUSCRIPT_FIGS.mkdir(parents=True, exist_ok=True)
     _save(fig, MANUSCRIPT_FIGS, "ireland_figure_hstar_summary")

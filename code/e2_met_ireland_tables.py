@@ -22,6 +22,9 @@ import argparse
 
 import pandas as pd
 
+import sys
+from unittest.mock import MagicMock
+sys.modules['xgboost'] = MagicMock()
 from e2_met_madrid_shared import ensure_results_dirs, load_json_config
 
 
