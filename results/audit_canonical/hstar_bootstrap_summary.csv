@@ -1,0 +1,10 @@
+station,hstar_lags_only_mean,hstar_lags_meteo_mean,delta_hstar_mean,delta_hstar_ci95_low,delta_hstar_ci95_high
+Madrid Casa de Campo,14.73,17.66,2.94,-7.0,12.03
+Birr co offlay,24.0,24.0,0.0,0.0,0.0
+Dublin Airport,21.94,22.44,0.5,0.0,3.0
+Dundalk Co Louth,23.8,24.0,0.2,0.0,1.0
+Pearse street dublin,23.96,24.0,0.03,0.0,1.0
+Ringsend dublin,23.96,23.95,-0.01,0.0,0.0
+edenderry co offlay,23.2,22.91,-0.28,-2.0,0.0
+henry street Limerick,20.21,22.54,2.33,-1.0,6.0
+porrlaoise co laois,23.98,24.0,0.02,0.0,0.0

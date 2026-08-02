@@ -1,0 +1,10 @@
+site,country,rho1,lags_only_hstar,lags_meteo_hstar,delta_hstar,regime_status,rho1_ge_095_threshold,rho1_lt_090_threshold
+Madrid Casa de Campo,Spain,0.957,9,17,8,UNCONSTRAINED,True,False
+Dundalk (Co. Louth),Ireland,0.945,24,24,0,CEILING_CONSTRAINED,False,False
+Henry St. Limerick,Ireland,0.876,17,24,7,UNCONSTRAINED,False,True
+Portlaoise (Co. Laois),Ireland,0.864,24,24,0,CEILING_CONSTRAINED,False,True
+Ringsend Dublin,Ireland,0.843,24,24,0,CEILING_CONSTRAINED,False,True
+Pearse St. Dublin,Ireland,0.842,24,24,0,CEILING_CONSTRAINED,False,True
+Birr (Co. Offaly),Ireland,0.815,24,24,0,CEILING_CONSTRAINED,False,True
+Dublin Airport,Ireland,0.815,22,23,1,UNCONSTRAINED,False,True
+Edenderry (Co. Offaly),Ireland,0.804,16,16,0,SUBMAXIMAL_TIE,False,True

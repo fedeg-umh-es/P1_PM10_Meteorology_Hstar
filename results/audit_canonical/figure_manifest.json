@@ -1,0 +1,121 @@
+{
+  "figures": [
+    {
+      "figure_id": "fig1_madrid_skill",
+      "output_file": "manuscripts/figures/madrid_figure_skill_curves.png",
+      "producer_script": "code/e2_met_madrid_figures.py",
+      "input_files": [
+        "results/e2_met_madrid_pm10/metrics/metrics_all_models.csv"
+      ],
+      "input_hashes": [
+        "8ba9d94a4dd194c1ee1c07c513b0d714aaaa129032207bd74dd46a29c21a22ba"
+      ],
+      "output_hash": "46c001ec1d34b5e388c607ef11a014b99999556794d36398438dd1bf6c183bc6",
+      "git_sha": "5596c1c87f8c466813a87f1305a2bbf377d7a98a"
+    },
+    {
+      "figure_id": "fig2_madrid_delta",
+      "output_file": "manuscripts/figures/madrid_figure_delta_skill.png",
+      "producer_script": "code/e2_met_madrid_figures.py",
+      "input_files": [
+        "results/e2_met_madrid_pm10/metrics/metrics_all_models.csv"
+      ],
+      "input_hashes": [
+        "8ba9d94a4dd194c1ee1c07c513b0d714aaaa129032207bd74dd46a29c21a22ba"
+      ],
+      "output_hash": "9b343e0e434827309a9b8ef088d4387453450232715bd4fbb3acde0947428ae2",
+      "git_sha": "5596c1c87f8c466813a87f1305a2bbf377d7a98a"
+    },
+    {
+      "figure_id": "fig3_madrid_dm",
+      "output_file": "manuscripts/figures/madrid_figure_dm_significance.png",
+      "producer_script": "code/e2_met_madrid_figures.py",
+      "input_files": [
+        "results/e2_met_madrid_pm10/stats/dm_lags_meteo_vs_lags_only.csv"
+      ],
+      "input_hashes": [
+        "c078db6f10c9f6103a4e20f843a9617c53fa85851477ebbbf16b4a5cfb0a7cc5"
+      ],
+      "output_hash": "5342c4139474f05594f30f0269c0b8cfa3bdefd008e3085f50c9c35a2fe0fb33",
+      "git_sha": "5596c1c87f8c466813a87f1305a2bbf377d7a98a"
+    },
+    {
+      "figure_id": "fig4_madrid_hstar",
+      "output_file": "manuscripts/figures/madrid_figure_hstar_summary.png",
+      "producer_script": "code/e2_met_madrid_figures.py",
+      "input_files": [
+        "results/e2_met_madrid_pm10/metrics/hstar_summary.csv"
+      ],
+      "input_hashes": [
+        "31cc1f67e67af54ac5f1d8d6f1b8c855bb400d23a93b01dfbb5b4a007449a71b"
+      ],
+      "output_hash": "767282cf526782f6f7db4fc3fbbbcf47b8c466618ef4341b90d82386b0e7dcfc",
+      "git_sha": "5596c1c87f8c466813a87f1305a2bbf377d7a98a"
+    },
+    {
+      "figure_id": "fig5_ireland_skill",
+      "output_file": "manuscripts/figures/ireland_figure_skill_by_station.png",
+      "producer_script": "code/e2_met_ireland_figures.py",
+      "input_files": [
+        "results/e2_met_ireland_pm10_regenerated/metrics/metrics_all_models.csv"
+      ],
+      "input_hashes": [
+        "9ef85270253046979160281fb900465a9161635088486607f71d7aae503442a0"
+      ],
+      "output_hash": "0bdebd499891cd9d212d4fd1f43497b389588fc56c2e1368fddb9319f85dd5dc",
+      "git_sha": "5596c1c87f8c466813a87f1305a2bbf377d7a98a"
+    },
+    {
+      "figure_id": "fig6_ireland_delta",
+      "output_file": "manuscripts/figures/ireland_figure_delta_skill.png",
+      "producer_script": "code/e2_met_ireland_figures.py",
+      "input_files": [
+        "results/e2_met_ireland_pm10_regenerated/metrics/metrics_all_models.csv"
+      ],
+      "input_hashes": [
+        "9ef85270253046979160281fb900465a9161635088486607f71d7aae503442a0"
+      ],
+      "output_hash": "d4c8e38fb6b119abb178277a74531d1ac046527dcfbda1550f0da704b3256c22",
+      "git_sha": "5596c1c87f8c466813a87f1305a2bbf377d7a98a"
+    },
+    {
+      "figure_id": "fig7_ireland_dm",
+      "output_file": "manuscripts/figures/ireland_figure_dm_significance.png",
+      "producer_script": "code/e2_met_ireland_figures.py",
+      "input_files": [
+        "results/e2_met_ireland_pm10_regenerated/stats/dm_lags_meteo_vs_lags_only.csv"
+      ],
+      "input_hashes": [
+        "b60990088171c23e98425040c1ce367d732808fc562c3969165b769d909d3aac"
+      ],
+      "output_hash": "4149cb7269ce5015d04f676fe8818b741f92e2742a30d255391e92005e2965c2",
+      "git_sha": "5596c1c87f8c466813a87f1305a2bbf377d7a98a"
+    },
+    {
+      "figure_id": "fig8_ireland_hstar",
+      "output_file": "manuscripts/figures/ireland_figure_hstar_summary.png",
+      "producer_script": "code/e2_met_ireland_figures.py",
+      "input_files": [
+        "results/e2_met_ireland_pm10_regenerated/metrics/hstar_summary_both_definitions.csv"
+      ],
+      "input_hashes": [
+        "83ffa88098268c810bfd47e77103a90e8b30c71d9caee0f45c3bb53fa4e5008c"
+      ],
+      "output_hash": "a8c0f824dc7a22feb564349526d1ba28dd2a9240d861b6a768aff6659895c5d4",
+      "git_sha": "5596c1c87f8c466813a87f1305a2bbf377d7a98a"
+    },
+    {
+      "figure_id": "fig9_rho1_delta",
+      "output_file": "manuscripts/figures/figure_rho1_vs_delta_hstar.png",
+      "producer_script": "code/e2_met_comparison_figures.py",
+      "input_files": [
+        "results/derived/nine_site_rho1_delta_hstar.csv"
+      ],
+      "input_hashes": [
+        "27ae95e8d3934000191915a09523825b5be71b8f0f77c4775a2701f711213446"
+      ],
+      "output_hash": "7102122b08c32cadcdf983bf445bba30e8aea82f16da375fd3b549a1c66cb53c",
+      "git_sha": "5596c1c87f8c466813a87f1305a2bbf377d7a98a"
+    }
+  ]
+}

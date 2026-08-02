@@ -1,0 +1,217 @@
+station,horizon,delta_skill_mean,delta_skill_ci95_low,delta_skill_ci95_high
+Madrid Casa de Campo,1,0.0195,-0.007,0.0469
+Madrid Casa de Campo,2,0.0446,0.006,0.0748
+Madrid Casa de Campo,3,0.026,-0.0029,0.0513
+Madrid Casa de Campo,4,0.039,0.0102,0.0642
+Madrid Casa de Campo,5,0.0161,-0.0127,0.0373
+Madrid Casa de Campo,6,-0.0018,-0.0392,0.042
+Madrid Casa de Campo,7,0.0189,-0.0133,0.041
+Madrid Casa de Campo,8,0.0029,-0.0292,0.0379
+Madrid Casa de Campo,9,0.0366,0.0053,0.0629
+Madrid Casa de Campo,10,0.0481,0.0188,0.0751
+Madrid Casa de Campo,11,0.0482,0.0137,0.0763
+Madrid Casa de Campo,12,0.0739,0.0293,0.1053
+Madrid Casa de Campo,13,0.082,0.0055,0.1377
+Madrid Casa de Campo,14,0.1156,0.0181,0.1944
+Madrid Casa de Campo,15,0.0615,-0.0152,0.1321
+Madrid Casa de Campo,16,0.0544,-0.0793,0.1735
+Madrid Casa de Campo,17,0.0395,-0.1657,0.2194
+Madrid Casa de Campo,18,-0.0043,-0.2233,0.2295
+Madrid Casa de Campo,19,0.0173,-0.2749,0.305
+Madrid Casa de Campo,20,0.0456,-0.3536,0.407
+Madrid Casa de Campo,21,0.0929,-0.3217,0.4581
+Madrid Casa de Campo,22,0.004,-0.2503,0.2416
+Madrid Casa de Campo,23,-0.0287,-0.127,0.0396
+Madrid Casa de Campo,24,0.1058,-0.0601,0.258
+Birr co offlay,1,0.0537,0.0319,0.075
+Birr co offlay,2,0.022,0.0008,0.0407
+Birr co offlay,3,0.0178,0.0065,0.0302
+Birr co offlay,4,0.0155,-0.0029,0.0379
+Birr co offlay,5,-0.0149,-0.0433,0.0117
+Birr co offlay,6,-0.0133,-0.0523,0.0267
+Birr co offlay,7,0.0017,-0.0325,0.041
+Birr co offlay,8,0.0198,0.0019,0.042
+Birr co offlay,9,0.0173,-0.0034,0.0395
+Birr co offlay,10,0.016,-0.0074,0.0426
+Birr co offlay,11,0.045,0.0272,0.0671
+Birr co offlay,12,0.0188,-0.0066,0.0576
+Birr co offlay,13,0.0552,0.0136,0.0971
+Birr co offlay,14,0.0032,-0.0335,0.0264
+Birr co offlay,15,0.0021,-0.0407,0.0497
+Birr co offlay,16,0.0043,-0.0309,0.0495
+Birr co offlay,17,0.1019,0.0534,0.1334
+Birr co offlay,18,0.1698,0.0781,0.2376
+Birr co offlay,19,0.0936,0.0421,0.1414
+Birr co offlay,20,0.0995,0.0299,0.1501
+Birr co offlay,21,0.0883,0.0603,0.1189
+Birr co offlay,22,0.1255,0.046,0.194
+Birr co offlay,23,0.1746,0.1141,0.219
+Birr co offlay,24,0.0105,-0.011,0.0282
+Dublin Airport,1,0.0891,0.0139,0.1367
+Dublin Airport,2,0.164,0.0253,0.2548
+Dublin Airport,3,0.1091,0.043,0.1544
+Dublin Airport,4,0.0269,-0.0586,0.0839
+Dublin Airport,5,0.063,-0.0342,0.1321
+Dublin Airport,6,-0.0068,-0.0846,0.0631
+Dublin Airport,7,-0.0061,-0.0783,0.0678
+Dublin Airport,8,0.039,-0.0355,0.1363
+Dublin Airport,9,0.0111,-0.0586,0.1182
+Dublin Airport,10,0.001,-0.0496,0.079
+Dublin Airport,11,-0.0,-0.0514,0.0832
+Dublin Airport,12,-0.0071,-0.0433,0.0449
+Dublin Airport,13,-0.0559,-0.1353,0.0663
+Dublin Airport,14,-0.0206,-0.0502,0.029
+Dublin Airport,15,-0.0286,-0.0566,0.0154
+Dublin Airport,16,-0.0152,-0.0604,0.0418
+Dublin Airport,17,0.0002,-0.0454,0.0643
+Dublin Airport,18,-0.0943,-0.2021,0.0635
+Dublin Airport,19,-0.0951,-0.2134,0.085
+Dublin Airport,20,-0.0447,-0.1196,0.0799
+Dublin Airport,21,-0.0012,-0.0722,0.0931
+Dublin Airport,22,0.014,-0.0416,0.0777
+Dublin Airport,23,0.0219,-0.041,0.0713
+Dublin Airport,24,0.0234,-0.0197,0.0604
+Dundalk Co Louth,1,0.1159,-0.0064,0.2369
+Dundalk Co Louth,2,0.0286,-0.0389,0.0929
+Dundalk Co Louth,3,0.0954,0.0047,0.177
+Dundalk Co Louth,4,0.0099,-0.0252,0.0495
+Dundalk Co Louth,5,-0.0252,-0.0624,0.0362
+Dundalk Co Louth,6,0.0245,-0.0079,0.0526
+Dundalk Co Louth,7,0.0063,-0.035,0.0342
+Dundalk Co Louth,8,0.0151,-0.009,0.0383
+Dundalk Co Louth,9,0.0236,-0.005,0.0518
+Dundalk Co Louth,10,0.0049,-0.018,0.027
+Dundalk Co Louth,11,0.0072,-0.0113,0.0201
+Dundalk Co Louth,12,0.009,-0.0057,0.0231
+Dundalk Co Louth,13,0.0177,-0.001,0.034
+Dundalk Co Louth,14,0.0042,-0.0207,0.0326
+Dundalk Co Louth,15,0.0073,-0.0105,0.0277
+Dundalk Co Louth,16,0.0045,-0.0215,0.0355
+Dundalk Co Louth,17,0.0606,0.0104,0.1149
+Dundalk Co Louth,18,0.0471,-0.0156,0.0982
+Dundalk Co Louth,19,0.0438,0.0082,0.0873
+Dundalk Co Louth,20,0.0596,0.0003,0.1198
+Dundalk Co Louth,21,0.0188,-0.0275,0.0897
+Dundalk Co Louth,22,-0.0049,-0.035,0.021
+Dundalk Co Louth,23,0.0063,-0.0308,0.0329
+Dundalk Co Louth,24,0.0687,0.0025,0.1313
+Pearse street dublin,1,0.0667,0.0138,0.1189
+Pearse street dublin,2,0.0747,-0.0055,0.1531
+Pearse street dublin,3,0.0682,0.0158,0.1042
+Pearse street dublin,4,0.027,0.0018,0.0495
+Pearse street dublin,5,0.0282,0.0041,0.052
+Pearse street dublin,6,0.0406,0.0196,0.0633
+Pearse street dublin,7,0.0261,0.0001,0.0551
+Pearse street dublin,8,0.0108,-0.0175,0.0431
+Pearse street dublin,9,0.0368,0.0171,0.063
+Pearse street dublin,10,0.0143,0.0008,0.046
+Pearse street dublin,11,0.0469,0.0287,0.0628
+Pearse street dublin,12,0.0234,0.008,0.0398
+Pearse street dublin,13,0.0516,0.0283,0.081
+Pearse street dublin,14,0.0322,0.019,0.0478
+Pearse street dublin,15,0.0369,0.0153,0.0527
+Pearse street dublin,16,0.0397,0.026,0.0552
+Pearse street dublin,17,0.0167,-0.0034,0.0383
+Pearse street dublin,18,0.0134,-0.0021,0.0333
+Pearse street dublin,19,-0.0044,-0.0191,0.0126
+Pearse street dublin,20,-0.0163,-0.0357,0.0119
+Pearse street dublin,21,0.0028,-0.0276,0.0299
+Pearse street dublin,22,-0.0044,-0.0334,0.0199
+Pearse street dublin,23,0.0141,-0.0218,0.0371
+Pearse street dublin,24,0.0625,-0.0221,0.1544
+Ringsend dublin,1,0.0195,-0.0199,0.0756
+Ringsend dublin,2,0.0099,-0.0167,0.0696
+Ringsend dublin,3,0.0483,0.0176,0.0762
+Ringsend dublin,4,-0.0107,-0.0538,0.0303
+Ringsend dublin,5,-0.0087,-0.0741,0.0481
+Ringsend dublin,6,-0.0067,-0.0622,0.0451
+Ringsend dublin,7,-0.0076,-0.0927,0.0601
+Ringsend dublin,8,0.0004,-0.085,0.0654
+Ringsend dublin,9,0.0543,-0.0184,0.1129
+Ringsend dublin,10,0.0383,-0.0463,0.1074
+Ringsend dublin,11,0.0805,0.0139,0.1371
+Ringsend dublin,12,0.0495,-0.0257,0.122
+Ringsend dublin,13,-0.012,-0.0786,0.0284
+Ringsend dublin,14,0.0098,-0.0296,0.0579
+Ringsend dublin,15,0.0184,-0.0437,0.0916
+Ringsend dublin,16,0.017,-0.0363,0.0792
+Ringsend dublin,17,0.0211,-0.0259,0.0728
+Ringsend dublin,18,0.0221,-0.0123,0.0616
+Ringsend dublin,19,0.0368,-0.002,0.082
+Ringsend dublin,20,0.0601,0.0257,0.1012
+Ringsend dublin,21,0.0426,0.0029,0.0842
+Ringsend dublin,22,0.021,-0.0186,0.0627
+Ringsend dublin,23,0.0244,0.0004,0.0462
+Ringsend dublin,24,-0.001,-0.0199,0.0238
+edenderry co offlay,1,0.0135,-0.0908,0.1002
+edenderry co offlay,2,-0.0161,-0.0525,0.0274
+edenderry co offlay,3,-0.0813,-0.1268,-0.0105
+edenderry co offlay,4,-0.0328,-0.0765,0.0318
+edenderry co offlay,5,-0.0727,-0.1306,0.0181
+edenderry co offlay,6,-0.0313,-0.0653,0.0158
+edenderry co offlay,7,-0.0641,-0.106,-0.0099
+edenderry co offlay,8,-0.0827,-0.1816,0.0564
+edenderry co offlay,9,-0.0065,-0.1111,0.0434
+edenderry co offlay,10,-0.025,-0.089,0.0092
+edenderry co offlay,11,-0.005,-0.035,0.0181
+edenderry co offlay,12,0.0145,-0.032,0.0737
+edenderry co offlay,13,0.048,-0.0265,0.1053
+edenderry co offlay,14,0.0148,-0.0338,0.0536
+edenderry co offlay,15,0.0385,-0.0445,0.0908
+edenderry co offlay,16,0.096,-0.0156,0.1797
+edenderry co offlay,17,0.145,-0.0108,0.2504
+edenderry co offlay,18,0.1266,-0.0112,0.224
+edenderry co offlay,19,0.1104,-0.0007,0.1592
+edenderry co offlay,20,0.0859,0.0133,0.144
+edenderry co offlay,21,0.0676,0.0271,0.114
+edenderry co offlay,22,0.0571,0.0079,0.1154
+edenderry co offlay,23,0.041,-0.0126,0.0704
+edenderry co offlay,24,0.0121,-0.0319,0.0419
+henry street Limerick,1,0.0199,-0.0118,0.0506
+henry street Limerick,2,0.0751,0.0263,0.1131
+henry street Limerick,3,0.0694,-0.0113,0.1488
+henry street Limerick,4,0.0362,-0.0406,0.0979
+henry street Limerick,5,-0.0179,-0.0798,0.0563
+henry street Limerick,6,-0.0356,-0.0572,-0.0013
+henry street Limerick,7,-0.0237,-0.0687,0.0593
+henry street Limerick,8,0.0127,-0.0416,0.0809
+henry street Limerick,9,0.0245,-0.0238,0.071
+henry street Limerick,10,0.0075,-0.0342,0.0801
+henry street Limerick,11,0.0153,-0.0539,0.0813
+henry street Limerick,12,0.0187,-0.0696,0.0988
+henry street Limerick,13,0.0718,0.0129,0.1135
+henry street Limerick,14,0.0605,-0.0151,0.1078
+henry street Limerick,15,0.0072,-0.0383,0.0438
+henry street Limerick,16,0.0236,-0.0344,0.0646
+henry street Limerick,17,0.0994,-0.0067,0.166
+henry street Limerick,18,0.0307,-0.032,0.0774
+henry street Limerick,19,0.0641,0.0085,0.1034
+henry street Limerick,20,0.0617,0.0114,0.0998
+henry street Limerick,21,0.0286,-0.0143,0.0682
+henry street Limerick,22,-0.0001,-0.0302,0.0379
+henry street Limerick,23,-0.0002,-0.0315,0.0295
+henry street Limerick,24,0.0228,-0.0098,0.0591
+porrlaoise co laois,1,0.0494,-0.0242,0.1091
+porrlaoise co laois,2,-0.0036,-0.0382,0.0366
+porrlaoise co laois,3,-0.0175,-0.0426,0.0114
+porrlaoise co laois,4,-0.0159,-0.0393,0.0062
+porrlaoise co laois,5,-0.0131,-0.0345,0.006
+porrlaoise co laois,6,-0.0129,-0.0283,0.008
+porrlaoise co laois,7,-0.007,-0.0265,0.0173
+porrlaoise co laois,8,-0.0066,-0.0285,0.0248
+porrlaoise co laois,9,0.0124,-0.0053,0.0282
+porrlaoise co laois,10,0.0227,0.0011,0.05
+porrlaoise co laois,11,0.0385,0.0177,0.0605
+porrlaoise co laois,12,0.0293,0.0036,0.054
+porrlaoise co laois,13,0.0321,0.0041,0.0582
+porrlaoise co laois,14,0.0454,0.023,0.0724
+porrlaoise co laois,15,0.0258,-0.016,0.07
+porrlaoise co laois,16,0.031,-0.011,0.0729
+porrlaoise co laois,17,0.0329,-0.0218,0.0859
+porrlaoise co laois,18,0.0216,-0.0189,0.075
+porrlaoise co laois,19,0.0469,-0.0159,0.1129
+porrlaoise co laois,20,-0.0105,-0.0591,0.0485
+porrlaoise co laois,21,0.0369,0.0125,0.0738
+porrlaoise co laois,22,0.0277,0.003,0.0567
+porrlaoise co laois,23,0.0056,-0.0273,0.0548
+porrlaoise co laois,24,0.0177,-0.0149,0.0588

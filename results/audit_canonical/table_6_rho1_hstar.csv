@@ -1,0 +1,10 @@
+site,country,rho1,H_strict_max_run_lags_only,H_strict_max_run_lags_meteo,delta_H_strict_max_run,provenance
+Madrid Casa de Campo,Spain,0.957,9,17,8,rho1=canonical_nine_site_table; Hstar_max_run=madrid_tracked_outputs
+Dundalk (Co. Louth),Ireland,0.945,24,24,0,rho1=canonical_nine_site_table; Hstar_max_run=regenerated_ireland_bundle_not_original
+Henry St. Limerick,Ireland,0.876,17,24,7,rho1=canonical_nine_site_table; Hstar_max_run=regenerated_ireland_bundle_not_original
+Portlaoise (Co. Laois),Ireland,0.864,24,24,0,rho1=canonical_nine_site_table; Hstar_max_run=regenerated_ireland_bundle_not_original
+Ringsend Dublin,Ireland,0.843,24,24,0,rho1=canonical_nine_site_table; Hstar_max_run=regenerated_ireland_bundle_not_original
+Pearse St. Dublin,Ireland,0.842,24,24,0,rho1=canonical_nine_site_table; Hstar_max_run=regenerated_ireland_bundle_not_original
+Birr (Co. Offaly),Ireland,0.815,24,24,0,rho1=canonical_nine_site_table; Hstar_max_run=regenerated_ireland_bundle_not_original
+Dublin Airport,Ireland,0.815,22,23,1,rho1=canonical_nine_site_table; Hstar_max_run=regenerated_ireland_bundle_not_original
+Edenderry (Co. Offaly),Ireland,0.804,16,16,0,rho1=canonical_nine_site_table; Hstar_max_run=regenerated_ireland_bundle_not_original

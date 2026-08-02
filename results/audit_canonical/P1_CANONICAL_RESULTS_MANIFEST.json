@@ -1,0 +1,74 @@
+{
+  "repository": "P1_PM10_Meteorology_Hstar",
+  "working_directory": "/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/P3_Madrid_Ireland",
+  "git_branch": "codex/p1-editorial-computational-audit",
+  "git_head_commit": "5596c1c87f8c466813a87f1305a2bbf377d7a98a",
+  "audit_timestamp": "2026-08-02T17:00:00Z",
+  "environment": {
+    "python_version": "3.9.6",
+    "pandas_version": "2.3.3",
+    "numpy_version": "2.0.2",
+    "scipy_version": "1.13.1",
+    "statsmodels_version": "0.14.6",
+    "xgboost_version": "2.1.4",
+    "scikit_learn_version": "1.6.1",
+    "random_seed": 42
+  },
+  "canonical_datasets_and_predictions": {
+    "madrid_predictions": {
+      "path": "results/e2_met_madrid_pm10/predictions/predictions_all_models.csv",
+      "sha256": "e4a7edd656385df4f160176f0952a410848dc456cd5842981f191124189ea85c"
+    },
+    "ireland_predictions": {
+      "path": "results/e2_met_ireland_pm10_regenerated/predictions/predictions_all_models.csv",
+      "sha256": "e8b262e0812da8c1243afcded5d621dcbed51d6dae56dc07a3fe9069c9484d8e"
+    },
+    "ireland_inventory": {
+      "path": "reports/ireland_dataset_inventory.csv",
+      "sha256": "4435820844c7ac2bb139a63153921fc553a98f16f91bbed858771a3848265383"
+    }
+  },
+  "canonical_tables": {
+    "table_1": {
+      "csv": "results/audit_canonical/table_1_descriptive_statistics.csv",
+      "sha256": ""
+    },
+    "table_3": {
+      "csv": "results/audit_canonical/table_3_madrid_dm.csv",
+      "sha256": ""
+    },
+    "table_4": {
+      "csv": "results/audit_canonical/table_4_ireland_hstar.csv",
+      "sha256": ""
+    },
+    "table_5": {
+      "csv": "results/audit_canonical/table_5_ireland_dm.csv",
+      "sha256": ""
+    },
+    "table_6": {
+      "csv": "results/audit_canonical/table_6_rho1_hstar.csv",
+      "sha256": ""
+    }
+  },
+  "canonical_audit_outputs": {
+    "temporal_contract_audit": "results/audit_canonical/temporal_contract_audit.csv",
+    "origin_accounting": "results/audit_canonical/origin_accounting.csv",
+    "data_completeness": "results/audit_canonical/data_completeness_by_station.csv",
+    "hstar_run_boundaries": "results/audit_canonical/hstar_run_boundaries.csv",
+    "dm_hln_results": "results/audit_canonical/dm_hln_results.csv",
+    "rho1_analysis": "results/audit_canonical/rho1_delta_hstar_analysis.csv",
+    "overleaf_handoff_report": "results/audit_canonical/P1_OVERLEAF_HANDOFF.md"
+  },
+  "test_suite": {
+    "test_file": "tests/test_audit_pipeline.py",
+    "sha256": "fa810874d51109db8f4c7c56e008c545d715612ccab3ef2293875e5219263f23",
+    "result": "PASSED (3/3 unit tests)"
+  },
+  "verdict": "VERIFIED_WITH_DOCUMENTATION_ERRORS",
+  "limits_and_rules_enforced": {
+    "modified_latex_files": "NO",
+    "modified_bib_files": "NO",
+    "created_commit": "YES",
+    "push_performed": "NO"
+  }
+}

@@ -1,0 +1,37 @@
+station,horizon,first_origin,last_origin,stride_hours,candidate_origins,valid_persistence_origins,valid_sarima_origins,valid_xgb_lags_origins,valid_xgb_met_origins,paired_xgb_origins,dm_n,exclusion_reason
+Madrid Casa de Campo,1,2023-01-01 00:00:00,2023-12-31 00:00:00,24,365,365,365,365,365,354,354,Missing target values (PM10 NaN) at horizon t+h in evaluation window
+Madrid Casa de Campo,6,2023-01-01 00:00:00,2023-12-31 00:00:00,24,365,365,365,365,365,356,356,Missing target values (PM10 NaN) at horizon t+h in evaluation window
+Madrid Casa de Campo,12,2023-01-01 00:00:00,2023-12-31 00:00:00,24,365,365,365,365,365,346,346,Missing target values (PM10 NaN) at horizon t+h in evaluation window
+Madrid Casa de Campo,24,2023-01-01 00:00:00,2023-12-31 00:00:00,24,365,365,365,365,365,354,354,Missing target values (PM10 NaN) at horizon t+h in evaluation window
+Birr co offlay,1,2023-01-01 00:00:00,2023-08-01 00:00:00,24,212,212,212,212,212,211,211,Missing PM10 targets at t+h or missing meteo features
+Birr co offlay,6,2023-01-01 00:00:00,2023-08-01 00:00:00,24,212,212,212,212,212,212,212,None
+Birr co offlay,12,2023-01-01 00:00:00,2023-08-01 00:00:00,24,212,212,212,212,212,212,212,None
+Birr co offlay,24,2023-01-01 00:00:00,2023-08-01 00:00:00,24,212,212,212,212,212,212,212,None
+Dublin Airport,1,2023-01-01 00:00:00,2023-08-01 00:00:00,24,212,212,212,212,212,145,145,Missing PM10 targets at t+h or missing meteo features
+Dublin Airport,6,2023-01-01 00:00:00,2023-08-01 00:00:00,24,212,212,212,212,212,145,145,Missing PM10 targets at t+h or missing meteo features
+Dublin Airport,12,2023-01-01 00:00:00,2023-08-01 00:00:00,24,212,212,212,212,212,145,145,Missing PM10 targets at t+h or missing meteo features
+Dublin Airport,24,2023-01-01 00:00:00,2023-08-01 00:00:00,24,212,212,212,212,212,145,145,Missing PM10 targets at t+h or missing meteo features
+Dundalk Co Louth,1,2023-01-01 00:00:00,2023-08-01 00:00:00,24,212,212,212,212,212,151,151,Missing PM10 targets at t+h or missing meteo features
+Dundalk Co Louth,6,2023-01-01 00:00:00,2023-08-01 00:00:00,24,212,212,212,212,212,152,152,Missing PM10 targets at t+h or missing meteo features
+Dundalk Co Louth,12,2023-01-01 00:00:00,2023-08-01 00:00:00,24,212,212,212,212,212,153,153,Missing PM10 targets at t+h or missing meteo features
+Dundalk Co Louth,24,2023-01-01 00:00:00,2023-08-01 00:00:00,24,212,212,212,212,212,152,152,Missing PM10 targets at t+h or missing meteo features
+Pearse street dublin,1,2023-01-01 00:00:00,2023-08-01 00:00:00,24,212,212,212,212,212,212,212,None
+Pearse street dublin,6,2023-01-01 00:00:00,2023-08-01 00:00:00,24,212,212,212,212,212,212,212,None
+Pearse street dublin,12,2023-01-01 00:00:00,2023-08-01 00:00:00,24,212,212,212,212,212,212,212,None
+Pearse street dublin,24,2023-01-01 00:00:00,2023-08-01 00:00:00,24,212,212,212,212,212,212,212,None
+Ringsend dublin,1,2023-01-01 00:00:00,2023-08-01 00:00:00,24,212,212,212,212,212,212,212,None
+Ringsend dublin,6,2023-01-01 00:00:00,2023-08-01 00:00:00,24,212,212,212,212,212,212,212,None
+Ringsend dublin,12,2023-01-01 00:00:00,2023-08-01 00:00:00,24,212,212,212,212,212,212,212,None
+Ringsend dublin,24,2023-01-01 00:00:00,2023-08-01 00:00:00,24,212,212,212,212,212,212,212,None
+edenderry co offlay,1,2023-01-01 00:00:00,2023-08-01 00:00:00,24,212,212,212,212,212,208,208,Missing PM10 targets at t+h or missing meteo features
+edenderry co offlay,6,2023-01-01 00:00:00,2023-08-01 00:00:00,24,212,212,212,212,212,211,211,Missing PM10 targets at t+h or missing meteo features
+edenderry co offlay,12,2023-01-01 00:00:00,2023-08-01 00:00:00,24,212,212,212,212,212,211,211,Missing PM10 targets at t+h or missing meteo features
+edenderry co offlay,24,2023-01-01 00:00:00,2023-08-01 00:00:00,24,212,212,212,212,212,210,210,Missing PM10 targets at t+h or missing meteo features
+henry street Limerick,1,2023-01-01 00:00:00,2023-08-01 00:00:00,24,212,212,212,212,212,211,211,Missing PM10 targets at t+h or missing meteo features
+henry street Limerick,6,2023-01-01 00:00:00,2023-08-01 00:00:00,24,212,212,212,212,212,211,211,Missing PM10 targets at t+h or missing meteo features
+henry street Limerick,12,2023-01-01 00:00:00,2023-08-01 00:00:00,24,212,212,212,212,212,210,210,Missing PM10 targets at t+h or missing meteo features
+henry street Limerick,24,2023-01-01 00:00:00,2023-08-01 00:00:00,24,212,212,212,212,212,211,211,Missing PM10 targets at t+h or missing meteo features
+porrlaoise co laois,1,2023-01-01 00:00:00,2023-08-01 00:00:00,24,212,212,212,212,212,212,212,None
+porrlaoise co laois,6,2023-01-01 00:00:00,2023-08-01 00:00:00,24,212,212,212,212,212,212,212,None
+porrlaoise co laois,12,2023-01-01 00:00:00,2023-08-01 00:00:00,24,212,212,212,212,212,212,212,None
+porrlaoise co laois,24,2023-01-01 00:00:00,2023-08-01 00:00:00,24,212,212,212,212,212,212,212,None

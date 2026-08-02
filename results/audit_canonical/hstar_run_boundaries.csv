@@ -1,0 +1,27 @@
+station,condition,model,H_strict_max_run_length,H_strict_max_run_start,H_strict_max_run_end,H_strict_from_h1,H_relax_last_positive_horizon,Delta_H_strict_max_run_length,ceiling_flag
+Madrid Casa de Campo,lags_only,xgboost_direct,9,3,11,0,15,0,False
+Madrid Casa de Campo,lags_meteo,xgboost_direct,17,1,17,17,17,8,False
+Birr co offlay,lags_meteo,xgboost_direct,24,1,24,24,24,0,False
+Birr co offlay,lags_only,xgboost_direct,24,1,24,24,24,0,True
+Birr co offlay,reference,sarima,16,1,16,16,24,0,False
+Dublin Airport,lags_meteo,xgboost_direct,23,2,24,0,24,1,False
+Dublin Airport,lags_only,xgboost_direct,22,3,24,0,24,0,False
+Dublin Airport,reference,sarima,24,1,24,24,24,0,False
+Dundalk Co Louth,lags_meteo,xgboost_direct,24,1,24,24,24,0,False
+Dundalk Co Louth,lags_only,xgboost_direct,24,1,24,24,24,0,True
+Dundalk Co Louth,reference,sarima,18,1,18,18,24,0,False
+Pearse street dublin,lags_meteo,xgboost_direct,24,1,24,24,24,0,False
+Pearse street dublin,lags_only,xgboost_direct,24,1,24,24,24,0,True
+Pearse street dublin,reference,sarima,17,1,17,17,23,0,False
+Ringsend dublin,lags_meteo,xgboost_direct,24,1,24,24,24,0,False
+Ringsend dublin,lags_only,xgboost_direct,24,1,24,24,24,0,True
+Ringsend dublin,reference,sarima,9,1,9,9,20,0,False
+edenderry co offlay,lags_meteo,xgboost_direct,16,1,16,7,24,0,False
+edenderry co offlay,lags_only,xgboost_direct,16,1,16,7,24,0,False
+edenderry co offlay,reference,sarima,9,1,9,3,21,0,False
+henry street Limerick,lags_meteo,xgboost_direct,24,1,24,24,24,7,False
+henry street Limerick,lags_only,xgboost_direct,17,1,17,1,24,0,False
+henry street Limerick,reference,sarima,4,1,4,1,17,0,False
+porrlaoise co laois,lags_meteo,xgboost_direct,24,1,24,24,24,0,False
+porrlaoise co laois,lags_only,xgboost_direct,24,1,24,24,24,0,True
+porrlaoise co laois,reference,sarima,17,1,17,17,17,0,False
