@@ -1,0 +1,5 @@
+horizon,n,dm_statistic,p_value,p_value_bonferroni_adjusted,favours
+1,354,1.169,0.2432,0.9727,lags_meteo
+6,356,-0.0484,0.9614,1.0,lags_only
+12,346,2.5159,0.0123,0.0493,lags_meteo
+24,354,0.8469,0.3976,1.0,lags_meteo

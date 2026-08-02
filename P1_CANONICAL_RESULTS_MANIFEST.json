@@ -1,0 +1,140 @@
+{
+  "repository": "https://github.com/fedeg-umh-es/P1_PM10_Meteorology_Hstar",
+  "local_path": "/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/P3_Madrid_Ireland",
+  "branch": "codex/p1-editorial-computational-audit",
+  "base_branch": "codex/p3-hstar-strict-manuscript-repair",
+  "base_head_sha": "5596c1c87f8c466813a87f1305a2bbf377d7a98a",
+  "audit_date": "2026-08-02T14:53:14.478198+00:00",
+  "environment": {
+    "python": "3.9.6",
+    "numpy": "2.0.2",
+    "pandas": "2.3.3",
+    "scikit-learn": "1.6.1",
+    "scipy": "1.13.1",
+    "statsmodels": "0.14.6",
+    "xgboost": "2.1.4",
+    "os": "Darwin (macOS), arm64"
+  },
+  "seeds": {
+    "xgboost_random_state": 42,
+    "random_seed_config": 42
+  },
+  "verdict": "VERIFIED_WITH_DOCUMENTATION_ERRORS",
+  "reproducibility_limitations": [
+    "data_raw/ and data_processed/ are gitignored and empty on this machine; full pipeline re-execution and Phase 4/8-training-period/12 could not be completed.",
+    "SARIMA alignment fix (predict_sarima) is unit-tested on synthetic data but not re-run end-to-end against real Madrid/Ireland data (blocked by the above)."
+  ],
+  "files": [
+    {
+      "path": "code/e2_met_madrid_shared.py",
+      "sha256": "e5b4919f42af34a16b3376965938b2a7e9d13d07b3116af391e2d417967acb0b",
+      "size_bytes": 22711
+    },
+    {
+      "path": "code/e2_met_madrid_run.py",
+      "sha256": "1b4f9140f176c20709a40c2b28cd807dc787ef26c619548201f676f8b1b1457b",
+      "size_bytes": 4289
+    },
+    {
+      "path": "code/e2_met_ireland_run.py",
+      "sha256": "6d2dcb5555625697455cc40348a83442eb65a0efe2b1122448aeb6ca7ac4e7c6",
+      "size_bytes": 16478
+    },
+    {
+      "path": "code/rolling_origin.py",
+      "sha256": "2e105cf418284bb55232be1520a055d1b6d769f7218f1155a887fbeabd203b2d",
+      "size_bytes": 10571
+    },
+    {
+      "path": "code/features.py",
+      "sha256": "57888349ad0ab63fb2040edd1ee5facc0d433e3deff5f3cccdab4b380bc47cf3",
+      "size_bytes": 3797
+    },
+    {
+      "path": "code/models/xgboost_model.py",
+      "sha256": "08fff6181fd666cbca67ae5e28453ea8e1b9d49572768ee4d59f2f2d7ef3e8c1",
+      "size_bytes": 4537
+    },
+    {
+      "path": "code/e2_met_madrid_config.json",
+      "sha256": "eb41f93761d7fb7345f02c8948905dc13b1a27b1cffe2c4ff926c70dc996a722",
+      "size_bytes": 1141
+    },
+    {
+      "path": "code/e2_met_ireland_config.json",
+      "sha256": "3739ae079b1d2f450f96924f0ee6f19c343d44ae61034831952ebd0b9c77907c",
+      "size_bytes": 1100
+    },
+    {
+      "path": "code/test_regression_p1_audit.py",
+      "sha256": "816a4c8f894b91ada8c7b3f08979eca093a23575e61a9ae9b99c7b154e18eb4a",
+      "size_bytes": 12737
+    },
+    {
+      "path": "results/e2_met_madrid_pm10/predictions/predictions_all_models.csv",
+      "sha256": "e4a7edd656385df4f160176f0952a410848dc456cd5842981f191124189ea85c",
+      "size_bytes": 2629099
+    },
+    {
+      "path": "results/e2_met_ireland_pm10_regenerated/predictions/predictions_all_models.csv",
+      "sha256": "e8b262e0812da8c1243afcded5d621dcbed51d6dae56dc07a3fe9069c9484d8e",
+      "size_bytes": 14729573
+    },
+    {
+      "path": "audit_p1_tmp/tables_out/table_3_madrid_dm.csv",
+      "sha256": "b93055901543fd2c37e99c842b9dcdd68552671e4541b58b7014bb7f040530a2",
+      "size_bytes": 214
+    },
+    {
+      "path": "audit_p1_tmp/tables_out/table_4_ireland_hstar.csv",
+      "sha256": "f2fbdb83c65a171a3825c23fd1d45459f54c75c2a56cb84b2404fb93a94e34cc",
+      "size_bytes": 522
+    },
+    {
+      "path": "audit_p1_tmp/tables_out/table_5_ireland_dm.csv",
+      "sha256": "26af38682361a3891eff04c2ff61f0749ca235a7d97549d2078ae433ddf1b860",
+      "size_bytes": 1615
+    },
+    {
+      "path": "audit_p1_tmp/tables_out/table_6_rho1_hstar.csv",
+      "sha256": "d7db3b16a3b3ca98f612ce972449c728f44b39dab3aea91c8f50be37701ef537",
+      "size_bytes": 605
+    },
+    {
+      "path": "audit_p1_tmp/skill_bootstrap_intervals_madrid.csv",
+      "sha256": "f22eda0643431cb8ca2733a1dc085f585e08e1188e53df06981c71be39782c4d",
+      "size_bytes": 3117
+    },
+    {
+      "path": "audit_p1_tmp/hstar_bootstrap_summary_madrid.csv",
+      "sha256": "1410c3a4bac003cb3ced51b31adbc8cd79708606f7cb0f590a1acf08c9098510",
+      "size_bytes": 408
+    },
+    {
+      "path": "audit_p1_tmp/hstar_bootstrap_summary_henry_st.csv",
+      "sha256": "64a8e90267c5a9e0163d372c991421f0ad5e1bcb177cac289f5a1979ef11e8c8",
+      "size_bytes": 408
+    },
+    {
+      "path": "audit_p1_tmp/origin_accounting_madrid.csv",
+      "sha256": "1a82b39f0c1ee66027d2188e0c45bb5ec8ffff3fe90b36470ebc7be5354508a7",
+      "size_bytes": 708
+    },
+    {
+      "path": "audit_p1_tmp/origin_accounting_ireland.csv",
+      "sha256": "41cfbb6451f2ae69075aa3c12e8970736a5bb1ae7403b09a8e582aea3f30ba67",
+      "size_bytes": 2613
+    },
+    {
+      "path": "audit_p1_tmp/dm_pair_counts_madrid.csv",
+      "sha256": "b2fb96ca3df460f2eee2e7b82cc18d82bf907005eec7d199e14de43dba90cd83",
+      "size_bytes": 110
+    },
+    {
+      "path": "P1_OVERLEAF_HANDOFF.md",
+      "sha256": "40a30860581062df8ff8d1ce31768337416e9b4602aef7802baac0726a58ca1d",
+      "size_bytes": 14175
+    }
+  ],
+  "missing_referenced_files": []
+}

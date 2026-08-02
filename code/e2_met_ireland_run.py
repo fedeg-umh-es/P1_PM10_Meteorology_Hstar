@@ -121,7 +121,7 @@ def run_backtest_for_station(
             continue
 
         persistence_preds = predict_persistence(train_df=train_df, config=config)
-        sarima_preds = predict_sarima(train_df=train_df, config=config)
+        sarima_preds = predict_sarima(train_df=train_df, config=config, origin=origin)
 
         model, medians, usable_features = fit_xgboost_direct(
             train_df=train_df,

@@ -1,0 +1,54 @@
+[
+  {
+    "output_csv": "audit_p1_tmp/tables_out/table_3_madrid_dm.csv",
+    "output_csv_sha256": "b93055901543fd2c37e99c842b9dcdd68552671e4541b58b7014bb7f040530a2",
+    "output_md": "audit_p1_tmp/tables_out/table_3_madrid_dm.md",
+    "sources": [
+      {
+        "path": "results/e2_met_madrid_pm10/predictions/predictions_all_models.csv",
+        "sha256": "e4a7edd656385df4f160176f0952a410848dc456cd5842981f191124189ea85c"
+      }
+    ],
+    "head_sha": "5596c1c87f8c466813a87f1305a2bbf377d7a98a",
+    "generated_at": "2026-08-02T14:39:24.966948+00:00"
+  },
+  {
+    "output_csv": "audit_p1_tmp/tables_out/table_4_ireland_hstar.csv",
+    "output_csv_sha256": "f2fbdb83c65a171a3825c23fd1d45459f54c75c2a56cb84b2404fb93a94e34cc",
+    "output_md": "audit_p1_tmp/tables_out/table_4_ireland_hstar.md",
+    "sources": [
+      {
+        "path": "results/e2_met_ireland_pm10_regenerated/predictions/predictions_all_models.csv",
+        "sha256": "e8b262e0812da8c1243afcded5d621dcbed51d6dae56dc07a3fe9069c9484d8e"
+      }
+    ],
+    "head_sha": "5596c1c87f8c466813a87f1305a2bbf377d7a98a",
+    "generated_at": "2026-08-02T14:39:24.966948+00:00"
+  },
+  {
+    "output_csv": "audit_p1_tmp/tables_out/table_5_ireland_dm.csv",
+    "output_csv_sha256": "26af38682361a3891eff04c2ff61f0749ca235a7d97549d2078ae433ddf1b860",
+    "output_md": "audit_p1_tmp/tables_out/table_5_ireland_dm.md",
+    "sources": [
+      {
+        "path": "results/e2_met_ireland_pm10_regenerated/predictions/predictions_all_models.csv",
+        "sha256": "e8b262e0812da8c1243afcded5d621dcbed51d6dae56dc07a3fe9069c9484d8e"
+      }
+    ],
+    "head_sha": "5596c1c87f8c466813a87f1305a2bbf377d7a98a",
+    "generated_at": "2026-08-02T14:39:24.966948+00:00"
+  },
+  {
+    "output_csv": "audit_p1_tmp/tables_out/table_6_rho1_hstar.csv",
+    "output_csv_sha256": "d7db3b16a3b3ca98f612ce972449c728f44b39dab3aea91c8f50be37701ef537",
+    "output_md": "audit_p1_tmp/tables_out/table_6_rho1_hstar.md",
+    "sources": [
+      {
+        "path": "results/e2_met_ireland_pm10_regenerated/predictions/predictions_all_models.csv",
+        "sha256": "e8b262e0812da8c1243afcded5d621dcbed51d6dae56dc07a3fe9069c9484d8e"
+      }
+    ],
+    "head_sha": "5596c1c87f8c466813a87f1305a2bbf377d7a98a",
+    "generated_at": "2026-08-02T14:39:24.966948+00:00"
+  }
+]

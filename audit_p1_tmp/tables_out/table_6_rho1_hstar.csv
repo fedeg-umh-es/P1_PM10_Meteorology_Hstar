@@ -1,0 +1,9 @@
+station,H_star_strict_lags_only,H_star_relax_lags_only,H_star_strict_lags_meteo,H_star_relax_lags_meteo,H_star_strict_sarima,H_star_relax_sarima,delta_H_star_strict,ceiling,rho1_evaluation_period_2023
+Birr co offlay,24,24,24,24,16,24,0,Yes,0.8067
+Dublin Airport,22,24,23,24,24,24,1,No,0.8935
+Dundalk Co Louth,24,24,24,24,18,24,0,Yes,0.789
+Pearse street dublin,24,24,24,24,17,23,0,Yes,0.8411
+Ringsend dublin,24,24,24,24,9,20,0,Yes,0.6619
+edenderry co offlay,16,24,16,24,9,21,0,No (submaximal tie),0.7941
+henry street Limerick,17,24,24,24,4,17,7,No,0.8724
+porrlaoise co laois,24,24,24,24,17,17,0,Yes,0.8854

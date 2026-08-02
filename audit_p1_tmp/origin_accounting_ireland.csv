@@ -1,0 +1,33 @@
+station,condition,model,n_origins,first_origin,last_origin,n_rows,n_horizons
+Birr co offlay,lags_meteo,xgboost_direct,212,2023-01-01,2023-07-31,5088,24
+Birr co offlay,lags_only,xgboost_direct,212,2023-01-01,2023-07-31,5088,24
+Birr co offlay,reference,persistence,212,2023-01-01,2023-07-31,5088,24
+Birr co offlay,reference,sarima,212,2023-01-01,2023-07-31,5088,24
+Dublin Airport,lags_meteo,xgboost_direct,145,2023-01-01,2023-05-25,3480,24
+Dublin Airport,lags_only,xgboost_direct,145,2023-01-01,2023-05-25,3480,24
+Dublin Airport,reference,persistence,145,2023-01-01,2023-05-25,3480,24
+Dublin Airport,reference,sarima,145,2023-01-01,2023-05-25,3480,24
+Dundalk Co Louth,lags_meteo,xgboost_direct,154,2023-01-01,2023-06-03,3696,24
+Dundalk Co Louth,lags_only,xgboost_direct,154,2023-01-01,2023-06-03,3696,24
+Dundalk Co Louth,reference,persistence,154,2023-01-01,2023-06-03,3696,24
+Dundalk Co Louth,reference,sarima,154,2023-01-01,2023-06-03,3696,24
+Pearse street dublin,lags_meteo,xgboost_direct,212,2023-01-01,2023-07-31,5088,24
+Pearse street dublin,lags_only,xgboost_direct,212,2023-01-01,2023-07-31,5088,24
+Pearse street dublin,reference,persistence,212,2023-01-01,2023-07-31,5088,24
+Pearse street dublin,reference,sarima,212,2023-01-01,2023-07-31,5088,24
+Ringsend dublin,lags_meteo,xgboost_direct,212,2023-01-01,2023-07-31,5088,24
+Ringsend dublin,lags_only,xgboost_direct,212,2023-01-01,2023-07-31,5088,24
+Ringsend dublin,reference,persistence,212,2023-01-01,2023-07-31,5088,24
+Ringsend dublin,reference,sarima,212,2023-01-01,2023-07-31,5088,24
+edenderry co offlay,lags_meteo,xgboost_direct,211,2023-01-01 00:00:00,2023-07-31 15:00:00,5064,24
+edenderry co offlay,lags_only,xgboost_direct,211,2023-01-01 00:00:00,2023-07-31 15:00:00,5064,24
+edenderry co offlay,reference,persistence,211,2023-01-01 00:00:00,2023-07-31 15:00:00,5064,24
+edenderry co offlay,reference,sarima,211,2023-01-01 00:00:00,2023-07-31 15:00:00,5064,24
+henry street Limerick,lags_meteo,xgboost_direct,211,2023-01-01 00:00:00,2023-07-31 08:00:00,5064,24
+henry street Limerick,lags_only,xgboost_direct,211,2023-01-01 00:00:00,2023-07-31 08:00:00,5064,24
+henry street Limerick,reference,persistence,211,2023-01-01 00:00:00,2023-07-31 08:00:00,5064,24
+henry street Limerick,reference,sarima,211,2023-01-01 00:00:00,2023-07-31 08:00:00,5064,24
+porrlaoise co laois,lags_meteo,xgboost_direct,212,2023-01-01,2023-07-31,5088,24
+porrlaoise co laois,lags_only,xgboost_direct,212,2023-01-01,2023-07-31,5088,24
+porrlaoise co laois,reference,persistence,212,2023-01-01,2023-07-31,5088,24
+porrlaoise co laois,reference,sarima,212,2023-01-01,2023-07-31,5088,24

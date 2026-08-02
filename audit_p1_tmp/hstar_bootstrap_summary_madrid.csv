@@ -1,0 +1,2 @@
+n_origins,n_boot,block_len,H_strict_lags_only_median,H_strict_lags_only_ci95,H_strict_lags_meteo_median,H_strict_lags_meteo_ci95,delta_H_strict_median,delta_H_strict_ci95,delta_H_strict_prob_positive,H_relax_lags_only_median,H_relax_lags_meteo_median
+362,2000,7,11.0,"(np.float64(7.0), np.float64(24.0))",15.0,"(np.float64(8.0), np.float64(24.0))",3.0,"(np.float64(-8.0), np.float64(12.0))",0.7445,16.0,21.0

@@ -1,0 +1,33 @@
+station,horizon,n,dm_statistic,p_value,favours
+Birr co offlay,1,211,2.6818,0.0079,lags_meteo
+Birr co offlay,6,212,-0.504,0.6148,lags_only
+Birr co offlay,12,212,1.0957,0.2745,lags_meteo
+Birr co offlay,24,212,0.6916,0.4899,lags_meteo
+Dublin Airport,1,145,1.6363,0.104,lags_meteo
+Dublin Airport,6,145,-0.3416,0.7331,lags_only
+Dublin Airport,12,145,-0.3601,0.7193,lags_only
+Dublin Airport,24,145,4.4196,0.0,lags_meteo
+Dundalk Co Louth,1,151,1.1168,0.2659,lags_meteo
+Dundalk Co Louth,6,152,1.1317,0.2595,lags_meteo
+Dundalk Co Louth,12,153,1.0677,0.2873,lags_meteo
+Dundalk Co Louth,24,152,1.0925,0.2764,lags_meteo
+Pearse street dublin,1,212,1.8465,0.0662,lags_meteo
+Pearse street dublin,6,212,3.0821,0.0023,lags_meteo
+Pearse street dublin,12,212,3.2627,0.0013,lags_meteo
+Pearse street dublin,24,212,0.823,0.4114,lags_meteo
+Ringsend dublin,1,212,1.2333,0.2189,lags_meteo
+Ringsend dublin,6,212,-0.1797,0.8576,lags_only
+Ringsend dublin,12,212,0.8404,0.4017,lags_meteo
+Ringsend dublin,24,212,0.1007,0.9199,lags_meteo
+edenderry co offlay,1,208,0.3392,0.7348,lags_meteo
+edenderry co offlay,6,211,-1.1843,0.2376,lags_only
+edenderry co offlay,12,211,0.183,0.855,lags_meteo
+edenderry co offlay,24,210,0.563,0.574,lags_meteo
+henry street Limerick,1,211,0.9175,0.3599,lags_meteo
+henry street Limerick,6,211,-1.1227,0.2628,lags_only
+henry street Limerick,12,210,0.41,0.6823,lags_meteo
+henry street Limerick,24,211,0.867,0.3869,lags_meteo
+porrlaoise co laois,1,212,1.221,0.2234,lags_meteo
+porrlaoise co laois,6,212,-1.0413,0.2989,lags_only
+porrlaoise co laois,12,212,1.8142,0.0711,lags_meteo
+porrlaoise co laois,24,212,,,undetermined

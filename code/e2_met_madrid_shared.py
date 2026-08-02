@@ -212,8 +212,13 @@ def predict_persistence(train_df: pd.DataFrame, config: dict[str, Any]) -> dict[
     return {h: last_value for h in range(1, horizon_max + 1)}
 
 
-def predict_sarima(train_df: pd.DataFrame, config: dict[str, Any]) -> dict[int, float]:
+def predict_sarima(
+    train_df: pd.DataFrame,
+    config: dict[str, Any],
+    origin: pd.Timestamp | None = None,
+) -> dict[int, float]:
     target_col = config["target_col"]
+    timestamp_col = config["timestamp_col"]
     horizon_max = int(config["horizon_max"])
     if not bool(config.get("include_sarima", False)):
         return {h: np.nan for h in range(1, horizon_max + 1)}
@@ -226,6 +231,24 @@ def predict_sarima(train_df: pd.DataFrame, config: dict[str, Any]) -> dict[int, 
     if len(y_train) > sarima_max_rows:
         y_train = y_train.iloc[-sarima_max_rows:]
 
+    # `get_forecast().predicted_mean` is indexed by step position counting
+    # from the row *after* the last training observation, not from `origin`.
+    # `train_df` (get_train_window) excludes `origin` itself (strict `<`), so
+    # the last training timestamp is `origin - gap_steps` hours (gap_steps is
+    # normally 1 on a gap-free hourly grid, but can be larger across a data
+    # gap). Requesting exactly `horizon_max` steps and reading `iloc[h-1]` for
+    # nominal horizon h therefore returns the forecast for `origin+(h-1)`,
+    # one step short of the `origin+h` timestamp that `y_true` uses in
+    # run_backtest — every SARIMA horizon was scored against the wrong
+    # target. `gap_steps` corrects the offset so `iloc[gap_steps+h-1]`
+    # lines up with `origin+h`, matching persistence/XGBoost.
+    gap_steps = 1
+    if origin is not None:
+        last_train_ts = pd.to_datetime(train_df[timestamp_col]).iloc[-1]
+        gap_hours = (pd.Timestamp(origin) - last_train_ts) / pd.Timedelta(hours=1)
+        if gap_hours.is_integer() and gap_hours >= 1:
+            gap_steps = int(gap_hours)
+
     try:
         model = SARIMAX(
             y_train,
@@ -236,8 +259,10 @@ def predict_sarima(train_df: pd.DataFrame, config: dict[str, Any]) -> dict[int, 
             simple_differencing=False,
         )
         result = model.fit(disp=False, maxiter=120)
-        forecast = result.get_forecast(steps=horizon_max).predicted_mean
-        return {h: float(forecast.iloc[h - 1]) for h in range(1, horizon_max + 1)}
+        forecast = result.get_forecast(steps=horizon_max + gap_steps).predicted_mean
+        return {
+            h: float(forecast.iloc[gap_steps + h - 1]) for h in range(1, horizon_max + 1)
+        }
     except Exception:
         return {h: np.nan for h in range(1, horizon_max + 1)}
 
@@ -300,7 +325,7 @@ def run_backtest(
             continue
 
         persistence_preds = predict_persistence(train_df=train_df, config=config)
-        sarima_preds = predict_sarima(train_df=train_df, config=config)
+        sarima_preds = predict_sarima(train_df=train_df, config=config, origin=origin)
 
         model, medians, usable_features = fit_xgboost_direct(
             train_df=train_df,
@@ -404,6 +429,39 @@ def attach_skill_against_persistence(metrics: pd.DataFrame) -> pd.DataFrame:
     return out
 
 
+def _max_run_and_bounds(skill: np.ndarray) -> tuple[int, int, int]:
+    """Longest contiguous positive-skill run anywhere in `skill` (1-indexed
+    inclusive start/end horizons; 0,0,0 if no positive value exists)."""
+    best = 0
+    best_start = 0
+    cur = 0
+    cur_start = 0
+    for i, value in enumerate(skill):
+        h = i + 1
+        if pd.notna(value) and value > 0:
+            if cur == 0:
+                cur_start = h
+            cur += 1
+            if cur > best:
+                best = cur
+                best_start = cur_start
+        else:
+            cur = 0
+    best_end = best_start + best - 1 if best > 0 else 0
+    return int(best), int(best_start), int(best_end)
+
+
+def _from_h1_run(skill: np.ndarray) -> int:
+    """Longest contiguous positive-skill run starting exactly at h=1."""
+    run = 0
+    for value in skill:
+        if pd.notna(value) and value > 0:
+            run += 1
+        else:
+            break
+    return int(run)
+
+
 def derive_hstar_from_metrics(metrics: pd.DataFrame, horizon_max: int) -> pd.DataFrame:
     rows: list[dict[str, Any]] = []
     for (condition, model), group in metrics.groupby(["condition", "model"]):
@@ -415,6 +473,9 @@ def derive_hstar_from_metrics(metrics: pd.DataFrame, horizon_max: int) -> pd.Dat
                     "H": int(horizon_max),
                     "H_star_relax": 0,
                     "H_star_strict": 0,
+                    "H_star_strict_from_h1": 0,
+                    "H_star_strict_run_start": 0,
+                    "H_star_strict_run_end": 0,
                 }
             )
             continue
@@ -425,24 +486,49 @@ def derive_hstar_from_metrics(metrics: pd.DataFrame, horizon_max: int) -> pd.Dat
         )
         pos = np.where(skill > 0)[0]
         h_relax = int(pos.max() + 1) if len(pos) > 0 else 0
-        best = 0
-        current = 0
-        for value in skill:
-            if pd.notna(value) and value > 0:
-                current += 1
-                best = max(best, current)
-            else:
-                current = 0
+        best, run_start, run_end = _max_run_and_bounds(skill)
+        from_h1 = _from_h1_run(skill)
         rows.append(
             {
                 "condition": condition,
                 "model": model,
                 "H": int(horizon_max),
                 "H_star_relax": h_relax,
-                "H_star_strict": int(best),
+                "H_star_strict": best,
+                "H_star_strict_from_h1": from_h1,
+                "H_star_strict_run_start": run_start,
+                "H_star_strict_run_end": run_end,
             }
         )
     return pd.DataFrame(rows).sort_values(["model", "condition"]).reset_index(drop=True)
+
+
+def compute_ceiling_flag(hstar_wide: pd.DataFrame, horizon_max: int) -> pd.DataFrame:
+    """Classify each site's lags_only H_star_strict against the horizon ceiling.
+
+    - "Yes": lags_only already reaches horizon_max (delta is structurally
+      forced to 0, not evidence that meteorology is uninformative).
+    - "No": lags_only is below horizon_max and lags_meteo differs from it
+      (a real, unconstrained comparison).
+    - "No (submaximal tie)": lags_only is below horizon_max but lags_meteo
+      is equal to it anyway (e.g. Edenderry) — not a ceiling effect, but a
+      tie that must not be conflated with one.
+    """
+    out = hstar_wide.copy()
+
+    def _classify(row: pd.Series) -> str:
+        only = row.get("H_star_strict_lags_only")
+        meteo = row.get("H_star_strict_lags_meteo")
+        if pd.isna(only) or pd.isna(meteo):
+            return "unknown"
+        if int(only) >= horizon_max:
+            return "Yes"
+        if int(only) == int(meteo):
+            return "No (submaximal tie)"
+        return "No"
+
+    out["ceiling"] = out.apply(_classify, axis=1)
+    return out
 
 
 def _loss_series(df: pd.DataFrame, loss: str) -> pd.Series:
