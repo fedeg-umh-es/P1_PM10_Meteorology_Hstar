@@ -1,0 +1,108 @@
+{
+  "_meta": {
+    "generated_by": "docs/audit/00_inventory.md .. 05_calibration.md (rama claude/audit-p1-meteorology-0ehg5v)",
+    "date": "2026-08-03",
+    "evidence_labels": {
+      "VERIFIED_PRIMARY": "reentrenado desde el dataset base crudo en este entorno",
+      "REPRODUCED": "recomputado desde predicciones row-level ya trackeadas, sin reentrenar (dataset base ausente en este entorno)",
+      "REPRODUCED_PRIOR_AUDIT": "recomputado en una auditoria previa (PR#3, commit 1aad811d) desde CSV fuente recuperados; hashes verificados de forma independiente por esta auditoria (Fase 3b), pero no recomputado de nuevo por esta sesion",
+      "TRANSCRIBED_FROM_MANUSCRIPT": "copiado literalmente de una tabla del manuscrito, usado como dato de entrada de un analisis nuevo (no es una cifra generada por esta auditoria)",
+      "UNVERIFIED": "no se pudo confirmar con los artefactos disponibles en este entorno",
+      "NOT_FOUND_IN_REPO": "la cifra de referencia citada en el encargo de auditoria no existe en ningun artefacto de este repositorio"
+    },
+    "primary_dataset_blocker": "data_processed/madrid_pm10_meteorology_experiment_base.csv y data_processed/ireland_pm10_meteorology_hourly.csv no existen en este entorno (ver docs/audit/00_inventory.md Sec.5); por eso ninguna cifra alcanza VERIFIED_PRIMARY."
+  },
+  "madrid": {
+    "lags_only": {"max_run": 9, "from_h1": 0, "relax": 15, "evidence": "REPRODUCED", "source": "results/audit/madrid_recompute/hstar_variants.csv"},
+    "lags_meteo": {"max_run": 17, "from_h1": 17, "relax": 17, "evidence": "REPRODUCED", "source": "results/audit/madrid_recompute/hstar_variants.csv"},
+    "sarima": {"max_run": 8, "from_h1": 0, "relax": 20, "evidence": "REPRODUCED", "source": "results/audit/madrid_recompute/hstar_variants.csv"},
+    "delta_hstar": {
+      "max_run": 8,
+      "from_h1": 17,
+      "ci_low": -8.0,
+      "ci_high": 13.0,
+      "bootstrap_mean": 3.083,
+      "bootstrap_sd": 5.492,
+      "bootstrap_block_days": 7,
+      "bootstrap_n_resamples": 2000,
+      "bootstrap_seed": 20260803,
+      "evidence": "REPRODUCED",
+      "note": "max_run=8 coincide con el manuscrito. El IC95% [-8,+13] es un analisis nuevo de esta auditoria; la cifra de referencia del encargo ([-7,+12]) es NOT_FOUND_IN_REPO (no aparece en manuscripts/, results/, reports/, docs/ ni notes/).",
+      "source": "results/audit/madrid_recompute/bootstrap_summary.json"
+    },
+    "dm": {
+      "h1": {"n": 354, "p_value": 0.243, "favours": "lags_meteo", "evidence": "REPRODUCED"},
+      "h6": {"n": 356, "p_value": 0.961, "favours": "lags_only", "evidence": "REPRODUCED"},
+      "h12": {"n": 346, "p_value": 0.012, "favours": "lags_meteo", "evidence": "REPRODUCED", "note": "unico horizonte que sobrevive a la correccion de Bonferroni del manuscrito (alpha_adj=0.0125) EN LA VENTANA PUBLICADA (ene-dic); no sobrevive en la ventana ene-jul (p=0.045), ver window_sensitivity."},
+      "h24": {"n": 354, "p_value": 0.398, "favours": "lags_meteo", "evidence": "REPRODUCED"},
+      "source": "results/audit/madrid_recompute/dm_recomputed.csv"
+    },
+    "window_sensitivity": {
+      "primaria_jan_jul_2023": {
+        "n_origins": 212,
+        "delta_hstar_max_run": 10,
+        "delta_hstar_from_h1": 0,
+        "bootstrap_ci95": [0.0, 12.0],
+        "dm_h12": {"n": 206, "p_value": 0.045, "survives_bonferroni_0125": false}
+      },
+      "sensibilidad_jan_dec_2023": {
+        "n_origins": 362,
+        "delta_hstar_max_run": 8,
+        "delta_hstar_from_h1": 17,
+        "bootstrap_ci95": [-8.0, 13.0],
+        "dm_h12": {"n": 346, "p_value": 0.012, "survives_bonferroni_0125": true}
+      },
+      "evidence": "REPRODUCED",
+      "note": "el manuscrito declara la ventana enero-julio (Metodologia L280, pie tab:descriptive L234) pero las cifras publicadas en Resultados solo son reproducibles con la ventana enero-diciembre.",
+      "source": "results/audit/madrid_window_sensitivity/window_summary.csv"
+    },
+    "null_calibration_max_run_lags_only": {
+      "observed": 9,
+      "null_mean": 10.209,
+      "null_p50": 9.0,
+      "null_p95": 24.0,
+      "null_p99": 24.0,
+      "fraction_null_ge_observed": 0.573,
+      "n_permutations": 5000,
+      "seed": 20260803,
+      "evidence": "REPRODUCED",
+      "note": "permutacion por origen (intercambia modelo/persistencia para los 24 horizontes de cada origen a la vez, preservando la correlacion real entre horizontes). El 57% de las permutaciones bajo skill nulo igualan o superan el valor observado.",
+      "source": "results/audit/calibration/null_calibration_summary.json"
+    },
+    "rho1_training_2020_2022": {"value": 0.957, "evidence": "TRANSCRIBED_FROM_MANUSCRIPT", "source": "manuscripts/manuscript_main.tex:203"},
+    "leakage_gate": {"verdict": "VERDE", "evidence": "REPRODUCED", "source": "docs/audit/01_leak_verdict.md"},
+    "run_metadata_coherence": {"status": "corregido en esta auditoria (Fase 3c)", "source": "results/e2_met_madrid_pm10/run_metadata.json"}
+  },
+  "ireland": {
+    "mean_delta_hstar": {"value": 0.9, "evidence": "REPRODUCED_PRIOR_AUDIT", "source": "results/e2_met_ireland_pm10_regenerated/ (PR#3); manuscripts/manuscript_main.tex:459-460"},
+    "mean_rho1_training_2020_2022": {"value": 0.850, "range": [0.804, 0.945], "evidence": "TRANSCRIBED_FROM_MANUSCRIPT", "source": "manuscripts/manuscript_main.tex:258-260"},
+    "per_station_hstar_strict_max_run": {
+      "evidence": "REPRODUCED_PRIOR_AUDIT",
+      "note": "verificado por hash en esta auditoria (Fase 3b): 30/31 ficheros de output_hashes.csv coinciden byte a byte; sin recomputo propio en esta sesion por falta del dataset consolidado de Irlanda.",
+      "source": "results/e2_met_ireland_pm10_regenerated/metrics/hstar_summary.csv",
+      "manuscript_vs_regenerated_mismatches": [
+        "Henry St. Limerick lags_only: manuscrito=18, regenerado=17 (ROUNDING_MATCH, IE-025/026)",
+        "DM-HLN favours count: manuscrito=23/8/1, regenerado=24/7/1 (MISMATCH, IE-036)"
+      ]
+    },
+    "hstar_definition_discrepancy": {
+      "note": "H*_strict en prosa (Metodos) = racha desde h=1 (from-h1); en tablas = racha mas larga en cualquier punto (max-run). Documentado primero para Irlanda en resultados/e2_met_ireland_pm10_regenerated/hstar_definition_discrepancy.md; esta auditoria confirmo el mismo patron para Madrid de forma independiente (Fase 2).",
+      "evidence": "REPRODUCED_PRIOR_AUDIT + REPRODUCED (Madrid, esta auditoria)"
+    },
+    "rho1_ols_all_9_sites": {"r": 0.579, "p_value": 0.103, "n": 9, "evidence": "REPRODUCED", "note": "coincide con el r=0.58/p=0.10 del manuscrito (manuscripts/manuscript_main.tex:872), confirma que la tabla usada reproduce sus datos de origen.", "source": "results/audit/calibration/rho1_delta_hstar_regression.json"},
+    "rho1_tobit_censored_all_9_sites": {
+      "beta1_slope": 52.404,
+      "beta0_intercept": -41.437,
+      "sigma": 0.896,
+      "evidence": "REPRODUCED",
+      "note": "censura por la derecha en 0 para los 6 sitios con techo de H*_strict=24h en lags_only. Pendiente ~63% mayor que el OLS (atenuacion por censura). n=9: ni el OLS ni el Tobit sostienen una afirmacion inferencial.",
+      "source": "results/audit/calibration/rho1_delta_hstar_regression.json"
+    }
+  },
+  "flow_determination": {
+    "engine_that_generated_published_results": "code/e2_met_madrid_shared.py (run_backtest / build_origin_feature_row / predict_xgboost_direct), compartido por Madrid e Irlanda",
+    "generic_engine_status": "code/rolling_origin.py (run_single_origin_evaluation / run_rolling_backtest) es codigo muerto del proyecto RVVCCA/Elche, no invocado por ningun script de Madrid/Irlanda",
+    "evidence": "REPRODUCED",
+    "source": "docs/audit/00_inventory.md"
+  }
+}

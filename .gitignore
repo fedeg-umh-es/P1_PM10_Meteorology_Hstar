@@ -41,6 +41,8 @@ results/_ireland_regen_shards/
 !results/audit/**
 !figures/audit/
 !figures/audit/**
+!results/RESULTS_CANONICAL.md
+!results/NUMBERS_FOR_MANUSCRIPT.json
 # Allow rvvcca subdirectory structure (data files remain ignored)
 !data_raw/rvvcca/
 data_raw/rvvcca/*
