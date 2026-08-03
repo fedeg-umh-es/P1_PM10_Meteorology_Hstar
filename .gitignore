@@ -50,3 +50,6 @@ data_raw/
 __pycache__/
 *.pyc
 *.pyo
+
+# Audit venv (local, reproducible via docs/audit/00_inventory.md)
+.venv_audit/
