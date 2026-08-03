@@ -39,6 +39,8 @@ results/_ireland_regen_shards/
 # not raw model dumps.
 !results/audit/
 !results/audit/**
+!figures/audit/
+!figures/audit/**
 # Allow rvvcca subdirectory structure (data files remain ignored)
 !data_raw/rvvcca/
 data_raw/rvvcca/*
