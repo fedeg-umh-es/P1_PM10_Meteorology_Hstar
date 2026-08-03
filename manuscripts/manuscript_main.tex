@@ -16,8 +16,11 @@
 % class itself; loading it again here with different options causes a
 % fatal "Option clash for package geometry" error, so it is intentionally
 % NOT re-loaded.
-\usepackage{setspace}
-\doublespacing
+% Double-spacing (via setspace) is dropped for the two-column [iicol]
+% layout: IJER's guidelines do not require it, sn-jnl's own two-column
+% format is designed to be set single-spaced, and double-spacing in a
+% narrow ~6cm column wastes a large amount of vertical space (a major
+% contributor to the earlier 41-page overflow).
 \usepackage{lineno}
 \linenumbers
 \usepackage{graphicx}
@@ -220,7 +223,7 @@ largest at Pearse Street Dublin, Ringsend Dublin and Portlaoise
 ($n=5{,}088$ each), reflecting differences in the length of usable overlap
 between \PMten{} and meteorological records at each site.
 
-\begin{table}[htbp]
+\begin{table*}[t]
 \centering
 \caption{Descriptive statistics of hourly \PMten{}
   (\si{\micro\gram\per\cubic\metre}) for all nine sites.
@@ -246,7 +249,7 @@ Henry St.\ Limerick & 13\,128 & 13.0 & 12.1 & 30.8 & 5\,052 & 11.9 &  8.6 & 27.2
 Portlaoise          & 21\,958 & 11.3 &  9.7 & 27.5 & 5\,088 & 10.9 &  7.9 & 25.1 \\
 \bottomrule
 \end{tabular}
-\end{table}
+\end{table*}
 
 Across the eight Irish stations, the mean lag-1 autocorrelation of hourly
 \PMten{} over the training period (2020--2022) is $\bar{\rho}_1 = 0.850$
@@ -493,7 +496,7 @@ a high of 23$^b$~h at Dublin Airport.  Figure~\ref{fig:ireland_hstar} presents
 these results as a grouped bar chart, facilitating direct station-by-station
 comparison.
 
-\begin{table}[htbp]
+\begin{table*}[t]
 \centering
 \caption{$H^*$ (hours) by station, model, and criterion for Ireland.
   $\Delta H^* = H^*_{\text{lags+met}} - H^*_{\text{lags only}}$ (strict criterion).}
@@ -524,7 +527,7 @@ $\Delta H^*$ (mean)     & \multicolumn{4}{c}{$+1.0$~h} & \multicolumn{2}{c}{---}
 \multicolumn{7}{l}{\phantom{$^b$} recovered from saved artifacts without refitting the model; the true}\\
 \multicolumn{7}{l}{\phantom{$^b$} value is 23 or 24~h.}
 \end{tabular}
-\end{table}
+\end{table*}
 
 DM-HLN tests for Ireland (Figure~\ref{fig:ireland_dm} and
 Table~\ref{tab:ireland_dm}) show that statistically significant advantages of
@@ -541,7 +544,7 @@ these are direction counts, not counts of statistically significant differences.
 This pattern is broadly consistent with $\Delta H^*_{\mathrm{strict,max-run}} \approx 0$
 at most Irish stations.
 
-\begin{table}[htbp]
+\begin{table*}[t]
 \centering
 \caption{DM-HLN test results for Ireland: lags + met.\ vs.\ lags only.
   Bold: $p < 0.05$.}
@@ -567,7 +570,7 @@ Henry St.     &  0.92 & 0.360          & $-$1.12 & 0.263 & 0.41 & 0.682 & 0.87 &
 Portlaoise    &  1.22 & 0.223          & $-$1.04 & 0.299 & 1.81 & 0.071 & --- & --- \\
 \bottomrule
 \end{tabular}
-\end{table}
+\end{table*}
 
 % ─────────────────────────────────────────────────────────────────────────────
 \section{Discussion}
@@ -625,7 +628,7 @@ association definitively.
 
 Table~\ref{tab:rho1} (extending the primary metric with the from-$h{=}1$ diagnostic) reports the same $\rho_1$--$\Delta H^*$ relationship shown in Figure~\ref{fig:rho1_delta} in tabular form. Notably, Madrid and Henry St.\ Limerick are the only two sites showing a from-$h{=}1$ gain (0$\to$17 and 1$\to$24 respectively), a pattern consistent with the autocorrelation narrative. Conversely, Dublin Airport fails to establish a continuous run from $h{=}1$ (0/0), indicating its positive skill begins later in the horizon.
 
-\begin{table}[htbp]
+\begin{table*}[t]
 \centering
 \caption{Lag-1 autocorrelation $\rho_1$ of hourly \PMten{} (training period
   2020--2022) and $\Delta H^*_{\mathrm{strict,max-run}}$ (lags + met.\ minus lags only)
@@ -660,7 +663,7 @@ Ireland mean             &         & 0.850 & 21.9 & 22.9 & 16.0 & 18.9 & $+1.0$ 
   effect. Note: Irish values reflect}\\
 \multicolumn{9}{l}{\phantom{$^a$} $H^*_{\text{strict,max-run}}$ evaluated from regenerated source datasets.}
 \end{tabular}
-\end{table}
+\end{table*}
 
 A plausible physical interpretation of this statistical pattern involves boundary-layer dynamics.
 Madrid Casa de Campo is a continental urban-background site characterised by
@@ -871,7 +874,7 @@ Agency for providing open-access air quality and meteorological data.
 
 \newpage
 
-\begin{figure}[htbp]
+\begin{figure*}[t]
   \centering
   \includegraphics[width=0.85\textwidth]{figures/madrid_figure_skill_curves.png}
   % TODO-CODEX: replace with regenerated canonical figure when available.
@@ -881,9 +884,9 @@ Agency for providing open-access air quality and meteorological data.
     Blue solid: XGBoost lags only; red dashed: XGBoost lags + met.; green
     dotted: SARIMA.  Horizontal dashed line at $S = 0$.}
   \label{fig:madrid_skill}
-\end{figure}
+\end{figure*}
 
-\begin{figure}[htbp]
+\begin{figure*}[t]
   \centering
   \includegraphics[width=0.85\textwidth]{figures/madrid_figure_delta_skill.png}
   \caption{Pointwise difference in RMSE skill score,
@@ -892,18 +895,18 @@ Agency for providing open-access air quality and meteorological data.
     indicate horizons where meteorology improves skill; areas below zero
     (shaded blue) indicate horizons where lags-only is superior.}
   \label{fig:madrid_delta}
-\end{figure}
+\end{figure*}
 
-\begin{figure}[htbp]
+\begin{figure*}[t]
   \centering
   \includegraphics[width=0.75\textwidth]{figures/madrid_figure_dm_significance.png}
   \caption{DM-HLN test results for Madrid at $h \in \{1, 6, 12, 24\}$.
     Filled circles: $p < 0.05$; open circles: $p \ge 0.05$.  Green: lags + met.\
     favoured; red: lags only favoured.  $p$-values annotated above each symbol.}
   \label{fig:madrid_dm}
-\end{figure}
+\end{figure*}
 
-\begin{figure}[htbp]
+\begin{figure*}[t]
   \centering
   \includegraphics[width=0.88\textwidth]{figures/madrid_figure_hstar_summary.png}
   \caption{$H^*$ summary bar chart for Madrid Casa de Campo.  Left panel:
@@ -911,11 +914,11 @@ Agency for providing open-access air quality and meteorological data.
     persistence; green: SARIMA; blue: XGBoost lags only; red: XGBoost lags +
     met.  Numbers above each bar show the value in hours.}
   \label{fig:madrid_hstar}
-\end{figure}
+\end{figure*}
 
 % ── Ireland figures ───────────────────────────────────────────────────────────
 
-\begin{figure}[htbp]
+\begin{figure*}[t]
   \centering
   \includegraphics[width=\textwidth]{figures/ireland_figure_skill_by_station.png}
   \caption{RMSE skill score $S(h)$ relative to persistence as a function of
@@ -924,9 +927,9 @@ Agency for providing open-access air quality and meteorological data.
     XGBoost lags only; red dashed: XGBoost lags + meteorology.  Horizontal
     dotted line at $S = 0$.}
   \label{fig:ireland_skill}
-\end{figure}
+\end{figure*}
 
-\begin{figure}[htbp]
+\begin{figure*}[t]
   \centering
   \includegraphics[width=0.85\textwidth]{figures/ireland_figure_delta_skill.png}
   % TODO-CODEX: replace with regenerated canonical figure when available.
@@ -936,9 +939,9 @@ Agency for providing open-access air quality and meteorological data.
     zero at most stations and most horizons indicate that lags-only XGBoost
     already captures the dominant predictable variance.}
   \label{fig:ireland_delta}
-\end{figure}
+\end{figure*}
 
-\begin{figure}[htbp]
+\begin{figure*}[t]
   \centering
   \includegraphics[width=0.78\textwidth]{figures/ireland_figure_dm_significance.png}
   % TODO-CODEX: replace with regenerated canonical figure when available.
@@ -947,9 +950,9 @@ Agency for providing open-access air quality and meteorological data.
     Filled circles: $p < 0.05$; open circles: $p \ge 0.05$.  Green: lags + met.\
     favoured; red: lags only favoured.}
   \label{fig:ireland_dm}
-\end{figure}
+\end{figure*}
 
-\begin{figure}[htbp]
+\begin{figure*}[t]
   \centering
   \includegraphics[width=\textwidth]{figures/ireland_figure_hstar_summary.png}
   % TODO-CODEX: replace with regenerated canonical figure when available.
@@ -958,11 +961,11 @@ Agency for providing open-access air quality and meteorological data.
     XGBoost lags only; red bars: XGBoost lags + meteorology.  Numbers above
     each bar show the value in hours.}
   \label{fig:ireland_hstar}
-\end{figure}
+\end{figure*}
 
 % ── ρ₁ vs ΔH* scatter ────────────────────────────────────────────────────────
 
-\begin{figure}[htbp]
+\begin{figure*}[t]
   \centering
   \includegraphics[width=0.82\textwidth]{figures/figure_rho1_vs_delta_hstar.png}
   % TODO-CODEX: replace with regenerated canonical figure when available.
@@ -976,7 +979,7 @@ Agency for providing open-access air quality and meteorological data.
     ceiling effect.  Among the four unconstrained sites the association is
     strong and monotone.}
   \label{fig:rho1_delta}
-\end{figure}
+\end{figure*}
 
 % ─────────────────────────────────────────────────────────────────────────────
 % Bibliography
