@@ -7,7 +7,7 @@
 % Figures are referenced from ../results/
 % Build from repo root: pdflatex manuscripts/manuscript_main.tex
 
-\documentclass{sn-jnl}
+\documentclass[iicol]{sn-jnl}
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -60,53 +60,35 @@ A multi-site, multi-horizon comparison with XGBoost and SARIMA}
 
 \begin{abstract}
 \noindent
-Multi-horizon forecasts of urban \PMten{} are increasingly relevant as ambient
-standards tighten.  We ask whether adding meteorological predictors increases
-the range of lead times over which a model shows positive skill relative to a
-naïve persistence baseline.  We use a rolling-origin, expanding-window
-backtesting design over January 2020--July 2023 across nine monitoring sites:
-Madrid Casa de Campo (Spain) and eight stations in Ireland.  We compare
-persistence, SARIMA(1,0,1)(1,0,0)$_{24}$, and direct multi-horizon XGBoost trained
-separately for each $h \in \{1,\ldots,24\}$, using either \PMten{} lags only
-(\textit{lags only}) or lags plus nine meteorological covariates observed at
-the forecast origin $t$ (\textit{lags + met.}); meteorological predictors are
-not drawn from the target time $t+h$ or any other future point.
+Multi-horizon forecasts of urban \PMten{} are increasingly relevant as
+ambient standards tighten.  We ask whether meteorological predictors extend
+the range of lead times over which a model beats a persistence baseline.
+Using a rolling-origin backtest (January 2020 to July 2023) across nine
+sites --- Madrid Casa de Campo (Spain) and eight Irish stations --- we
+compare persistence, SARIMA, and direct multi-horizon XGBoost trained for
+each $h \in \{1,\ldots,24\}$, using \PMten{} lags only or lags plus nine
+meteorological covariates observed at the forecast origin.
 
-Forecast quality is summarised by the RMSE skill score relative to persistence.
-Our primary horizon metric, $H^*_{\mathrm{strict,max-run}}$, is defined as the
-\emph{length} (in hours) of the longest contiguous run of strictly positive
-skill, located anywhere within $h=1,\ldots,24$ (e.g., a run $h=3$--$11$ has
-length 9 and terminal horizon $h=11$).  We additionally report
-$H^*_{\mathrm{strict,from-}h1}$ (positive-skill run starting at $h=1$) and the
-relaxed last-positive horizon $H^*_{\mathrm{relax}}$.
-
-At Madrid, XGBoost (lags only) attains its longest positive-skill run over
-$h=3$--$11$ ($H^*_{\mathrm{strict,max-run}}=9$~h), whereas adding meteorology yields
-a run over $h=1$--$17$ ($H^*_{\mathrm{strict,max-run}}=17$~h), an eight-hour
-increase in maximum run length.  Across Ireland, the mean increase in
-$H^*_{\mathrm{strict,max-run}}$ is $+1.0$~h.  DM-HLN tests at
-$h\in\{1,6,12,24\}$ indicate that, for Madrid, the lags+met.\ advantage is
-statistically significant only at $h=12$ ($p=0.012$; nominal and consistent with
-a four-test Bonferroni threshold of 0.0125).  A moving-block bootstrap over
-forecast origins shows that the Madrid $\Delta H^*_{\mathrm{strict,max-run}}$
-point estimate carries a wide 95\% interval that includes zero, so this
-result should be read as directional rather than precise (see
-Section~\ref{sec:results}).  An exploratory across-site
-analysis relating lag-1 autocorrelation to $\Delta H^*$ is not statistically
-significant ($r=0.555$, $p=0.121$, $n=9$).
-
-Overall, the observed site contrast is compatible with meteorology providing
-additional information primarily where persistence is harder to beat at short
-leads, but the evidence is limited by the small number of sites, ceiling
-censoring at 24~h, and the restricted set of inferential tests.  Operational
-interpretation depends on the time alignment and availability of the
-meteorological predictors.
+Forecast quality is summarised by the RMSE skill score relative to
+persistence.  Our primary metric, $H^*_{\mathrm{strict,max-run}}$, is the
+length (hours) of the longest contiguous positive-skill run within
+$h=1,\ldots,24$; we additionally report $H^*_{\mathrm{strict,from-}h1}$ and
+the relaxed last-positive horizon $H^*_{\mathrm{relax}}$.  At Madrid,
+meteorology extends the longest run from 9~h to 17~h; across Ireland the
+mean gain is only $+1.0$~h.  DM-HLN tests at $h\in\{1,6,12,24\}$ show the
+Madrid advantage is significant only at $h=12$ ($p=0.012$).  A moving-block
+bootstrap places the Madrid $\Delta H^*$ estimate within a wide 95\%
+interval that includes zero, so the result is directional rather than
+precise.  An exploratory analysis relating lag-1 autocorrelation to
+$\Delta H^*$ across sites is not significant ($r=0.555$, $p=0.121$,
+$n=9$).  The contrast is compatible with meteorology helping mainly where
+persistence is hard to beat at short leads, though evidence is limited by
+the small number of sites and ceiling censoring at 24~h.
 
 \medskip
 \noindent
-\textbf{Keywords:} PM\textsubscript{10}; atmospheric aerosol; meteorological
-covariates; forecast horizon; XGBoost; SARIMA; skill score; Diebold--Mariano
-test; air quality.
+\textbf{Keywords:} \PMten{}; forecast horizon; meteorological covariates;
+XGBoost; SARIMA; skill score.
 \end{abstract}
 
 \newpage
@@ -122,9 +104,9 @@ and one of the most consequential atmospheric pollutants in European cities.
 Its surface concentration integrates contributions from primary crustal and
 traffic-related emissions, long-range transported dust, and secondary aerosol
 formation, all modulated by boundary-layer mixing, wet scavenging, and
-synoptic-scale advection \citep{Seinfeld2006, Kumar2016}.  Sustained exposure
+synoptic-scale advection \citep{Kumar2016, Seinfeld2006}.  Sustained exposure
 is associated with cardiovascular and respiratory morbidity, premature
-mortality, and reduced quality of life \citep{WHO2021, EEA2023}.  The European
+mortality, and reduced quality of life \citep{EEA2023, WHO2021}.  The European
 regulatory framework has progressively tightened in response: Directive
 2008/50/EC established the current limit of
 40~\si{\micro\gram\per\cubic\metre} as an annual mean, and the revised
@@ -142,7 +124,7 @@ deep daytime convective mixing, frontal passages, and precipitation scavenging
 all accelerate aerosol dispersal, reducing persistence.  Wind speed and
 direction influence horizontal transport of aerosol plumes from upwind sources,
 while relative humidity modulates hygroscopic growth and related aerosol
-properties \citep{Seinfeld2006, Kumar2016}.  This physical coupling motivates
+properties \citep{Kumar2016, Seinfeld2006}.  This physical coupling motivates
 considering meteorological predictors as potential covariates in statistical and
 machine-learning forecasting models, particularly at lead times where the
 information content of recent \PMten{} history alone may decay.
@@ -864,26 +846,24 @@ sites, and that lag-1 autocorrelation may serve as a candidate screening
 indicator, pending validation on independent datasets.
 
 % ─────────────────────────────────────────────────────────────────────────────
-\section*{Acknowledgements}
+\section*{Declarations}
 % ─────────────────────────────────────────────────────────────────────────────
 
-The author thanks the Madrid City Council and the Irish Environmental Protection
-Agency for providing open-access air quality and meteorological data.
+\paragraph{Funding.}
+The author did not receive support from any organization for the submitted work.
 
-% ─────────────────────────────────────────────────────────────────────────────
-\section*{Data and code availability}
-% ─────────────────────────────────────────────────────────────────────────────
+\paragraph{Competing interests.}
+The author has no relevant financial or non-financial interests to disclose.
 
+\paragraph{Data, material and code availability.}
 Processed data, model code, and figure-generation scripts are available at
 \url{https://github.com/fedeg-umh-es/P1_PM10_Meteorology_Hstar} under an MIT licence.
 Raw data are available from the respective national agencies under their
 standard open-data licences. The Irish station evaluations reported in this revision were regenerated from recovered source datasets; they do not correspond to the originally archived computational run, whose row-level prediction files were not retained in the repository.
 
-% ─────────────────────────────────────────────────────────────────────────────
-\section*{Declaration of competing interests}
-% ─────────────────────────────────────────────────────────────────────────────
-
-The author declares no competing interests.
+\paragraph{Acknowledgements.}
+The author thanks the Madrid City Council and the Irish Environmental Protection
+Agency for providing open-access air quality and meteorological data.
 
 % ─────────────────────────────────────────────────────────────────────────────
 % Figures
