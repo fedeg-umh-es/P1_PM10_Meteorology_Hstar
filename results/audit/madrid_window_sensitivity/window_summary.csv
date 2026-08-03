@@ -1,0 +1,3 @@
+window,start,end,n_origins,hstar_max_run_lags_only,hstar_max_run_lags_meteo,delta_hstar_max_run,hstar_from_h1_lags_only,hstar_from_h1_lags_meteo,delta_hstar_from_h1,bootstrap_ci95_low,bootstrap_ci95_high
+PRIMARIA_jan_jul_2023,2023-01-01,2023-07-31,212,9,19,10,0,0,0,0.0,12.0
+SENSIBILIDAD_jan_dec_2023,2023-01-01,2023-12-30,362,9,17,8,0,17,17,-8.0,13.0
