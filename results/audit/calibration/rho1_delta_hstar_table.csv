@@ -1,0 +1,10 @@
+site,rho1,delta_hstar,ceiling
+Madrid Casa de Campo,0.957,8,False
+Dundalk (Co. Louth),0.945,0,True
+Henry St. Limerick,0.876,6,False
+Portlaoise (Co. Laois),0.864,0,True
+Ringsend Dublin,0.843,0,True
+Pearse St. Dublin,0.842,0,True
+Dublin Airport,0.815,1,False
+Birr (Co. Offaly),0.815,0,True
+Edenderry (Co. Offaly),0.804,0,False

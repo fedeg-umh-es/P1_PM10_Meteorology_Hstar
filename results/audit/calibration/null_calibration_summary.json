@@ -1,0 +1,10 @@
+{
+  "n_permutations": 5000,
+  "seed": 20260803,
+  "observed_hstar_max_run_lags_only": 9,
+  "null_mean": 10.2086,
+  "null_p50": 9.0,
+  "null_p95": 24.0,
+  "null_p99": 24.0,
+  "fraction_null_ge_observed": 0.5726
+}

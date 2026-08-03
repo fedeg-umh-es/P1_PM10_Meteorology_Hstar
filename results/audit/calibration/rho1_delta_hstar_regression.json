@@ -1,0 +1,23 @@
+{
+  "n": 9,
+  "ols": {
+    "slope": 32.12199870214147,
+    "intercept": -26.033203547479992,
+    "r": 0.5785715505506013,
+    "p_value": 0.10265124238560365
+  },
+  "tobit_right_censored_at_0": {
+    "converged": true,
+    "beta0": -41.43738525967436,
+    "beta1_slope": 52.40395784296584,
+    "sigma": 0.8960425590406095,
+    "neg_loglik": 5.444881153772407
+  },
+  "manuscript_reported_ols": {
+    "r": 0.58,
+    "p_value": 0.1,
+    "n": 9
+  },
+  "ols_matches_manuscript": true,
+  "caveat": "n=9 (Madrid + 8 estaciones irlandesas); ni el OLS ni el Tobit sostienen una afirmacion inferencial con esta n. Ambos se reportan como diagnostico descriptivo, no como evidencia confirmatoria."
+}
