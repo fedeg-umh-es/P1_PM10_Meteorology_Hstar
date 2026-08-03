@@ -1,0 +1,2 @@
+station,n_origins,n_boot,block_length,delta_Hstar_strict_from_h1,delta_Hstar_strict_from_h1_ci_lower,delta_Hstar_strict_from_h1_ci_upper,delta_Hstar_strict_max_run,delta_Hstar_strict_max_run_ci_lower,delta_Hstar_strict_max_run_ci_upper,delta_Hstar_relax,delta_Hstar_relax_ci_lower,delta_Hstar_relax_ci_upper
+Madrid Casa de Campo,362,1000,7,17,-8.0,24.0,8,-8.0,12.0,2,-1.0,10.0

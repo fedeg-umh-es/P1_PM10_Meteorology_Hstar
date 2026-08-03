@@ -1,0 +1,33 @@
+station,condition,model,H,Hstar_strict_from_h1,Hstar_strict_max_run,Hstar_relax,ceiling_constrained_strict_from_h1,ceiling_constrained_strict_max_run,ceiling_constrained_relax
+Birr co offlay,lags_meteo,xgboost_direct,24,24,24,24,True,True,True
+Birr co offlay,lags_only,xgboost_direct,24,24,24,24,True,True,True
+Birr co offlay,reference,persistence,24,0,0,0,False,False,False
+Birr co offlay,reference,sarima,24,16,16,24,False,False,True
+Dublin Airport,lags_meteo,xgboost_direct,24,0,23,24,False,False,True
+Dublin Airport,lags_only,xgboost_direct,24,0,22,24,False,False,True
+Dublin Airport,reference,persistence,24,0,0,0,False,False,False
+Dublin Airport,reference,sarima,24,24,24,24,True,True,True
+Dundalk Co Louth,lags_meteo,xgboost_direct,24,24,24,24,True,True,True
+Dundalk Co Louth,lags_only,xgboost_direct,24,24,24,24,True,True,True
+Dundalk Co Louth,reference,persistence,24,0,0,0,False,False,False
+Dundalk Co Louth,reference,sarima,24,18,18,24,False,False,True
+Pearse street dublin,lags_meteo,xgboost_direct,24,24,24,24,True,True,True
+Pearse street dublin,lags_only,xgboost_direct,24,24,24,24,True,True,True
+Pearse street dublin,reference,persistence,24,0,0,0,False,False,False
+Pearse street dublin,reference,sarima,24,17,17,23,False,False,False
+Ringsend dublin,lags_meteo,xgboost_direct,24,24,24,24,True,True,True
+Ringsend dublin,lags_only,xgboost_direct,24,24,24,24,True,True,True
+Ringsend dublin,reference,persistence,24,0,0,0,False,False,False
+Ringsend dublin,reference,sarima,24,9,9,20,False,False,False
+edenderry co offlay,lags_meteo,xgboost_direct,24,7,16,24,False,False,True
+edenderry co offlay,lags_only,xgboost_direct,24,7,16,24,False,False,True
+edenderry co offlay,reference,persistence,24,0,0,0,False,False,False
+edenderry co offlay,reference,sarima,24,3,9,21,False,False,False
+henry street Limerick,lags_meteo,xgboost_direct,24,24,24,24,True,True,True
+henry street Limerick,lags_only,xgboost_direct,24,1,17,24,False,False,True
+henry street Limerick,reference,persistence,24,0,0,0,False,False,False
+henry street Limerick,reference,sarima,24,1,4,17,False,False,False
+porrlaoise co laois,lags_meteo,xgboost_direct,24,24,24,24,True,True,True
+porrlaoise co laois,lags_only,xgboost_direct,24,24,24,24,True,True,True
+porrlaoise co laois,reference,persistence,24,0,0,0,False,False,False
+porrlaoise co laois,reference,sarima,24,17,17,17,False,False,False

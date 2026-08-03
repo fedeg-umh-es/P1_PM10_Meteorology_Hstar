@@ -89,3 +89,21 @@ python3 code/e2_met_madrid_tables.py --config code/e2_met_madrid_config.json
 - `results/e2_met_madrid_pm10/manuscript_tables/table_metrics_long.csv`
 - `results/e2_met_madrid_pm10/manuscript_tables/table_xgboost_horizon_wide.csv`
 - `results/e2_met_madrid_pm10/manuscript_tables/table_delta_lags_meteo_vs_lags_only.csv`
+
+## 5. H* methodological contract v1.2.1 audit pass (post-processing, read-only)
+
+Re-derives, on top of the outputs above and the equivalent Ireland
+regenerated run, the three H* variants (`Hstar_strict_from_h1`,
+`Hstar_strict_max_run`, `Hstar_relax`), ceiling-censoring flags, fine-grained
+loss matrices, and a Moving-Block Bootstrap 95% CI for `Delta H*`. Does not
+re-run or re-fit any model. See `docs/protocol/hstar_v1_2_1_contract.md`.
+
+```bash
+cd /Users/federicogarciacrespi/Public/P1_PM10_Meteorology_Hstar
+python3 code/export_results_summary_v1_2_1.py --n-boot 1000
+```
+
+Outputs `results/results_summary_v1.2.1.csv` / `.json`, plus per-dataset
+`metrics/loss_matrix_full.parquet`, `metrics/hstar_summary_v1_2_1.csv`, and
+`stats/bootstrap_delta_hstar_v1_2_1.csv` under
+`results/e2_met_madrid_pm10/` and `results/e2_met_ireland_pm10_regenerated/`.

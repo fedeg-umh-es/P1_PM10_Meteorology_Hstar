@@ -1,0 +1,10 @@
+station_manuscript_name,station_pipeline_name,dataset,country,rho1,source
+Madrid Casa de Campo,Madrid Casa de Campo,Madrid,Spain,0.957,manuscript_tab_rho1
+Dundalk (Co. Louth),Dundalk Co Louth,Ireland,Ireland,0.945,manuscript_tab_rho1
+Henry St. Limerick,henry street Limerick,Ireland,Ireland,0.876,manuscript_tab_rho1
+Portlaoise (Co. Laois),porrlaoise co laois,Ireland,Ireland,0.864,manuscript_tab_rho1
+Ringsend Dublin,Ringsend dublin,Ireland,Ireland,0.843,manuscript_tab_rho1
+Pearse St. Dublin,Pearse street dublin,Ireland,Ireland,0.842,manuscript_tab_rho1
+Dublin Airport,Dublin Airport,Ireland,Ireland,0.815,manuscript_tab_rho1
+Birr (Co. Offaly),Birr co offlay,Ireland,Ireland,0.815,manuscript_tab_rho1
+Edenderry (Co. Offaly),edenderry co offlay,Ireland,Ireland,0.804,manuscript_tab_rho1

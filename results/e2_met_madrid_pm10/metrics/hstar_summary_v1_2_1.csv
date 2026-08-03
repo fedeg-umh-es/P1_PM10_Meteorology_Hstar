@@ -1,0 +1,5 @@
+station,condition,model,H,Hstar_strict_from_h1,Hstar_strict_max_run,Hstar_relax,ceiling_constrained_strict_from_h1,ceiling_constrained_strict_max_run,ceiling_constrained_relax
+Madrid Casa de Campo,lags_meteo,xgboost_direct,24,17,17,17,False,False,False
+Madrid Casa de Campo,lags_only,xgboost_direct,24,0,9,15,False,False,False
+Madrid Casa de Campo,reference,persistence,24,0,0,0,False,False,False
+Madrid Casa de Campo,reference,sarima,24,0,8,20,False,False,False

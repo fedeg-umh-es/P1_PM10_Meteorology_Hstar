@@ -34,6 +34,23 @@ results/e2_met_ireland_pm10_regenerated/predictions/predictions_*_lags_*.csv
 # never tracked (large, not the manuscript-facing artifact; manifest with
 # hashes is tracked instead).
 results/_ireland_regen_shards/
+# Madrid E2-MET canonical run (predictions/metrics/stats/manuscript_tables):
+# frozen manuscript evidence, explicitly tracked -- formalizes what was
+# already committed before this rule existed, and covers the H* v1.2.1
+# audit artifacts (loss_matrix_full.parquet, hstar_summary_v1_2_1.csv,
+# bootstrap_delta_hstar_v1_2_1.csv) added under it.
+!results/e2_met_madrid_pm10/
+!results/e2_met_madrid_pm10/**
+!results/madrid_sarima/
+!results/madrid_sarima/**
+# H* methodological contract v1.2.1 cross-dataset audit summary (Madrid +
+# Ireland combined): ρ1, all three H* variants, ΔH* + Moving-Block
+# Bootstrap 95% CI, DM-HLN p-values, ceiling flags. See
+# code/export_results_summary_v1_2_1.py and
+# docs/protocol/hstar_v1_2_1_contract.md.
+!results/rho1_reference_from_manuscript.csv
+!results/results_summary_v1.2.1.csv
+!results/results_summary_v1.2.1.json
 # Allow rvvcca subdirectory structure (data files remain ignored)
 !data_raw/rvvcca/
 data_raw/rvvcca/*
