@@ -1,17 +1,21 @@
 % manuscript_main.tex
 % P1 — Meteorology value for PM10 multi-horizon forecasting
-% Target journal: Atmospheric Research (Elsevier, ISSN 0169-8095)
+% Target journal: International Journal of Environmental Research (Springer Nature,
+%   ISSN 1735-6865 print / 2008-2304 electronic, link.springer.com/journal/41742)
 % Compile: pdflatex → bibtex → pdflatex × 2
 %
 % Figures are referenced from ../results/
 % Build from repo root: pdflatex manuscripts/manuscript_main.tex
 
-\documentclass[12pt,a4paper]{article}
+\documentclass{sn-jnl}
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
-\usepackage[margin=2.5cm]{geometry}
+% geometry is already loaded (with SN's own page layout) by the sn-jnl
+% class itself; loading it again here with different options causes a
+% fatal "Option clash for package geometry" error, so it is intentionally
+% NOT re-loaded.
 \usepackage{setspace}
 \doublespacing
 \usepackage{lineno}
@@ -34,11 +38,11 @@
 
 % ── title block ───────────────────────────────────────────────────────────────
 
+\newcommand{\PMten}{PM\textsubscript{10}}
+
 \title{Does meteorology increase the useful skill range of urban
 \PMten{} forecasts?\\
 A multi-site, multi-horizon comparison with XGBoost and SARIMA}
-
-\newcommand{\PMten}{PM\textsubscript{10}}
 
 \author{
   Federico García Crespí\textsuperscript{1}\thanks{Corresponding author.
