@@ -34,6 +34,15 @@ results/e2_met_ireland_pm10_regenerated/predictions/predictions_*_lags_*.csv
 # never tracked (large, not the manuscript-facing artifact; manifest with
 # hashes is tracked instead).
 results/_ireland_regen_shards/
+# P1 audit (2026-08): recomputed statistics derived from already-tracked
+# row-level predictions (see docs/audit/*.md) -- small, versioned evidence,
+# not raw model dumps.
+!results/audit/
+!results/audit/**
+!figures/audit/
+!figures/audit/**
+!results/RESULTS_CANONICAL.md
+!results/NUMBERS_FOR_MANUSCRIPT.json
 # Allow rvvcca subdirectory structure (data files remain ignored)
 !data_raw/rvvcca/
 data_raw/rvvcca/*
@@ -50,3 +59,6 @@ data_raw/
 __pycache__/
 *.pyc
 *.pyo
+
+# Audit venv (local, reproducible via docs/audit/00_inventory.md)
+.venv_audit/

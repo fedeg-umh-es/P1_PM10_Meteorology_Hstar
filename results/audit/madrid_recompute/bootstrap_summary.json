@@ -1,0 +1,10 @@
+{
+  "block_days": 7,
+  "n_resamples": 2000,
+  "seed": 20260803,
+  "point_estimate_delta_hstar_max_run": 8,
+  "bootstrap_mean": 3.083,
+  "bootstrap_sd": 5.492011662045886,
+  "ci95_low": -8.0,
+  "ci95_high": 13.0
+}

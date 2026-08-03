@@ -1,0 +1,14 @@
+claim,manuscript_value,recomputed_value,status
+hstar_strict_max_run.lags_only,9.0,9.0,COINCIDE
+hstar_strict_max_run.lags_meteo,17.0,17.0,COINCIDE
+hstar_strict_from_h1.lags_only,0.0,0.0,COINCIDE
+hstar_strict_from_h1.lags_meteo,17.0,17.0,COINCIDE
+delta_hstar_strict_max_run,8.0,8.0,COINCIDE
+dm.h1.p_value,0.243,0.243,COINCIDE
+dm.h1.n,354.0,354.0,COINCIDE
+dm.h6.p_value,0.961,0.961,COINCIDE
+dm.h6.n,356.0,356.0,COINCIDE
+dm.h12.p_value,0.012,0.012,COINCIDE
+dm.h12.n,346.0,346.0,COINCIDE
+dm.h24.p_value,0.398,0.398,COINCIDE
+dm.h24.n,354.0,354.0,COINCIDE

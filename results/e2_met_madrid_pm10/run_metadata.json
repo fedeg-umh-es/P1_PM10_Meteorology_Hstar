@@ -1,14 +1,26 @@
 {
-  "started_at_utc": "2026-05-15T10:01:03.960302+00:00",
   "config_path": "/Users/federicogarciacrespi/Public/P1_PM10_Meteorology_Hstar/code/e2_met_madrid_config.json",
   "dataset_path": "/Users/federicogarciacrespi/Public/P1_PM10_Meteorology_Hstar/data_processed/madrid_pm10_meteorology_experiment_base.csv",
   "conditions_run": [
-    "lags_only"
+    "lags_only",
+    "lags_meteo"
   ],
   "n_origins": 362,
   "horizon_max": 24,
-  "finished_at_utc": "2026-05-15T11:01:14.605298+00:00",
-  "prediction_rows": 26064,
-  "metrics_rows": 72,
-  "dm_rows": 0
+  "prediction_rows": 34752,
+  "metrics_rows": 96,
+  "dm_rows": 4,
+  "metadata_correction": {
+    "corrected_by": "docs/audit/03_recompute.md (Fase 3c, P1 audit branch claude/audit-p1-meteorology-0ehg5v)",
+    "corrected_at_utc": "2026-08-03",
+    "reason": "The previously committed run_metadata.json (started_at_utc=2026-05-15T10:01:03Z, finished_at_utc=2026-05-15T11:01:14Z) described a --condition lags_only run (conditions_run=[\"lags_only\"], prediction_rows=26064, metrics_rows=72, dm_rows=0). But the predictions/metrics/stats files tracked alongside it in the same commit (c30e6cf8, \"Add SARIMA baseline to Madrid E2-MET experiment\") contain both conditions plus SARIMA and a non-empty DM table (34752/96/4 rows respectively), which is only reproducible by e2_met_madrid_run.py under --condition all. The metadata file was evidently not regenerated when that later, fuller run overwrote the output files. This correction updates the row counts and conditions_run to match the actual tracked outputs. The exact started_at_utc/finished_at_utc of that later run are not recoverable (never recorded) and have been removed rather than fabricated; the commit timestamp of c30e6cf8 (2026-05-16T05:51:32Z) is the best available lower bound on when it happened.",
+    "superseded_original": {
+      "started_at_utc": "2026-05-15T10:01:03.960302+00:00",
+      "finished_at_utc": "2026-05-15T11:01:14.605298+00:00",
+      "conditions_run": ["lags_only"],
+      "prediction_rows": 26064,
+      "metrics_rows": 72,
+      "dm_rows": 0
+    }
+  }
 }

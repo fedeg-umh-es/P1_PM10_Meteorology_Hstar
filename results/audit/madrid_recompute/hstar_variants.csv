@@ -1,0 +1,4 @@
+model_condition,hstar_strict_max_run,hstar_strict_from_h1,hstar_relax
+sarima,8,0,20
+lags_only,9,0,15
+lags_meteo,17,17,17
