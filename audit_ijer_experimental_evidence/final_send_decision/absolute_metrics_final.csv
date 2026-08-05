@@ -1,0 +1,12 @@
+station,model,condition,horizon,n_eval,mae,rmse,mae_persistence,rmse_persistence,skill_mae_vs_persistence,notes
+Madrid Casa de Campo,xgboost_direct,lags_meteo,1,354,3.4992,5.0026,3.6328,5.0818,0.0368,Madrid h=1 absolute values
+Madrid Casa de Campo,xgboost_direct,lags_only,1,354,3.5125,5.1113,3.6328,5.0818,0.0331,Madrid h=1 absolute values
+Madrid Casa de Campo,xgboost_direct,lags_meteo,6,356,4.1534,6.0466,5.4803,7.5968,0.2421,Madrid h=6 absolute values
+Madrid Casa de Campo,xgboost_direct,lags_only,6,356,4.1517,6.0352,5.4803,7.5968,0.2424,Madrid h=6 absolute values
+Madrid Casa de Campo,xgboost_direct,lags_meteo,12,346,8.0745,11.4342,8.2283,12.2012,0.0187,Madrid h=12 absolute values
+Madrid Casa de Campo,xgboost_direct,lags_only,12,346,8.3378,12.3364,8.2283,12.2012,-0.0133,Madrid h=12 absolute values
+Madrid Casa de Campo,xgboost_direct,lags_meteo,24,354,7.5251,14.3662,7.5876,12.6743,0.0082,Madrid h=24 absolute values
+Madrid Casa de Campo,xgboost_direct,lags_only,24,354,7.5966,15.9038,7.5876,12.6743,-0.0012,Madrid h=24 absolute values
+Dublin Airport,sarima,reference,24,145,8.1377,11.9823,8.4831,12.3552,0.0407,Dublin Airport recovered SARIMA h=24 benchmark
+Dublin Airport,xgboost_direct,lags_meteo,24,145,8.3491,12.2411,8.4831,12.3552,0.0158,Dublin Airport XGBoost direct lags_meteo
+Dundalk Co Louth,sarima,reference,24,152,10.5332,15.8943,11.8953,16.8923,0.1145,Dundalk recovered SARIMA h=24 benchmark

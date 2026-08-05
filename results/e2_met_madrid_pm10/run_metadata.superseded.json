@@ -1,0 +1,14 @@
+{
+  "started_at_utc": "2026-05-15T10:01:03.960302+00:00",
+  "config_path": "/Users/federicogarciacrespi/Public/P1_PM10_Meteorology_Hstar/code/e2_met_madrid_config.json",
+  "dataset_path": "/Users/federicogarciacrespi/Public/P1_PM10_Meteorology_Hstar/data_processed/madrid_pm10_meteorology_experiment_base.csv",
+  "conditions_run": [
+    "lags_only"
+  ],
+  "n_origins": 362,
+  "horizon_max": 24,
+  "finished_at_utc": "2026-05-15T11:01:14.605298+00:00",
+  "prediction_rows": 26064,
+  "metrics_rows": 72,
+  "dm_rows": 0
+}

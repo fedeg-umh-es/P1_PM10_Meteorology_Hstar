@@ -1,0 +1,11 @@
+station,evaluation_window,candidate_origins,unique_origins_in_predictions,valid_evaluations_h1,valid_evaluations_h24,stride_hours,notes
+Madrid Casa de Campo,Full Year 2023,365,362,354,354,24,Origins represent calendar days with evaluated forecasts. Variations in valid counts due to missing target values.
+Madrid Casa de Campo,Jan-Jul 2023,212,212,212,212,24,Used as common window comparison in Table 3 and Figure 1 Panel B.
+Birr co offlay,Jan-Jul 2023,212,212,211,212,24,Irish EPA station metadata and evaluation.
+Dublin Airport,Jan-Jul 2023,212,145,145,145,24,Irish suburban station with higher missing rate.
+Dundalk Co Louth,Jan-Jul 2023,212,154,151,152,24,Irish regional town station.
+Pearse street dublin,Jan-Jul 2023,212,212,212,212,24,"Dublin traffic station, complete case evaluation."
+Ringsend dublin,Jan-Jul 2023,212,212,212,212,24,"Dublin coastal station, complete case evaluation."
+edenderry co offlay,Jan-Jul 2023,212,211,208,210,24,Irish small town station.
+henry street Limerick,Jan-Jul 2023,212,211,211,211,24,Limerick commercial / traffic station.
+porrlaoise co laois,Jan-Jul 2023,212,212,212,212,24,"Irish regional town, complete case evaluation."

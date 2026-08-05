@@ -1,0 +1,37 @@
+station,horizon,dm_hln_stat,significance_marker,status
+Madrid,1,1.169017,,OK
+Madrid,6,-0.049554,,OK
+Madrid,12,2.385761,,OK
+Madrid,24,0.833644,,OK
+Birr co offlay,1,2.681823,*,OK
+Birr co offlay,6,-0.517154,,OK
+Birr co offlay,12,0.879233,,OK
+Birr co offlay,24,0.705030,,OK
+Dublin Airport,1,1.636299,,OK
+Dublin Airport,6,-0.279169,,OK
+Dublin Airport,12,-0.384473,,OK
+Dublin Airport,24,1.268872,,OK
+Dundalk Co Louth,1,1.116832,,OK
+Dundalk Co Louth,6,0.987703,,OK
+Dundalk Co Louth,12,1.068475,,OK
+Dundalk Co Louth,24,1.114722,,OK
+Pearse street dublin,1,1.846522,,OK
+Pearse street dublin,6,2.910300,*,OK
+Pearse street dublin,12,2.623699,*,OK
+Pearse street dublin,24,0.810518,,OK
+Ringsend dublin,1,1.233260,,OK
+Ringsend dublin,6,-0.190211,,OK
+Ringsend dublin,12,0.820191,,OK
+Ringsend dublin,24,0.077938,,OK
+edenderry co offlay,1,0.339187,,OK
+edenderry co offlay,6,-1.233878,,OK
+edenderry co offlay,12,0.198507,,OK
+edenderry co offlay,24,0.591639,,OK
+henry street Limerick,1,0.917485,,OK
+henry street Limerick,6,-1.320384,,OK
+henry street Limerick,12,0.405934,,OK
+henry street Limerick,24,0.909077,,OK
+porrlaoise co laois,1,1.221015,,OK
+porrlaoise co laois,6,-1.050301,,OK
+porrlaoise co laois,12,1.735359,,OK
+porrlaoise co laois,24,0.905520,,OK

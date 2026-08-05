@@ -1,0 +1,43 @@
+Starting P1 Computational Closure Pipeline...
+Captured initial hashes for protected inputs.
+
+--- Step 1: DM-HLN Bartlett Closure ---
+DM Bartlett canonical CSV written (36 rows, 36 OK).
+
+
+--- Step 2: Render Table 4 & Figure 3 ---
+Saved superseded table (SHA256: 6aa72bce0c7acbbaaf4d9d57ba5dfefcc7a7496eb07d1fa99933e59aa6b4d89e)
+Saved superseded figure (SHA256: 74a01f31a74fe52da421f2fe569023d4e4e710f2d161849fb519994bec27b7c2)
+Regenerated manuscripts/tables/ijer/table_4_dm_summary.tex
+Regenerated manuscripts/figures/ijer/figure_3_dm_heatmap.pdf
+
+
+--- Step 3: Verify DM Artifacts ---
+TABLE_FIGURE_CONSISTENT_WITH_CANONICAL_CSV
+
+
+--- Step 4: Common Window Rho-1 ---
+RHO1_BLOCKED_BY_INSUFFICIENT_RECONSTRUCTED_COVERAGE
+  Madrid: 0.9801
+  Birr co offlay: 0.9992
+  Dublin Airport: 0.6840
+  Dundalk Co Louth: 0.7148
+  Pearse street dublin: 0.9998
+  Ringsend dublin: 0.9996
+  edenderry co offlay: 0.9882
+  henry street Limerick: 0.9927
+  porrlaoise co laois: 0.9998
+
+
+--- Step 5: Hash Manifest & Metadata Update ---
+Copied original results/e2_met_madrid_pm10/run_metadata.json to results/e2_met_madrid_pm10/run_metadata.superseded.json
+Replaced results/e2_met_madrid_pm10/run_metadata.json with audit_ijer_experimental_evidence/computational_fixes/run_metadata_madrid_corrected.json
+Verified run_metadata.json byte-for-byte identity to corrected metadata.
+Updated hash manifest written to results/ijer/artifact_hash_manifest.csv (43 total entries).
+
+
+--- Step 6: 20 Mandatory Tests ---
+ALL 20 MANDATORY MINIMUM TESTS PASSED SUCCESSFULLY!
+Generated manuscript_numbers.md
+
+P1 COMPUTATIONAL CLOSURE COMPLETE!
