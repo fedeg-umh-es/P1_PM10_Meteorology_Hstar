@@ -10,8 +10,16 @@ from scipy.stats import t as student_t
 from sklearn.metrics import mean_absolute_error, mean_squared_error
 from statsmodels.tsa.statespace.sarimax import SARIMAX
 
-from models.xgboost_model import XGBoostDirectForecaster, make_direct_targets
-from rolling_origin import generate_rolling_origins, get_test_window, get_train_window
+from models.xgboost_model import XGBoostDirectForecaster
+from rolling_origin import get_train_window
+from temporal_contract import (
+    add_exact_lags,
+    add_exact_targets,
+    exact_horizon_window,
+    filter_complete_origins,
+    generate_clock_origins,
+    normalise_timestamps,
+)
 
 
 def load_json_config(path: str | Path) -> dict[str, Any]:
@@ -40,8 +48,7 @@ def load_experiment_dataset(config: dict[str, Any]) -> pd.DataFrame:
     dataset_path = Path(config["dataset_path"]).expanduser().resolve()
     timestamp_col = config["timestamp_col"]
     df = pd.read_csv(dataset_path, parse_dates=[timestamp_col])
-    df = df.sort_values(timestamp_col).drop_duplicates(subset=[timestamp_col], keep="last")
-    return df.reset_index(drop=True)
+    return normalise_timestamps(df, timestamp_col)
 
 
 def add_calendar_features(df: pd.DataFrame, timestamp_col: str) -> pd.DataFrame:
@@ -88,21 +95,31 @@ def build_train_frame(
     train_df: pd.DataFrame,
     config: dict[str, Any],
     feature_cols: list[str],
+    origin: pd.Timestamp,
 ) -> tuple[pd.DataFrame, dict[int, pd.Series], list[str]]:
     timestamp_col = config["timestamp_col"]
     target_col = config["target_col"]
     lags = config["lags"]
     horizon_max = int(config["horizon_max"])
 
-    prepared = add_calendar_features(train_df, timestamp_col=timestamp_col)
-    prepared = add_target_lags(prepared, target_col=target_col, lags=lags)
-    lag_cols = get_lag_columns(target_col=target_col, lags=lags)
-    prepared = prepared.dropna(subset=lag_cols).reset_index(drop=True)
-    prepared, y_by_horizon = make_direct_targets(
-        df=prepared,
+    prepared = normalise_timestamps(train_df, timestamp_col)
+    prepared = add_calendar_features(prepared, timestamp_col=timestamp_col)
+    prepared = add_exact_lags(
+        prepared, timestamp_col=timestamp_col, target_col=target_col, lags=lags
+    )
+    prepared = add_exact_targets(
+        prepared,
+        timestamp_col=timestamp_col,
         target_col=target_col,
         horizon_max=horizon_max,
     )
+    lag_cols = get_lag_columns(target_col=target_col, lags=lags)
+    prepared = prepared.dropna(subset=lag_cols).reset_index(drop=True)
+    y_by_horizon: dict[int, pd.Series] = {}
+    for horizon in range(1, horizon_max + 1):
+        target_timestamp = prepared[f"{target_col}_t_plus_{horizon}_timestamp"]
+        target = pd.to_numeric(prepared[f"{target_col}_t_plus_{horizon}"], errors="coerce")
+        y_by_horizon[horizon] = target.where(target_timestamp < pd.Timestamp(origin))
     usable_features = [col for col in feature_cols if col in prepared.columns]
     return prepared, y_by_horizon, usable_features
 
@@ -117,8 +134,11 @@ def build_origin_feature_row(
     target_col = config["target_col"]
     lags = config["lags"]
 
-    prepared = add_calendar_features(context_df, timestamp_col=timestamp_col)
-    prepared = add_target_lags(prepared, target_col=target_col, lags=lags)
+    prepared = normalise_timestamps(context_df, timestamp_col)
+    prepared = add_calendar_features(prepared, timestamp_col=timestamp_col)
+    prepared = add_exact_lags(
+        prepared, timestamp_col=timestamp_col, target_col=target_col, lags=lags
+    )
     prepared[timestamp_col] = pd.to_datetime(prepared[timestamp_col])
     row = prepared.loc[prepared[timestamp_col] == pd.Timestamp(origin), :]
     usable_features = [col for col in feature_cols if col in row.columns]
@@ -151,12 +171,14 @@ def fit_xgboost_direct(
     train_df: pd.DataFrame,
     config: dict[str, Any],
     condition: str,
+    origin: pd.Timestamp,
 ) -> tuple[XGBoostDirectForecaster | None, pd.Series, list[str]]:
     feature_cols = get_condition_feature_columns(df=train_df, config=config, condition=condition)
     train_frame, y_by_horizon, usable_features = build_train_frame(
         train_df=train_df,
         config=config,
         feature_cols=feature_cols,
+        origin=origin,
     )
     if not usable_features:
         return None, pd.Series(dtype=float), usable_features
@@ -268,15 +290,22 @@ def predict_sarima(
 
 
 def generate_shared_origins_file(df: pd.DataFrame, config: dict[str, Any], output_path: str | Path) -> pd.DataFrame:
-    origins = generate_rolling_origins(
+    timestamp_col = config["timestamp_col"]
+    origins = generate_clock_origins(
         df=df,
-        timestamp_col=config["timestamp_col"],
+        timestamp_col=timestamp_col,
         test_start=config["test_start"],
         test_end=config["test_end"],
-        horizon_max=int(config["horizon_max"]) + 1,
+        stride_hours=int(config["origin_stride_hours"]),
     )
-    stride = int(config["origin_stride_hours"])
-    origins = origins[::stride]
+    origins = filter_complete_origins(
+        df,
+        origins,
+        timestamp_col,
+        config["target_col"],
+        config["lags"],
+        int(config["horizon_max"]),
+    )
     out = pd.DataFrame({"origin": pd.to_datetime(origins)})
     out.to_csv(Path(output_path).expanduser().resolve(), index=False)
     return out
@@ -294,14 +323,16 @@ def run_backtest(
     horizon_max = int(config["horizon_max"])
     train_start = config["train_start"]
 
-    origins = generate_rolling_origins(
+    origins = generate_clock_origins(
         df=df,
         timestamp_col=timestamp_col,
         test_start=config["test_start"],
         test_end=config["test_end"],
-        horizon_max=horizon_max + 1,
+        stride_hours=int(config["origin_stride_hours"]),
     )
-    origins = origins[:: int(config["origin_stride_hours"])]
+    origins = filter_complete_origins(
+        df, origins, timestamp_col, target_col, config["lags"], horizon_max
+    )
     if max_origins is not None:
         origins = origins[:max_origins]
 
@@ -313,15 +344,15 @@ def run_backtest(
             timestamp_col=timestamp_col,
             train_start=train_start,
         )
-        test_df = get_test_window(
+        test_df = exact_horizon_window(
             df=df,
             origin=origin,
-            horizon_max=horizon_max + 1,
+            horizon_max=horizon_max,
             timestamp_col=timestamp_col,
         )
         if len(train_df) < int(config["min_train_rows"]):
             continue
-        if len(test_df) < horizon_max + 1:
+        if test_df[target_col].isna().any():
             continue
 
         persistence_preds = predict_persistence(train_df=train_df, config=config)
@@ -331,6 +362,7 @@ def run_backtest(
             train_df=train_df,
             config=config,
             condition=condition,
+            origin=origin,
         )
         model_preds = predict_xgboost_direct(
             model=model,

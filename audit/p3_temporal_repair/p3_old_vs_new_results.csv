@@ -1,0 +1,9 @@
+site,old_H_only,new_H_only,old_H_met,new_H_met,old_Delta,new_Delta,old_SARIMA,new_SARIMA,changed
+Birr co offlay,24,24,24,24,0,0,16,16,False
+Dublin Airport,22,22,23,23,1,1,24,24,False
+Dundalk Co Louth,24,24,24,24,0,0,18,18,False
+Pearse street dublin,24,24,24,24,0,0,17,15,True
+Ringsend dublin,24,24,24,24,0,0,9,9,False
+edenderry co offlay,16,24,16,24,0,0,9,15,True
+henry street Limerick,17,24,24,24,7,0,4,17,True
+porrlaoise co laois,24,24,24,24,0,0,17,17,False

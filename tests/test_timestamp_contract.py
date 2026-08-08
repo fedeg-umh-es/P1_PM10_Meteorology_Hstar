@@ -16,6 +16,7 @@ from temporal_contract import (
     generate_clock_origins,
     normalise_timestamps,
 )
+from e2_met_madrid_shared import build_train_frame, get_condition_feature_columns
 
 
 def sample(gap: bool = False) -> pd.DataFrame:
@@ -85,6 +86,30 @@ class TestTimestampContract(unittest.TestCase):
         start = pd.Timestamp("2023-03-26 00:00", tz="Europe/Madrid")
         end = start + pd.Timedelta(hours=24)
         self.assertEqual((end.tz_convert("UTC") - start.tz_convert("UTC")), pd.Timedelta(hours=24))
+
+    def test_direct_training_uses_exact_lags_and_pre_origin_targets(self) -> None:
+        timestamps = pd.date_range("2023-01-01", periods=80, freq="h").delete(30)
+        train = pd.DataFrame({
+            "timestamp": timestamps,
+            "PM10": range(len(timestamps)),
+            "temp": 10.0,
+        })
+        origin = pd.Timestamp("2023-01-04 00:00")
+        config = {
+            "timestamp_col": "timestamp",
+            "target_col": "PM10",
+            "lags": [1, 24],
+            "horizon_max": 2,
+            "calendar_features": ["hour_of_day", "day_of_week", "month", "julian_day"],
+            "meteo_features": ["temp"],
+        }
+        feature_cols = get_condition_feature_columns(train, config, "lags_only")
+        frame, targets, _ = build_train_frame(train, config, feature_cols, origin)
+        self.assertNotIn(pd.Timestamp("2023-01-02 07:00"), set(frame["timestamp"]))
+        for horizon, values in targets.items():
+            non_missing = values.notna()
+            target_times = frame.loc[non_missing, f"PM10_t_plus_{horizon}_timestamp"]
+            self.assertTrue((target_times < origin).all())
 
 
 if __name__ == "__main__":

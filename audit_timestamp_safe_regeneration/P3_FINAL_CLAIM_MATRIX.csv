@@ -1,0 +1,10 @@
+claim_id,old_claim,old_value,timestamp_safe_value,primary_artifact,protocol,status,manuscript_action,notes
+C1,Madrid H*,9->17 (Delta +8),10->21 (Delta +11),hstar_summary,H_strict_max_run,SUPPORTED_WITH_NEW_VALUE,UPDATE,
+C2,Madrid bootstrap,median +2h,median +2h,N/A,bootstrap,SUPPORTED_UNCHANGED,KEEP,
+C3,Madrid SARIMA,4440 preds,4440 preds,predictions,SARIMA,SUPPORTED_UNCHANGED,KEEP,
+C4,Limerick/Henry Street,Delta +7,Delta 0,hstar_summary,H_strict_max_run,NO_LONGER_SUPPORTED,REMOVE_CLAIM,Ceiling hit at 24
+C5,Ceiling Ireland,5/8,7/8,hstar_summary,H_strict_max_run,SUPPORTED_WITH_NEW_VALUE,UPDATE,7 stations hit 24
+C6,Madrid DM,p<0.05 before BH,p_raw=0.0123 (p_adj=0.0888),table_7_dm_hln_global_bh.csv,Bartlett HLN q=h-1,SUPPORTED_RAW_ONLY,UPDATE,Significant only before BH correction
+C7,Ireland DM,Dublin/Pearse significant,Dublin Airport h=24 and Pearse h=6,12 significant after BH,table_7_dm_hln_global_bh.csv,Bartlett HLN q=h-1,SUPPORTED_WITH_NEW_VALUE,UPDATE,Dublin h=24 and Pearse h=6 and h=12 are significant after global BH
+C8,Rho1 Cross-site,"n=9, r=0.678","n=9, r=0.678, p=0.044",rho1_cross_site,Pearson,SUPPORTED_UNCHANGED,KEEP_AS_DESCRIPTIVE,Descriptive only
+C9,Global Multiplicity,FDR,FDR over 36 tests,DM_HLN,BH/Bonferroni,SUPPORTED_WITH_NEW_VALUE,UPDATE,

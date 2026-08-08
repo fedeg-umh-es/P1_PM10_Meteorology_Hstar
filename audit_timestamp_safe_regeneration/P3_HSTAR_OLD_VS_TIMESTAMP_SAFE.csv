@@ -1,0 +1,10 @@
+site,model_or_condition,H_old,H_timestamp_safe,delta_old,delta_timestamp_safe,changed,scientific_effect
+Madrid,N/A,17,21,8,11,True,SUPPORTED_WITH_NEW_VALUE
+Birr co offlay,lags+met,24,24,0,0,False,SUPPORTED_UNCHANGED
+Dublin Airport,lags+met,23,23,1,1,False,SUPPORTED_UNCHANGED
+Dundalk Co Louth,lags+met,24,24,0,0,False,SUPPORTED_UNCHANGED
+Pearse street dublin,lags+met,24,24,0,0,True,SUPPORTED_WITH_NEW_VALUE
+Ringsend dublin,lags+met,24,24,0,0,False,SUPPORTED_UNCHANGED
+edenderry co offlay,lags+met,16,24,0,0,True,SUPPORTED_WITH_NEW_VALUE
+henry street Limerick,lags+met,24,24,7,0,True,SUPPORTED_WITH_NEW_VALUE
+porrlaoise co laois,lags+met,24,24,0,0,False,SUPPORTED_UNCHANGED

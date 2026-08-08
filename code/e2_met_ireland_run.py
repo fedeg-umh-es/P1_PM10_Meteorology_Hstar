@@ -39,7 +39,13 @@ from e2_met_madrid_shared import (
     predict_sarima,
     predict_xgboost_direct,
 )
-from rolling_origin import generate_rolling_origins, get_test_window, get_train_window
+from rolling_origin import get_train_window
+from temporal_contract import (
+    exact_horizon_window,
+    filter_complete_origins,
+    generate_clock_origins,
+    normalise_timestamps,
+)
 
 
 # ── data loading ───────────────────────────────────────────────────────────────
@@ -49,8 +55,16 @@ def load_ireland_dataset(config: dict[str, Any]) -> pd.DataFrame:
     timestamp_col = config["timestamp_col"]
     station_col = config["station_col"]
     df = pd.read_csv(dataset_path, parse_dates=[timestamp_col])
-    df = df.sort_values([station_col, timestamp_col]).reset_index(drop=True)
-    return df
+    # Ireland is a panel: uniqueness is a station × timestamp invariant.
+    groups = [
+        normalise_timestamps(group, timestamp_col)
+        for _, group in df.groupby(station_col, sort=False)
+    ]
+    return (
+        pd.concat(groups, ignore_index=True)
+        .sort_values([station_col, timestamp_col])
+        .reset_index(drop=True)
+    )
 
 
 # ── per-station backtest ───────────────────────────────────────────────────────
@@ -73,22 +87,18 @@ def run_backtest_for_station(
     horizon_max = int(config["horizon_max"])
     train_start = config["train_start"]
 
-    # Dedup within station (safety; build script should have resolved these)
-    df = (
-        station_df
-        .sort_values(timestamp_col)
-        .drop_duplicates(subset=[timestamp_col], keep="last")
-        .reset_index(drop=True)
-    )
+    df = normalise_timestamps(station_df, timestamp_col)
 
-    origins = generate_rolling_origins(
+    origins = generate_clock_origins(
         df=df,
         timestamp_col=timestamp_col,
         test_start=config["test_start"],
         test_end=config["test_end"],
-        horizon_max=horizon_max + 1,
+        stride_hours=int(config["origin_stride_hours"]),
     )
-    origins = origins[:: int(config["origin_stride_hours"])]
+    origins = filter_complete_origins(
+        df, origins, timestamp_col, target_col, config["lags"], horizon_max
+    )
     if max_origins is not None:
         origins = origins[:max_origins]
 
@@ -108,25 +118,34 @@ def run_backtest_for_station(
             timestamp_col=timestamp_col,
             train_start=train_start,
         )
-        test_df = get_test_window(
+        test_df = exact_horizon_window(
             df=df,
             origin=origin,
-            horizon_max=horizon_max + 1,
+            horizon_max=horizon_max,
             timestamp_col=timestamp_col,
         )
 
         if len(train_df) < int(config["min_train_rows"]):
             continue
-        if len(test_df) < horizon_max + 1:
+        if test_df[target_col].isna().any():
             continue
 
-        persistence_preds = predict_persistence(train_df=train_df, config=config)
-        sarima_preds = predict_sarima(train_df=train_df, config=config, origin=origin)
+        persistence_preds = (
+            predict_persistence(train_df=train_df, config=config)
+            if include_references
+            else {}
+        )
+        sarima_preds = (
+            predict_sarima(train_df=train_df, config=config, origin=origin)
+            if include_references
+            else {}
+        )
 
         model, medians, usable_features = fit_xgboost_direct(
             train_df=train_df,
             config=config,
             condition=condition,
+            origin=origin,
         )
         model_preds = predict_xgboost_direct(
             model=model,

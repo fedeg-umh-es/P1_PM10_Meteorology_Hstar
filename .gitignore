@@ -50,3 +50,16 @@ data_raw/
 __pycache__/
 *.pyc
 *.pyo
+
+# Scratch, virtual environments, zips and backups
+.venv_closure/
+*.zip
+*.bak
+temp_hash.csv
+manual_p3_reaudit.sh
+regenerate_p3_final_figures.sh
+backup_*
+pre_timestamp_safe_backup_*
+manuscripts/figures/backup_*
+manuscripts/figures/pre_timestamp_safe_backup_*
+

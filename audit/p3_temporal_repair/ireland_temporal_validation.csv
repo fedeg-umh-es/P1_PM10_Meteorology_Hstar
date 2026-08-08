@@ -1,0 +1,9 @@
+station,candidate_origins,valid_origins,evaluated_origins,prediction_rows,common_keys,duplicates,y_true_match,exact_lags,exact_horizons,future_feature_check,SARIMA_support,PASS
+Birr co offlay,210,210,210,20160,5040,False,True,True,True,True,True,True
+Dublin Airport,145,145,145,13920,3480,False,True,True,True,True,True,True
+Dundalk Co Louth,143,143,143,13728,3432,False,True,True,True,True,True,True
+Pearse street dublin,212,212,212,20352,5088,False,True,True,True,True,True,True
+Ringsend dublin,211,211,211,20256,5064,False,True,True,True,True,True,True
+edenderry co offlay,199,199,199,19104,4776,False,True,True,True,True,True,True
+henry street Limerick,204,204,204,19584,4896,False,True,True,True,True,True,True
+porrlaoise co laois,212,212,212,20352,5088,False,True,True,True,True,True,True

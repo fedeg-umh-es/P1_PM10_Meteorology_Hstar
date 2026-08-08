@@ -1,0 +1,8 @@
+Claim,Class,Note
+Madrid H* changed from 9 to 17 (Delta +8),NO_LONGER_SUPPORTED,Now 10 to 21 (Delta +11)
+Madrid bootstrap median +2 h,SUPPORTED_UNCHANGED,Given in prompt
+Madrid DM no comparison survives BH,SUPPORTED_UNCHANGED,Checked globally
+Ireland lags-only mean H_strict = 21.9,NO_LONGER_SUPPORTED,New mean: 23.75
+Ireland lags+met H_strict = 22.9,NO_LONGER_SUPPORTED,New mean: 23.88
+Ireland mean Delta H* = +1.0,NO_LONGER_SUPPORTED,New mean Delta: 0.12
+Ireland SARIMA mean H_strict = 14.3,NO_LONGER_SUPPORTED,New mean: 16.38

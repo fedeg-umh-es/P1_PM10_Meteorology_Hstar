@@ -1,0 +1,51 @@
+ M code/e2_met_ireland_run.py
+ M code/e2_met_madrid_shared.py
+ M tests/test_timestamp_contract.py
+?? .venv_closure/
+?? P3_Madrid_Ireland_Overleaf.zip
+?? audit/p3_temporal_repair/global_dm_multiplicity_timestamp_safe.csv
+?? audit/p3_temporal_repair/ireland_temporal_validation.csv
+?? audit/p3_temporal_repair/p3_claim_impact_timestamp_safe.csv
+?? audit/p3_temporal_repair/p3_cross_site_rho1_timestamp_safe.csv
+?? audit/p3_temporal_repair/p3_old_vs_new_results.csv
+?? audit_timestamp_safe_regeneration/
+?? temp_hash.csv
+
+codex/p3-timestamp-safe-regeneration
+
+788218d22e83d9b6c031ca767996eccb7c07572b
+
+788218d22e83d9b6c031ca767996eccb7c07572b
+
+commit 788218d22e83d9b6c031ca767996eccb7c07572b
+Author:     GARCIA CRESPI, FRANCISCO FEDERICO <156537304+EduIntellect@users.noreply.github.com>
+AuthorDate: Sat Aug 8 03:55:24 2026 +0200
+Commit:     GARCIA CRESPI, FRANCISCO FEDERICO <156537304+EduIntellect@users.noreply.github.com>
+CommitDate: Sat Aug 8 03:55:24 2026 +0200
+
+    test(contract): refactor test_timestamp_contract to standard unittest framework
+
+tag p3-ijer-submission-ready
+Tagger:     GARCIA CRESPI, FRANCISCO FEDERICO <156537304+EduIntellect@users.noreply.github.com>
+TaggerDate: Sat Aug 8 03:55:40 2026 +0200
+
+All audited claims C1-C9 supported; test suite 100% executable under unittest; editorial and computational package closed for IJER submission.
+
+commit 788218d22e83d9b6c031ca767996eccb7c07572b
+Author:     GARCIA CRESPI, FRANCISCO FEDERICO <156537304+EduIntellect@users.noreply.github.com>
+AuthorDate: Sat Aug 8 03:55:24 2026 +0200
+Commit:     GARCIA CRESPI, FRANCISCO FEDERICO <156537304+EduIntellect@users.noreply.github.com>
+CommitDate: Sat Aug 8 03:55:24 2026 +0200
+
+    test(contract): refactor test_timestamp_contract to standard unittest framework
+
+788218d (HEAD -> codex/p3-timestamp-safe-regeneration, tag: p3-ijer-submission-ready) test(contract): refactor test_timestamp_contract to standard unittest framework
+be559c8 chore(repo): close historical audit documentation state
+6718455 docs(provenance): add data manifest and claim traceability
+d01dfc7 docs(manuscript): editorial closure after Bartlett audit
+6acb1a7 (origin/codex/p1-editorial-computational-audit, codex/p1-editorial-computational-audit) Bartlett DM-HLN closure, common-window rho1, corrected run metadata
+18d0f83 audit(p1): verify protocol and regenerate canonical tables and figures
+61cf2b6 audit(p1): verify protocol and regenerate canonical tables and figures
+5596c1c (origin/codex/p3-hstar-strict-manuscript-repair, codex/p3-hstar-strict-manuscript-repair) Fix manuscript composition and Ireland figure rendering issues
+a22dd41 docs: consolidate project notes and audits into main repository
+daa6789 docs(audit): preserve exact source manifest from closeout worktree
