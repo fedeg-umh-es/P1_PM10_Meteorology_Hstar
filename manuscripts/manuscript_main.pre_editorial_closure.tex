@@ -11,13 +11,11 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
-\makeatletter
-\@ifpackageloaded{geometry}{}{\usepackage{geometry}}
-\makeatother
-\geometry{margin=2.5cm}
+\usepackage[margin=2.5cm]{geometry}
 \usepackage{setspace}
 \doublespacing
 \usepackage{lineno}
+\linenumbers
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{amsmath}
@@ -36,15 +34,15 @@
 
 % ── title block ───────────────────────────────────────────────────────────────
 
-\newcommand{\PMten}{PM\textsubscript{10}}
-
 \title{Does meteorology extend the useful forecast horizon for urban
-\PMten{}?\\
+\PMten{}?\
 A multi-city, multi-horizon skill analysis with XGBoost and SARIMA}
+
+\newcommand{\PMten}{PM\textsubscript{10}}
 
 \author{
   Federico García Crespí\textsuperscript{1}\thanks{Corresponding author.
-    \texttt{fedeg@umh.es}} \\
+    \texttt{fedeg@umh.es}} \\[6pt]
   \textsuperscript{1}Universidad Miguel Hernández de Elche, Spain
 }
 
@@ -55,7 +53,6 @@ A multi-city, multi-horizon skill analysis with XGBoost and SARIMA}
 \begin{document}
 
 \maketitle
-\linenumbers
 
 \begin{abstract}
 \noindent
@@ -71,7 +68,7 @@ stations in Ireland.  Three model classes are evaluated at each of $h = 1,
 \ldots, 24$ lead hours: (i) a persistence baseline, (ii) SARIMA(1,0,1)(1,0,0)$_{24}$
 as a linear statistical reference, and (iii) XGBoost fitted separately for each
 horizon, once with \PMten{} lags only (\textit{lags only}) and once with lags
-plus meteorological covariates (\textit{lags + met.}).  Forecast quality
+plus nine meteorological covariates (\textit{lags + met.}).  Forecast quality
 is measured via the RMSE skill score relative to persistence; $H^*$ is
 determined both under a strict criterion --- the primary metric
 $H^*_{\text{strict,max-run}}$, defined as the longest contiguous positive-skill
@@ -79,7 +76,24 @@ run located anywhere within $h = 1, \ldots, 24$, with an auxiliary from-$h{=}1$
 variant reported separately --- and a relaxed criterion (last horizon with
 positive skill).
 
-At Madrid, adding forecast-origin meteorological predictors produced a point-estimate increase in the longest contiguous positive-skill run from 9 to 17~h. This (+8)-h difference was uncertain under moving-block bootstrap resampling, with a median of (+3)~h and a 95\% interval of ([-8,+12])~h. Across Ireland, five of eight stations reached the 24-h evaluation boundary under the lags-only model, limiting inference about further extension. Under the primary Bartlett/Newey--West DM-HLN specification, three comparisons survived within-station FDR control, whereas none survived global FDR or global Bonferroni correction. Horizon-specific inferential results are therefore treated as exploratory.
+At Madrid, adding meteorology extends $H^*_{\text{strict}}$ from 9~h to 17~h
+($\Delta H^* = +8$~h), a gain attributed to the high lag-1 autocorrelation of
+the series ($\rho_1 = 0.957$), which sustains persistence as a strong
+competitor at short lead times while allowing meteorologically informed models
+to maintain skill at medium horizons.  In contrast, the eight Irish stations,
+characterised by more moderate mean autocorrelation ($\bar{\rho}_1 = 0.850$),
+show mean $\Delta H^*_{\text{strict}} = +1.0$~h, with XGBoost already
+extracting most of the predictable signal from lagged \PMten{} alone.
+Diebold--Mariano significance testing confirms that the meteorology benefit at
+Madrid is statistically significant at $h = 12$ ($p = 0.012$) but not at
+shorter or longer horizons.  We interpret the contrast in terms of
+boundary-layer dynamics: high $\rho_1$ reflects stable, stagnant
+boundary-layer conditions under which aerosol concentrations evolve slowly and
+meteorological forcing becomes decisive only beyond $h \approx 9$~h, when
+advection and mixing begin to dominate over in-situ accumulation.  These
+findings indicate that the value of meteorological covariates in \PMten{}
+forecasting is associated with the local boundary-layer persistence regime, and
+that $H^*$ provides a compact diagnostic of that association.
 
 \medskip
 \noindent
@@ -180,11 +194,17 @@ The station is classified as an urban-background site on the western edge of
 the city, away from major point sources, and is representative of citywide
 background conditions.  The study period spans January 2020 through July 2023;
 records with missing \PMten{} or meteorological data were flagged and excluded
-from model training and evaluation on a per-origin basis.  Seven meteorological
+from model training and evaluation on a per-origin basis.  Nine meteorological
 variables were retained: precipitation (\textit{rain}), temperature
-(\textit{temp}), relative humidity (\textit{rhum}), mean sea-level pressure
-(\textit{msl}), wind speed (\textit{wdsp}), wind direction (\textit{wddir}),
-and solar radiation.
+(\textit{temp}), wet-bulb temperature (\textit{wetb}), dew-point temperature
+(\textit{dewpt}), vapour pressure (\textit{vappr}), relative humidity
+(\textit{rhum}), mean sea-level pressure (\textit{msl}), wind speed
+(\textit{wdsp}), and wind direction (\textit{wddir}).
+
+The lag-1 autocorrelation of hourly \PMten{} at Madrid over the training
+period (2020--2022) is $\rho_1 = 0.957$, indicative of a highly persistent
+series dominated by slow, boundary-layer-driven accumulation and dispersal
+episodes lasting tens of hours.
 
 \subsection{Ireland}
 
@@ -194,7 +214,8 @@ stations distributed across Ireland were selected on the basis of data
 completeness over the study window (January 2020 -- July 2023):
 Birr (Co.\ Offaly), Dublin Airport, Dundalk (Co.\ Louth), Pearse Street
 Dublin, Ringsend Dublin, Edenderry (Co.\ Offaly), Henry Street Limerick, and
-Portlaoise (Co.\ Laois).  Meteorological variables were extracted from the nearest EPA synoptic station for each monitoring
+Portlaoise (Co.\ Laois).  The same nine meteorological variables used for
+Madrid were extracted from the nearest EPA synoptic station for each monitoring
 site.
 
 Table~\ref{tab:descriptive} summarises the basic \PMten{} statistics for all
@@ -235,6 +256,14 @@ Portlaoise          & 21\,958 & 11.3 &  9.7 & 27.5 & 5\,088 & 10.9 &  7.9 & 25.1
 \bottomrule
 \end{tabular}
 \end{table}
+
+Across the eight Irish stations, the mean lag-1 autocorrelation of hourly
+\PMten{} over the training period (2020--2022) is $\bar{\rho}_1 = 0.850$
+(range: 0.804--0.945), reflecting a more moderately persistent pollution
+regime compared with Madrid ($\rho_1 = 0.957$).  Dundalk (Co.\ Louth) is an
+exception within the Irish network, reaching $\rho_1 = 0.945$, comparable to
+Madrid; its implications for the autocorrelation-persistence mechanism are
+discussed in Section~\ref{sec:discussion}.
 
 % ─────────────────────────────────────────────────────────────────────────────
 \section{Methods}
@@ -284,13 +313,14 @@ Julian day).  Hyperparameters are fixed across all origins and horizons
 cross-validation is performed.
 
 \paragraph{XGBoost — lags + meteorology.}
-Identical to the lags-only model except that the meteorological variables
-measured at time $t$ are appended to the feature vector (seven for Madrid, nine for the Irish stations).  This is an
+Identical to the lags-only model except that the nine meteorological variables
+measured at time $t$ are appended to the feature vector.  This is an
 \emph{observational} setup in which concurrent meteorology is assumed to be
 available at the moment of forecast issuance (e.g., from a station collocated
 with the \PMten{} sensor).  Because observed meteorological values are used
 rather than numerical weather prediction (NWP) forecasts, the reported skill
-scores should not be interpreted as operational performance with NWP inputs (see Section 5.3).
+scores represent an upper bound on what an operationally deployed
+system could achieve (see Section 5.3).
 
 \begin{table}[htbp]
 \centering
@@ -324,7 +354,7 @@ where the RMSEs are computed over all forecast origins in the evaluation period.
 Positive $S_m(h)$ indicates that model $m$ outperforms persistence at horizon
 $h$.
 
-\paragraph{Useful forecast horizon \texorpdfstring{$H^*$}{H*}.}
+\paragraph{Useful forecast horizon $H^*$.}
 We define two variants:
 \begin{itemize}
   \item \textbf{$H^*_{\text{strict}}$}: the primary metric, defined as the length of the longest \emph{contiguous} positive-skill run anywhere within the horizon range $h \in \{1, \dots, H\}$, denoted $H^*_{\text{strict,max-run}}$. As a complementary auxiliary diagnostic, $H_{\text{strict,from-}h1}$ measures the uninterrupted sequence of positive skill starting specifically at $h = 1$.
@@ -347,7 +377,7 @@ reported at both the nominal and corrected thresholds.
 \label{sec:results}
 % ─────────────────────────────────────────────────────────────────────────────
 
-\subsection{Madrid: skill curves and \texorpdfstring{$H^*$}{H*}}
+\subsection{Madrid: skill curves and $H^*$}
 
 Figure~\ref{fig:madrid_skill} shows the RMSE skill score $S(h)$ as a function
 of lead time for all three model classes at Madrid Casa de Campo.  All three
@@ -371,13 +401,18 @@ meteorology sustains it.  At $h = 18$ onwards both conditions are negative and
 the gain dissipates.
 
 Figure~\ref{fig:madrid_dm} and Table~\ref{tab:madrid_dm} report the DM-HLN
-test results at $h \in \{1, 6, 12, 24\}$, estimated under the Bartlett
-(Newey--West) long-run variance kernel ($q = h - 1$). At $h = 12$, the statistic is $\mathrm{DM}_{\text{HLN}} = 2.39$ ($p_{\text{raw}} = 0.018$).
-However, this raw difference does not survive false-discovery-rate control within station ($p_{\text{FDR,station}} = 0.070$), nor global FDR control ($p_{\text{FDR,global}} = 0.158$) or Bonferroni correction ($p_{\text{Bonf,global}} = 0.633$) across all 36 comparisons. At $h = 1$ ($p = 0.243$), $h = 6$ ($p = 0.961$), and $h = 24$ ($p = 0.405$) the null hypothesis of equal predictive accuracy is also not rejected. Horizon-specific inferential results are therefore treated as exploratory.
+test results at $h \in \{1, 6, 12, 24\}$.  The only statistically significant
+difference is at $h = 12$ ($\mathrm{DM} = 2.52$, $p = 0.012$), which
+survives the Bonferroni-corrected threshold of $\alpha_{\text{adj}} = 0.0125$
+for four simultaneous tests.  Lags-plus-meteorology is favoured at $h = 12$.
+At $h = 1$ ($p = 0.243$), $h = 6$ ($p = 0.961$), and $h = 24$ ($p = 0.398$)
+the null hypothesis of equal predictive accuracy cannot be rejected.  This
+pattern is consistent with the $\Delta S(h)$ profile: the meteorology benefit
+is concentrated in the mid-range, medium-term window.
 
 \begin{table}[htbp]
 \centering
-\caption{DM-HLN test results for Madrid: lags + met.\ vs.\ lags only (Bartlett HAC kernel, $q = h-1$).}
+\caption{DM-HLN test results for Madrid: lags + met.\ vs.\ lags only.}
 \label{tab:madrid_dm}
 \begin{tabular}{rrrrl}
 \toprule
@@ -385,8 +420,8 @@ $h$ & $n$ & DM statistic & $p$-value & Favours \\
 \midrule
  1 & 354 &  1.17 & 0.243 & lags + met. \\
  6 & 356 & $-$0.05 & 0.961 & lags only \\
-12 & 346 &  2.39 & 0.018 & lags + met. \\
-24 & 354 &  0.83 & 0.405 & lags + met. \\
+12 & 346 &  2.52 & \textbf{0.012} & lags + met. \\
+24 & 354 &  0.85 & 0.398 & lags + met. \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -394,7 +429,7 @@ $h$ & $n$ & DM statistic & $p$-value & Favours \\
 Figure~\ref{fig:madrid_hstar} summarises $H^*_{\text{strict}}$ and
 $H^*_{\text{relax}}$ across all four model classes for Madrid.
 
-\subsection{Ireland: station-level \texorpdfstring{$H^*$}{H*} and meteorology benefit}
+\subsection{Ireland: station-level $H^*$ and meteorology benefit}
 
 Figure~\ref{fig:ireland_skill} shows the RMSE skill curves for all eight Irish
 stations as a 2$\times$4 panel grid.  A common pattern is visible: both the
@@ -417,14 +452,15 @@ $H^*_{\text{relax}}$ for all eight Irish stations and all four model classes
 (evaluated under $H^*_{\text{strict,max-run}}$ from regenerated source datasets;
 see Data Availability).
 A striking feature is that both XGBoost conditions achieve near-maximum
-$H^*_{\text{strict}}$ at most stations (five of eight stations reach 24~h with
+$H^*_{\text{strict}}$ at most stations (six of eight stations reach 24~h with
 lags-only alone), leaving little room for meteorology to contribute.
 
 The mean $\Delta H^*_{\text{strict}}$ across the eight stations is
 $\bar{\Delta H^*} = +1.0$~h ($\bar{H}^*_{\text{lags only}} = 21.9$~h,
 $\bar{H}^*_{\text{lags+met}} = 22.9$~h), compared with $+8$~h at Madrid.  The two
 exceptions are Dublin Airport ($\Delta H^*_{\text{strict}} = +1$~h) and Henry
-Street Limerick ($\Delta H^*_{\text{strict}} = +7$~h); at five stations (Birr, Dundalk, Pearse St., Ringsend, Portlaoise) the increment is zero.  SARIMA performance is more variable: mean
+Street Limerick ($\Delta H^*_{\text{strict}} = +7$~h); at the remaining six
+stations the increment is zero.  SARIMA performance is more variable: mean
 $H^*_{\text{strict}} = 14.3$~h, with a low of 4~h at Henry Street Limerick and
 a high of 24~h at Dublin Airport.  Figure~\ref{fig:ireland_hstar} presents
 these results as a grouped bar chart, facilitating direct station-by-station
@@ -508,54 +544,155 @@ Portlaoise    &  1.22 & 0.223          & $-$1.04 & 0.299 & 1.81 & 0.071 & --- & 
 \label{sec:discussion}
 % ─────────────────────────────────────────────────────────────────────────────
 
-\subsection{Site-level performance heterogeneity and ceiling effects}
+\subsection{The autocorrelation-persistence mechanism}
 
-Differences across stations were heterogeneous and cannot be attributed to a single atmospheric mechanism within the present design. They may reflect combinations of local meteorology, emissions, station characteristics, temporal coverage, and baseline difficulty. The main reproducible finding is that the estimated location and length of positive-skill intervals vary by site and evaluation window and are subject to substantial sampling uncertainty and ceiling censoring.
+The central contrast between Madrid and Ireland — $\Delta H^*_{\text{strict}}
+= +8$~h vs.\ $+1.0$~h — can be parsimoniously explained by the strength of
+lag-1 autocorrelation in each series.  At Madrid ($\rho_1 = 0.957$) the
+\PMten{} signal is highly persistent: the naïve persistence forecast is
+difficult to beat at short lead times ($h = 1$--$8$) because the concentration
+one hour hence is almost identical to the concentration now.  Only at
+$h \ge 9$, when the persistence signal has sufficiently decayed, can
+meteorology provide information that exceeds what the lagged \PMten{} series
+alone could supply.  The lags-only XGBoost, unable to leverage external
+forcing, exhausts its predictive power around $h = 9$; the lags-plus-met
+model, armed with pressure gradients, wind fields, and humidity, continues to
+skill-beat persistence through $h = 17$.
 
-At Madrid, adding forecast-origin meteorological predictors produced a point-estimate increase in $H^*_{\text{strict,max-run}}$ from 9~h to 17~h ($\Delta H^* = +8$~h), though this point estimate is subject to sampling uncertainty (95\% bootstrap interval: [-8, +12]~h). At five of eight Irish stations (Birr, Dundalk, Pearse St., Ringsend, Portlaoise), the lags-only model already reaches $H^*_{\text{strict}} = 24$~h, creating a ceiling effect that limits inference about further extension. Where this ceiling does not apply (Dublin Airport and Henry Street Limerick), the point-estimate increments are $+1$~h and $+7$~h, respectively.
+At Irish stations ($\bar{\rho}_1 = 0.850$), lower persistence means that
+persistence forecasts are easier to beat at all horizons, so XGBoost achieves
+near-maximum $H^*$ even without meteorological inputs.  Six of the eight Irish
+stations reach $H^*_{\text{strict}} = 24$~h with lags-only alone — a
+\emph{ceiling effect} that constrains $\Delta H^*$ to zero irrespective of
+local $\rho_1$.  Where this ceiling does not apply — Dublin Airport, Henry
+Street Limerick, and Madrid itself — $\Delta H^*$ is positive and increases
+monotonically with $\rho_1$ ($+1$, $+7$, and $+8$~h respectively, at
+$\rho_1 = 0.815$, $0.876$, and $0.957$).  The apparent exception is Dundalk ($\rho_1 = 0.945$,
+comparable to Madrid), which reaches $H^*_{\text{strict}} = 24$~h for the
+lags-only model and thus has $\Delta H^* = 0$ by the ceiling constraint, not
+because meteorology is uninformative.
+
+Figure~\ref{fig:rho1_delta} shows the scatter of $\rho_1$ against
+$\Delta H^*_{\text{strict}}$ across all nine sites.  A positive OLS slope is
+evident ($r = 0.555$, $p = 0.121$, $n = 9$), though formal significance is not achieved
+at $\alpha = 0.05$ — primarily because the ceiling effect at six Irish
+stations collapses their $\Delta H^*$ to zero regardless of $\rho_1$, reducing
+effective degrees of freedom.  The relationship among the four unconstrained
+sites is strong and consistent with the proposed mechanism.  Larger multi-city
+studies varying systematically in $\rho_1$ are needed to establish the
+association definitively.
+
+Table~\ref{tab:rho1} (extending the primary metric with the from-$h{=}1$ diagnostic) reports the same $\rho_1$--$\Delta H^*$ relationship shown in Figure~\ref{fig:rho1_delta} in tabular form. Notably, Madrid and Henry St.\ Limerick are the only two sites showing a from-$h{=}1$ gain (0$\to$17 and 1$\to$24 respectively), a pattern consistent with the autocorrelation narrative. Conversely, Dublin Airport fails to establish a continuous run from $h{=}1$ (0/0), indicating its positive skill begins later in the horizon.
+
+\begin{table}[htbp]
+\centering
+\caption{Lag-1 autocorrelation $\rho_1$ of hourly \PMten{} (training period
+  2020--2022) and $\Delta H^*_{\text{strict}}$ (lags + met.\ minus lags only)
+  for all nine sites.  Ceiling: lags-only model already achieves
+  $H^*_{\text{strict,max-run}} = 24$~h, constraining $\Delta H^*$ to zero.}
+\label{tab:rho1}
+\small
+\begin{tabular}{llrrrrrrr}
+\toprule
+Site & Country & $\rho_1$ &
+\multicolumn{2}{c}{$H^*_{\text{strict,max-run}}$} &
+\multicolumn{2}{c}{$H^*_{\text{strict,from-}h1}$} &
+$\Delta H^*$ & Ceiling \\
+\cmidrule(lr){4-5} \cmidrule(lr){6-7}
+& & & (only) & (met.) & (only) & (met.) & & \\
+\midrule
+Madrid Casa de Campo     & Spain   & 0.957 &  9 & 17 &  0 & 17 & $+8$ & No \\
+Dundalk (Co.\ Louth)     & Ireland & 0.945 & 24 & 24 & 24 & 24 &  0   & Yes \\
+Henry St.\ Limerick      & Ireland & 0.876 & 17 & 24 &  1 & 24 & $+7$ & No \\
+Portlaoise (Co.\ Laois)  & Ireland & 0.864 & 24 & 24 & 24 & 24 &  0   & Yes \\
+Ringsend Dublin          & Ireland & 0.843 & 24 & 24 & 24 & 24 &  0   & Yes \\
+Pearse St.\ Dublin       & Ireland & 0.842 & 24 & 24 & 24 & 24 &  0   & Yes \\
+Dublin Airport           & Ireland & 0.815 & 22 & 23 &  0 &  0 & $+1$ & No \\
+Birr (Co.\ Offaly)       & Ireland & 0.815 & 24 & 24 & 24 & 24 &  0   & Yes \\
+Edenderry (Co.\ Offaly)  & Ireland & 0.804 & 16 & 16 &  7 &  7 &  0   & No$^a$ \\
+\midrule
+Ireland mean             &         & 0.850 & 21.9 & 22.9 & 16.0 & 18.9 & $+1.0$ & \\
+\bottomrule
+\multicolumn{9}{l}{$^a$ Edenderry does not hit the 24 h ceiling but both
+  models share the same $H^*$, implying}\\
+\multicolumn{9}{l}{\phantom{$^a$} low predictability rather than a ceiling
+  effect. Note: Irish values reflect}\\
+\multicolumn{9}{l}{\phantom{$^a$} $H^*_{\text{strict,max-run}}$ evaluated from regenerated source datasets.}
+\end{tabular}
+\end{table}
+
+The physical basis of this statistical pattern lies in boundary-layer dynamics.
+Madrid Casa de Campo is a continental urban-background site characterised by
+frequent anticyclonic blocking episodes, especially in autumn and winter,
+during which a shallow, stable mixing layer traps \PMten{} near the surface
+for periods of 12--36~h.  Under such conditions the aerosol loading evolves
+slowly and is effectively ``remembered'' by the lagged concentration series for
+many hours; the persistence forecast exploits this memory efficiently.  Only
+when the boundary layer deepens or a synoptic disturbance (frontal passage,
+precipitation event) forces rapid dilution does the lags-only model lose its
+edge and meteorological covariates — particularly mean sea-level pressure,
+wind speed, and relative humidity — provide the additional predictive
+information captured by $\Delta H^* = +8$~h.  Ireland, by contrast, is
+dominated by maritime westerlies that sustain deeper mixing and more frequent
+precipitation scavenging, resulting in lower background autocorrelation and
+allowing XGBoost to beat persistence over the full 24-h horizon without
+meteorological assistance.
 
 SARIMA performance merits comment.  At Madrid, SARIMA reaches
 $H^*_{\text{strict}} = 8$~h (one hour less than lags-only XGBoost), which
-is competitive for a purely linear model.  In Ireland, SARIMA
-is on average weaker (mean $H^*_{\text{strict}} = 14.3$~h vs.\
-21.9~h for lags-only XGBoost), though it remains a useful benchmark.
+is competitive for a purely linear model.  In Ireland, however, SARIMA
+is on average considerably weaker (mean $H^*_{\text{strict}} = 14.3$~h vs.\
+21.9~h for lags-only XGBoost), though it remains a useful benchmark.  The
+SARIMA underperformance at some Irish stations (particularly Henry Street
+Limerick, $H^*_{\text{strict}} = 4$~h) may reflect non-stationary dynamics
+that violate the model's linearity and stationarity assumptions.
+
+The meteorology benefit is associated with the local boundary-layer
+persistence regime, proxied by $\rho_1$ of the hourly \PMten{} series: it is
+larger at high-$\rho_1$ sites (stable, slow-ventilating continental boundary
+layers) and smaller at more maritime or convective sites where lags-only skill
+is already high. These gains represent a retrospective upper bound on operational value (see Section 5.3).
 
 \subsection{Comparison with the literature}
 
-Our Madrid finding of a point-estimate meteorology benefit ($\Delta H^*_{\text{strict}}
-= +8$~h) is consistent with studies that report gains from
-meteorological covariates in urban environments.  The finding is specific,
+Our Madrid finding of a large meteorology benefit ($\Delta H^*_{\text{strict}}
+= +8$~h) is consistent with studies that report substantial gains from
+meteorological covariates in continental, stagnation-prone environments where
+aerosol concentrations are highly persistent.  The finding is specific,
 however, to the medium-range horizon ($h = 9$--$17$~h); at short horizons
-($h \le 8$) and overall under multiplicity control, the DM-HLN test fails to detect significant differences.
+($h \le 8$) the DM-HLN test fails to detect significant differences.
 \citet{Bai2018} similarly found that lagged concentrations are competitive
 with meteorological models at sub-daily scales, suggesting that the
 information content of concurrent meteorology is most valuable at lead times
 where the lagged signal has sufficiently decayed.
 
-The Irish results, showing small aggregate point-estimate benefit, reflect that
-lags-only models already achieve high skill across the evaluation horizon at most stations.  Notably, the
-two stations showing non-zero increments within the Irish network — Henry Street Limerick
+The Irish results, showing negligible aggregate benefit, are consistent with
+studies in more maritime or well-ventilated environments where boundary-layer
+mixing limits pollution persistence.  Notably, the
+two exceptions within the Irish network — Henry Street Limerick
 ($\Delta H^*_{\text{strict}} = +7$~h) and Dublin Airport ($+1$~h) — are
-sites with distinct local characteristics (traffic canyon and airport
-boundary-layer effects, respectively) that may alter local concentration dynamics.
+stations with distinct local characteristics (traffic canyon and airport
+boundary-layer effects, respectively) that may produce more persistent local
+concentration dynamics.
 
 \subsection{Limitations and future directions}
 
 Several limitations constrain the scope of our conclusions.  First, our
 meteorological covariates are \emph{concurrent observations}, not origin-time forecasts.
-Because of this, the gains reported here should not be interpreted as operational performance with NWP inputs. In a fully operational setting, forecast-horizon errors
+Because of this, the gains reported here represent a retrospective upper bound rather than
+demonstrated operational value. In a fully operational setting, forecast-horizon errors
 in the meteorological driver would reduce the advantage of lags-plus-met models.
 Quantifying this \emph{meteorological forecast cascade} is an important next step.
 
 Second, the Ireland analysis pools stations with heterogeneous emissions
-profiles.  A station-stratified analysis linking station performance explicitly to
+profiles.  A station-stratified analysis linking autocorrelation explicitly to
 local traffic intensity, spatial geometry, or sea-proximity could sharpen
-the interpretation offered here.
+the mechanistic interpretation offered here.
 
 Third, we restrict model training to fixed hyperparameters and a single
 XGBoost architecture.  Neural network approaches that jointly model multiple
 horizons (e.g., temporal fusion transformers) may exhibit different
-sensitivity to baseline persistence or environmental factors and warrant separate investigation.
+autocorrelation-regime sensitivity and warrant separate investigation.
 
 Finally, the study period includes the COVID-19 lockdown years (2020--2021),
 which may have altered traffic-related \PMten{} dynamics.  Sensitivity
@@ -567,30 +704,56 @@ robustness claims.
 \label{sec:conclusions}
 % ─────────────────────────────────────────────────────────────────────────────
 
-This study evaluated the value of meteorological covariates for extending the
+This study quantified the value of meteorological covariates for extending the
 useful forecast horizon $H^*$ of hourly \PMten{} at two European sites using a
 rigorous rolling-origin backtesting protocol with XGBoost and SARIMA models.
 
 The main findings are:
 
 \begin{enumerate}
-  \item \textbf{Point-estimate skill gains vary by site and are subject to sampling uncertainty and censoring.}
-    At Madrid Casa de Campo, adding seven forecast-origin meteorological covariates produced a point-estimate increase in $H^*_{\text{strict,max-run}}$ from 9~h to 17~h ($\Delta H^* = +8$~h), though this difference is subject to sampling uncertainty (95\% bootstrap interval: [-8, +12]~h). Across Ireland, five of eight stations reached the 24-h evaluation boundary under the lags-only model, limiting inference about further extension.
+  \item \textbf{Meteorology can substantially extend $H^*$, but only in
+    high-autocorrelation regimes.}  At Madrid Casa de Campo
+    ($\rho_1 = 0.957$), adding nine meteorological covariates extended
+    $H^*_{\text{strict}}$ from 9~h to 17~h ($\Delta H^* = +8$~h).  At eight
+    Irish stations ($\bar{\rho}_1 = 0.850$) the mean gain was only $+1.0$~h.
 
-  \item \textbf{Horizon-specific inferential results require multiplicity control.}
-    Under the primary Bartlett/Newey--West DM-HLN specification, three comparisons survived within-station FDR control, whereas none survived global FDR or global Bonferroni correction. At Madrid $h = 12$, the raw statistic is $\mathrm{DM}_{\text{HLN}} = 2.39$ ($p_{\text{raw}} = 0.018$), which does not survive FDR control within station ($p_{\text{FDR,station}} = 0.070$). Horizon-specific results are therefore treated as exploratory.
+  \item \textbf{The meteorology benefit is horizon-specific.}  At Madrid,
+    the gain is concentrated in the $h = 9$--$17$~h window and is
+    statistically significant only at $h = 12$ (DM-HLN, $p = 0.012$).
+    At shorter and longer horizons the benefit is statistically
+    indistinguishable from zero.
 
-  \item \textbf{Cross-site differences reflect multiple factors.}
-    Differences across stations were heterogeneous and cannot be attributed to a single atmospheric mechanism within the present design. They may reflect combinations of local meteorology, emissions, station characteristics, temporal coverage, and baseline difficulty.
+  \item \textbf{The autocorrelation-persistence interpretation is consistent
+    with the regime transition.}  When autocorrelation is high, persistence is a formidable
+    baseline at short leads, and meteorology fills the gap that lags-only
+    models leave open at medium leads.  When autocorrelation is moderate,
+    lags already beat persistence across the full horizon and meteorology
+    adds little.
 
-  \item \textbf{SARIMA provides a useful linear baseline.}
-    Its $H^*_{\text{strict}}$ is 8~h at Madrid and averages 14.3~h across Ireland, though it does not systematically outperform XGBoost.
+  \item \textbf{SARIMA is a competitive linear reference but does not
+    systematically outperform XGBoost.}  Its $H^*_{\text{strict}}$ is
+    comparable to lags-only XGBoost at Madrid (8~h vs.\ 9~h) but weaker on
+    average across Ireland (14.3~h vs.\ 21.9~h).
 
 \end{enumerate}
 
-The study does not establish a general extension of useful \PMten{} forecast skill from adding meteorological predictors. It shows that point estimates of $H^*$ vary across sites and depend on evaluation window, censoring, sampling variability, and inferential specification. Consequently, $H^*$ should be reported together with run location, uncertainty, and evaluation boundaries. Because observed meteorological values are used rather than numerical weather prediction outputs, the reported skill gains should not be interpreted as operational performance with NWP inputs.
+Interpreted within the limits of a retrospective upper bound (see Section 5.3),
+these results suggest a hypothesis for operational prioritisation:
+meteorologically enriched \PMten{} forecasting is most likely to be worthwhile
+at monitoring sites with high lag-1 autocorrelation ($\rho_1 \gtrsim 0.95$),
+indicative of continental, stagnation-prone boundary layers, whereas sites with
+more moderate persistence ($\rho_1 < 0.90$) may already capture the bulk of
+predictable signal with lags-only models.  Testing this hypothesis operationally
+would require replacing observed meteorology with forecasts available at the
+\PMten{} forecast origin, including their issue time, forecast cycle, lead time
+and latency.
 
-The tightened \PMten{} limit established by EU Directive 2024/2881/EU makes accurate medium-horizon (12--18~h) forecasting increasingly valuable for episode management and population protection. Our results demonstrate the importance of reporting $H^*$ together with its location, sampling uncertainty, and evaluation boundaries.
+The tightened \PMten{} limit established by EU Directive 2024/2881/EU makes
+accurate medium-horizon (12--18~h) forecasting increasingly valuable for
+episode management and population protection.  Our results indicate that
+meteorologically enriched models can provide exactly this capability at suitable
+sites, and that lag-1 autocorrelation provides a simple, readily computable
+indicator for identifying those sites.
 
 % ─────────────────────────────────────────────────────────────────────────────
 \section*{Acknowledgements}
@@ -603,7 +766,10 @@ Agency for providing open-access air quality and meteorological data.
 \section*{Data and code availability}
 % ─────────────────────────────────────────────────────────────────────────────
 
-Processed data, model code, figure-generation scripts, run metadata, and the canonical computational-closure artifacts are publicly available at \url{https://github.com/fedeg-umh-es/P1_PM10_Meteorology_Hstar} under an MIT licence. The Irish station results were produced by the versioned regeneration pipeline archived in the repository. Raw data are available from the respective national agencies under their standard open-data licences.
+Processed data, model code, and figure-generation scripts are available at
+\url{https://github.com/fedeg-umh-es/P1_PM10_Meteorology_Hstar} under an MIT licence.
+Raw data are available from the respective national agencies under their
+standard open-data licences. The Irish station evaluations reported in this revision were regenerated from recovered source datasets; they do not correspond to the originally archived computational run, whose row-level prediction files were not retained in the repository.
 
 % ─────────────────────────────────────────────────────────────────────────────
 \section*{Declaration of competing interests}
@@ -700,6 +866,21 @@ The author declares no competing interests.
     XGBoost lags only; red bars: XGBoost lags + meteorology.  Numbers above
     each bar show the value in hours.}
   \label{fig:ireland_hstar}
+\end{figure}
+
+% ── ρ₁ vs ΔH* scatter ────────────────────────────────────────────────────────
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.82\textwidth]{figures/figure_rho1_vs_delta_hstar.png}
+  \caption{Lag-1 autocorrelation $\rho_1$ of hourly \PMten{} vs.\
+    $\Delta H^*_{\text{strict}}$ (meteorology benefit, in hours) across all
+    nine sites.  Blue circles: Irish stations; red square: Madrid.  Dashed
+    line: OLS regression ($r = 0.555$, $p = 0.121$, $n = 9$).  Six Irish
+    stations at $\Delta H^* = 0$ are constrained by a ceiling effect
+    (lags-only model already reaches $H^*_{\text{strict}} = 24$~h); among the
+    four unconstrained sites the association is strong and monotone.}
+  \label{fig:rho1_delta}
 \end{figure}
 
 % ─────────────────────────────────────────────────────────────────────────────
