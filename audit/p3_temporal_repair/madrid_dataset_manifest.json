@@ -1,0 +1,22 @@
+{
+  "station": 24,
+  "station_name": "Casa de Campo",
+  "timestamp_semantics": "official timezone-naive hourly labels; H01 maps to 00:00",
+  "rows": 43536,
+  "start": "2019-01-01 00:00:00",
+  "end": "2023-12-31 23:00:00",
+  "missing_clock_timestamps": 288,
+  "duplicate_timestamps": 0,
+  "missing_percent": {
+    "PM10": 1.8903895626607863,
+    "wind_speed_ms": 1.3000735023888277,
+    "wind_dir_deg": 1.0428151414920985,
+    "temp_c": 1.0634876883498714,
+    "humidity_pct": 1.0428151414920985,
+    "pressure_hpa": 6.2362183020948185,
+    "solar_rad_wm2": 1.0703785373024624,
+    "precip_mm": 1.9064682102168322
+  },
+  "pm10_manifest": "/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/_datasets/P3/madrid_pm10_2019_2023/madrid_pm10_manifest.json",
+  "meteo_manifest": "/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/_datasets/P3/madrid_meteo_2019_2023/madrid_meteo_manifest.json"
+}

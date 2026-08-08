@@ -1,0 +1,9 @@
+station,rule,status,max_allowed_training_target_offset_hours
+Birr co offlay,training_target_timestamp < forecast_origin,PASS_BY_CONSTRUCTION,-1
+Dublin Airport,training_target_timestamp < forecast_origin,PASS_BY_CONSTRUCTION,-1
+Dundalk Co Louth,training_target_timestamp < forecast_origin,PASS_BY_CONSTRUCTION,-1
+Pearse street dublin,training_target_timestamp < forecast_origin,PASS_BY_CONSTRUCTION,-1
+Ringsend dublin,training_target_timestamp < forecast_origin,PASS_BY_CONSTRUCTION,-1
+edenderry co offlay,training_target_timestamp < forecast_origin,PASS_BY_CONSTRUCTION,-1
+henry street Limerick,training_target_timestamp < forecast_origin,PASS_BY_CONSTRUCTION,-1
+porrlaoise co laois,training_target_timestamp < forecast_origin,PASS_BY_CONSTRUCTION,-1

@@ -1,0 +1,37 @@
+station,horizon,evaluation_start,evaluation_end,origin_stride_hours,n_unique_origins,n_unique_verification_times,n_dm_pairs,source_artifact,classification
+Madrid Casa de Campo,1,2023-01-01 00:00:00,2023-12-30 00:00:00,row_stride_24;clock_deltas=24.0|72.0,362,362,354,results/predictions_all_models.csv,PIPELINE_ERROR
+Madrid Casa de Campo,6,2023-01-01 00:00:00,2023-12-30 00:00:00,row_stride_24;clock_deltas=24.0|72.0,362,362,356,results/predictions_all_models.csv,PIPELINE_ERROR
+Madrid Casa de Campo,12,2023-01-01 00:00:00,2023-12-30 00:00:00,row_stride_24;clock_deltas=24.0|72.0,362,362,346,results/predictions_all_models.csv,PIPELINE_ERROR
+Madrid Casa de Campo,24,2023-01-01 00:00:00,2023-12-30 00:00:00,row_stride_24;clock_deltas=24.0|72.0,362,362,354,results/predictions_all_models.csv,PIPELINE_ERROR
+Birr co offlay,1,2023-01-01 00:00:00,2023-07-31 00:00:00,24,212,212,211,results/e2_met_ireland_pm10_regenerated/predictions/predictions_all_models.csv,CONSISTENT
+Birr co offlay,6,2023-01-01 00:00:00,2023-07-31 00:00:00,24,212,212,212,results/e2_met_ireland_pm10_regenerated/predictions/predictions_all_models.csv,CONSISTENT
+Birr co offlay,12,2023-01-01 00:00:00,2023-07-31 00:00:00,24,212,212,212,results/e2_met_ireland_pm10_regenerated/predictions/predictions_all_models.csv,CONSISTENT
+Birr co offlay,24,2023-01-01 00:00:00,2023-07-31 00:00:00,24,212,212,212,results/e2_met_ireland_pm10_regenerated/predictions/predictions_all_models.csv,CONSISTENT
+Dublin Airport,1,2023-01-01 00:00:00,2023-05-25 00:00:00,24,145,145,145,results/e2_met_ireland_pm10_regenerated/predictions/predictions_all_models.csv,DOCUMENTATION_ERROR
+Dublin Airport,6,2023-01-01 00:00:00,2023-05-25 00:00:00,24,145,145,145,results/e2_met_ireland_pm10_regenerated/predictions/predictions_all_models.csv,DOCUMENTATION_ERROR
+Dublin Airport,12,2023-01-01 00:00:00,2023-05-25 00:00:00,24,145,145,145,results/e2_met_ireland_pm10_regenerated/predictions/predictions_all_models.csv,DOCUMENTATION_ERROR
+Dublin Airport,24,2023-01-01 00:00:00,2023-05-25 00:00:00,24,145,145,145,results/e2_met_ireland_pm10_regenerated/predictions/predictions_all_models.csv,DOCUMENTATION_ERROR
+Dundalk Co Louth,1,2023-01-01 00:00:00,2023-06-03 00:00:00,24,154,154,151,results/e2_met_ireland_pm10_regenerated/predictions/predictions_all_models.csv,DOCUMENTATION_ERROR
+Dundalk Co Louth,6,2023-01-01 00:00:00,2023-06-03 00:00:00,24,154,154,152,results/e2_met_ireland_pm10_regenerated/predictions/predictions_all_models.csv,DOCUMENTATION_ERROR
+Dundalk Co Louth,12,2023-01-01 00:00:00,2023-06-03 00:00:00,24,154,154,153,results/e2_met_ireland_pm10_regenerated/predictions/predictions_all_models.csv,DOCUMENTATION_ERROR
+Dundalk Co Louth,24,2023-01-01 00:00:00,2023-06-03 00:00:00,24,154,154,152,results/e2_met_ireland_pm10_regenerated/predictions/predictions_all_models.csv,DOCUMENTATION_ERROR
+Pearse street dublin,1,2023-01-01 00:00:00,2023-07-31 00:00:00,24,212,212,212,results/e2_met_ireland_pm10_regenerated/predictions/predictions_all_models.csv,CONSISTENT
+Pearse street dublin,6,2023-01-01 00:00:00,2023-07-31 00:00:00,24,212,212,212,results/e2_met_ireland_pm10_regenerated/predictions/predictions_all_models.csv,CONSISTENT
+Pearse street dublin,12,2023-01-01 00:00:00,2023-07-31 00:00:00,24,212,212,212,results/e2_met_ireland_pm10_regenerated/predictions/predictions_all_models.csv,CONSISTENT
+Pearse street dublin,24,2023-01-01 00:00:00,2023-07-31 00:00:00,24,212,212,212,results/e2_met_ireland_pm10_regenerated/predictions/predictions_all_models.csv,CONSISTENT
+Ringsend dublin,1,2023-01-01 00:00:00,2023-07-31 00:00:00,24,212,212,212,results/e2_met_ireland_pm10_regenerated/predictions/predictions_all_models.csv,CONSISTENT
+Ringsend dublin,6,2023-01-01 00:00:00,2023-07-31 00:00:00,24,212,212,212,results/e2_met_ireland_pm10_regenerated/predictions/predictions_all_models.csv,CONSISTENT
+Ringsend dublin,12,2023-01-01 00:00:00,2023-07-31 00:00:00,24,212,212,212,results/e2_met_ireland_pm10_regenerated/predictions/predictions_all_models.csv,CONSISTENT
+Ringsend dublin,24,2023-01-01 00:00:00,2023-07-31 00:00:00,24,212,212,212,results/e2_met_ireland_pm10_regenerated/predictions/predictions_all_models.csv,CONSISTENT
+edenderry co offlay,1,2023-01-01 00:00:00,2023-07-31 15:00:00,row_stride_24;clock_deltas=22.0|23.0|23.016666666666666|24.0|25.983333333333334|27.0|30.0|63.0,211,211,208,results/e2_met_ireland_pm10_regenerated/predictions/predictions_all_models.csv,PIPELINE_ERROR
+edenderry co offlay,6,2023-01-01 00:00:00,2023-07-31 15:00:00,row_stride_24;clock_deltas=22.0|23.0|23.016666666666666|24.0|25.983333333333334|27.0|30.0|63.0,211,211,211,results/e2_met_ireland_pm10_regenerated/predictions/predictions_all_models.csv,PIPELINE_ERROR
+edenderry co offlay,12,2023-01-01 00:00:00,2023-07-31 15:00:00,row_stride_24;clock_deltas=22.0|23.0|23.016666666666666|24.0|25.983333333333334|27.0|30.0|63.0,211,211,211,results/e2_met_ireland_pm10_regenerated/predictions/predictions_all_models.csv,PIPELINE_ERROR
+edenderry co offlay,24,2023-01-01 00:00:00,2023-07-31 15:00:00,row_stride_24;clock_deltas=22.0|23.0|23.016666666666666|24.0|25.983333333333334|27.0|30.0|63.0,211,211,210,results/e2_met_ireland_pm10_regenerated/predictions/predictions_all_models.csv,PIPELINE_ERROR
+henry street Limerick,1,2023-01-01 00:00:00,2023-07-31 08:00:00,row_stride_24;clock_deltas=21.016666666666666|22.016666666666666|22.983333333333334|23.0|23.983333333333334|24.0|63.0,211,211,211,results/e2_met_ireland_pm10_regenerated/predictions/predictions_all_models.csv,PIPELINE_ERROR
+henry street Limerick,6,2023-01-01 00:00:00,2023-07-31 08:00:00,row_stride_24;clock_deltas=21.016666666666666|22.016666666666666|22.983333333333334|23.0|23.983333333333334|24.0|63.0,211,211,211,results/e2_met_ireland_pm10_regenerated/predictions/predictions_all_models.csv,PIPELINE_ERROR
+henry street Limerick,12,2023-01-01 00:00:00,2023-07-31 08:00:00,row_stride_24;clock_deltas=21.016666666666666|22.016666666666666|22.983333333333334|23.0|23.983333333333334|24.0|63.0,211,211,210,results/e2_met_ireland_pm10_regenerated/predictions/predictions_all_models.csv,PIPELINE_ERROR
+henry street Limerick,24,2023-01-01 00:00:00,2023-07-31 08:00:00,row_stride_24;clock_deltas=21.016666666666666|22.016666666666666|22.983333333333334|23.0|23.983333333333334|24.0|63.0,211,211,211,results/e2_met_ireland_pm10_regenerated/predictions/predictions_all_models.csv,PIPELINE_ERROR
+porrlaoise co laois,1,2023-01-01 00:00:00,2023-07-31 00:00:00,24,212,212,212,results/e2_met_ireland_pm10_regenerated/predictions/predictions_all_models.csv,CONSISTENT
+porrlaoise co laois,6,2023-01-01 00:00:00,2023-07-31 00:00:00,24,212,212,212,results/e2_met_ireland_pm10_regenerated/predictions/predictions_all_models.csv,CONSISTENT
+porrlaoise co laois,12,2023-01-01 00:00:00,2023-07-31 00:00:00,24,212,212,212,results/e2_met_ireland_pm10_regenerated/predictions/predictions_all_models.csv,CONSISTENT
+porrlaoise co laois,24,2023-01-01 00:00:00,2023-07-31 00:00:00,24,212,212,212,results/e2_met_ireland_pm10_regenerated/predictions/predictions_all_models.csv,CONSISTENT

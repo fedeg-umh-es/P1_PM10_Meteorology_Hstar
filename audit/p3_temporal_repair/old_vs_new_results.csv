@@ -1,0 +1,8 @@
+station,model,metric,old_value,new_value,absolute_difference,changed
+Madrid Casa de Campo,xgboost_direct,Delta H* claim,8,UNVERIFIABLE,UNVERIFIABLE,UNVERIFIABLE
+ALL,ALL,H_strict_max_run,available in historical artifacts,UNVERIFIABLE,UNVERIFIABLE,UNVERIFIABLE
+ALL,ALL,h_start,available in historical artifacts,UNVERIFIABLE,UNVERIFIABLE,UNVERIFIABLE
+ALL,ALL,h_end,available in historical artifacts,UNVERIFIABLE,UNVERIFIABLE,UNVERIFIABLE
+ALL,ALL,H_relax,available in historical artifacts,UNVERIFIABLE,UNVERIFIABLE,UNVERIFIABLE
+ALL,ALL,representative RMSE,available in historical artifacts,UNVERIFIABLE,UNVERIFIABLE,UNVERIFIABLE
+ALL,ALL,representative Skill,available in historical artifacts,UNVERIFIABLE,UNVERIFIABLE,UNVERIFIABLE
