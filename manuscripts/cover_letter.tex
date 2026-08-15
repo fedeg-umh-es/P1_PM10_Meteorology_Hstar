@@ -1,137 +1,143 @@
 % cover_letter.tex
-% Cover letter for submission to Atmospheric Research (Elsevier, ISSN 0169-8095)
-% Compile: pdflatex manuscripts/cover_letter.tex
+% Cover letter for submission to
+% Stochastic Environmental Research and Risk Assessment
+% Compile: pdflatex serra_cover_letter.tex
 
-\documentclass[12pt,a4paper]{article}
+\documentclass[9pt,a4paper]{article}
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
-\usepackage[margin=2.5cm]{geometry}
-\usepackage{parskip}
+\usepackage[margin=1.6cm]{geometry}
+\usepackage[skip=2pt]{parskip}
 \usepackage{microtype}
 \usepackage{hyperref}
-\hypersetup{colorlinks=true, urlcolor=blue, linkcolor=blue}
+
+\hypersetup{
+    colorlinks=true,
+    urlcolor=blue,
+    linkcolor=blue
+}
 
 \pagestyle{empty}
 
 \begin{document}
-
-% ── sender ────────────────────────────────────────────────────────────────────
-
-\noindent
-Federico García Crespí\\
-Universidad Miguel Hernández de Elche\\
-\href{mailto:fedeg@umh.es}{fedeg@umh.es}
-
-\bigskip
-\noindent
-18 May 2026
-
-\bigskip
-
-% ── addressee ─────────────────────────────────────────────────────────────────
+\small
 
 \noindent
-Dear Editor-in-Chief,  % ← replace with name if known
+Dear Editor-in-Chief,
 
-\bigskip
-
-% ── opening ───────────────────────────────────────────────────────────────────
-
-I am pleased to submit our manuscript,
+I am pleased to submit my manuscript
 
 \begin{quote}
-\textbf{``Does meteorology extend the useful forecast horizon for urban
-PM$_{10}$?\
-A multi-city, multi-horizon skill analysis with XGBoost and SARIMA''},
+\textbf{``When descriptive forecast-horizon gains do not imply global evidence
+of incremental meteorological predictability: a multi-site PM$_{10}$ study''}
 \end{quote}
 
 for consideration for publication in
-\textit{Atmospheric Research}.
+\textit{Stochastic Environmental Research and Risk Assessment}.
+
 The manuscript is original, has not been published previously, and is not
-currently under consideration elsewhere.
+currently under consideration by another journal.
 
-% ── what the paper does ───────────────────────────────────────────────────────
+A recurring difficulty in environmental forecasting is that a result that
+looks convincing descriptively may support a much narrower conclusion once
+the source of the improvement is examined statistically. This is particularly
+relevant in multi-horizon forecasting. A model may outperform persistence over
+a longer sequence of lead times after new predictors are added, yet the longer
+skill horizon does not by itself establish that those predictors contribute
+incremental predictive information. Our manuscript examines this distinction
+for hourly PM$_{10}$ forecasting and asks a deliberately focused question:
+when meteorological observations extend persistence-relative forecast skill,
+how much evidence supports attributing that extension to the additional
+meteorological information?
 
-\textbf{What we do.}
-The paper addresses a practical question that is directly relevant to
-operational air quality management: over how many lead hours does a
-data-driven PM$_{10}$ forecasting model reliably outperform a naïve persistence
-benchmark, and does the addition of concurrent meteorological covariates extend
-that window?  We formalise this as the \emph{useful forecast horizon}~$H^*$,
-define strict and relaxed variants, and measure it under a rigorous
-rolling-origin expanding-window backtesting protocol at two European sites ---
-Madrid Casa de Campo (Spain) and a network of eight stations in Ireland ---
-covering a 42-month study window (January~2020 -- July~2023).
+We study Madrid Casa de Campo and eight monitoring stations in Ireland using
+an expanding-window rolling-origin evaluation over January--July 2023, with
+forecast origins spaced by 24 hours and horizons from 1 to 24 hours. Persistence
+and SARIMA provide temporal reference models, while the controlled
+information-set comparison uses the same direct XGBoost learner first with
+lagged PM$_{10}$ and then with the addition of meteorological observations
+available at the forecast origin. This paired design allows the descriptive
+effect of the added information to be examined without changing the learner.
+It also keeps the interpretation deliberately retrospective: the
+meteorological inputs are observations available at forecast issuance, not
+future numerical weather prediction forecasts.
 
-Three model classes are evaluated at each of $h = 1, \ldots, 24$ lead hours:
-persistence (benchmark), SARIMA(1,0,1)(1,0,0)$_{24}$ (linear statistical
-reference), and XGBoost fitted with and without nine meteorological covariates.
-The Diebold--Mariano test with Harvey--Leybourne--Newbold correction is used
-to assess whether observed skill differences are statistically significant.
+The empirical results initially suggest a strong meteorological benefit in
+Madrid. Under the primary definition of the useful forecast horizon---the
+longest contiguous run of positive skill relative to persistence---the horizon
+increases from 9 to 17 hours when meteorological observations are added, an
+8-hour extension. The corresponding relaxed last-positive-skill horizon,
+however, increases from 15 to 17 hours, a 2-hour change. The contrast becomes
+still less straightforward across Ireland: the mean strict horizon changes
+from 21.875 to 22.875 hours (+1.000 hour), and five of the eight stations
+already reach the 24-hour evaluation boundary with the lags-only model, leaving
+little observable room for the strict horizon to extend further. These results make
+the descriptive story interesting, but they also make clear why the number of
+additional ``useful'' hours cannot by itself answer the attribution question.
 
-% ── main findings ─────────────────────────────────────────────────────────────
+That question produces the main inferential turning point of the paper. Across
+the 36 planned station--horizon comparisons, all tests are valid under the
+dimensionally corrected overlap-based DM-HLN specification, but none survives
+global Bonferroni correction. Limited within-station signals remain under
+station-wise false-discovery-rate control. We then address the most immediate
+statistical objection: although the 24-hour spacing between forecast origins
+implies no mechanically required positive-lag covariance from overlapping
+forecast errors for the tested horizons, residual serial dependence in the
+loss differential may still be present. A fixed automatic Newey--West
+sensitivity analysis allows for such positive-lag dependence. The family-wise
+result remains the same---again, no comparison survives global Bonferroni
+correction---although the identities of the limited local signals are not
+identical across the two specifications. The complete cell-level results are
+supplied as Online Resource 1, alongside the main-text DM-HLN inferential
+landscape (Figure 3).
 
-\textbf{Main findings.}
-At Madrid (lag-1 autocorrelation $\rho_1 \approx 0.90$), adding meteorology
-extends $H^*_{\text{strict}}$ from 9\,h to 17\,h
-($\Delta H^* = +8$\,h), a gain that is statistically significant at
-$h = 12$ ($p = 0.012$, DM-HLN).  At the eight Irish stations
-($\rho_1 \approx 0.82$), the mean gain is only $+0.9$\,h, with lags-only
-XGBoost already achieving near-maximum horizon skill.  We show that this
-contrast is mechanistically explained by the local autocorrelation-persistence
-regime: when autocorrelation is high, persistence is a formidable baseline at
-short leads and meteorology fills the gap that lagged-pollutant models leave
-open at medium leads; when autocorrelation is moderate, lagged values already
-capture the dominant variance and meteorology adds little.
+For us, this distinction between the descriptive and inferential results is
+the main value of the study. The Madrid skill extension remains a genuine
+empirical feature of the forecasts; the inferential analysis does not make it
+disappear. Rather, it changes what can reasonably be claimed from it.
+Persistence-relative horizon gains, local evidence of forecast differences,
+and family-wise support for incremental predictive information are different
+levels of evidence. Treating them as interchangeable can make an environmental
+forecasting result appear more general than the evaluation actually supports.
 
-% ── relevance to journal ──────────────────────────────────────────────────────
+We believe this question is well suited to
+\textit{Stochastic Environmental Research and Risk Assessment} because it
+concerns not only predictive performance but the stochastic structure and
+statistical interpretation of environmental forecasts. The comparison is
+conducted under temporal dependence, across multiple sites and horizons, and
+against persistence---a demanding reference when environmental concentrations
+are strongly autocorrelated. The study also illustrates a practical
+methodological consequence of the evaluation design: when forecast horizons
+are expressed in physical hours but forecast origins are more widely spaced,
+the dependence parameters used for forecast-comparison inference must be
+defined on the loss-differential sequence rather than transferred mechanically
+from physical time.
 
-\textbf{Relevance to \textit{Atmospheric Research}.}
-PM$_{10}$ is the dominant coarse aerosol fraction in the urban boundary layer,
-and its concentration dynamics are governed by the same boundary-layer and
-mesoscale processes that sit at the core of the journal's scope: stable
-nocturnal mixing layers that trap aerosol under anticyclonic blocking,
-frontal passages and precipitation events that scavenge it, and synoptic-scale
-wind fields that advect it.  Our paper connects these physical mechanisms
-directly to the statistical predictability of surface PM$_{10}$: we show that
-the lag-1 autocorrelation of the hourly aerosol time series — a proxy for
-boundary-layer ventilation frequency — governs both the skill of data-driven
-forecasting models and the incremental value of explicit meteorological
-covariates.  The study covers two contrasting European regimes (continental
-Madrid and maritime Ireland) under a rigorous rolling-origin backtesting
-protocol and applies the Diebold--Mariano significance test to validate the
-observed horizon gains.  The revised EU Directive 2024/2881/EU, which halves
-the annual PM$_{10}$ limit to 20\,\si{\micro\gram\per\cubic\metre} by 2030,
-makes accurate medium-horizon (12--18\,h) aerosol forecasting increasingly
-urgent; our results provide evidence-based guidance on when and where
-meteorological data pipelines justify their cost — a finding of direct
-relevance to the journal's SDG~13 (Climate Action) commitment.
+The manuscript therefore does not argue that meteorology is generally
+uninformative, nor that a particular forecasting architecture is universally
+superior. Its contribution is more specific: in this multi-site PM$_{10}$
+experiment, substantial descriptive horizon gains can coexist with limited
+family-wise evidence for attributing those gains to the added meteorological
+information, and that global conclusion persists under a fixed sensitivity to
+additional serial dependence. We believe that this provides a useful framework
+for interpreting horizon-dependent performance claims in environmental
+forecasting more generally, while keeping the empirical conclusions bounded by
+the evaluated sites, period, information sets, and 24-hour forecast range.
 
-% ── comparison with prior rejection (AQAH) ───────────────────────────────────
+Code, processed research materials, and figure-generation resources associated
+with the study are made available through the project repository described in
+the manuscript.
 
-\textbf{Note on prior submission.}
-An earlier version of this work was submitted to \textit{Air Quality,
-Atmosphere \& Health} and was not accepted following review.  The present
-manuscript has been substantially revised to address the reviewers' concerns:
-(i)~the mechanistic explanation linking autocorrelation regime to meteorology
-benefit has been developed into a dedicated Discussion subsection; (ii)~the
-multi-city design explicitly disentangles site-level predictability from model
-architecture; and (iii)~both the backtesting protocol and the $H^*$ definition
-are now formally specified in the Methods section.
-
-% ── closing ───────────────────────────────────────────────────────────────────
-
-We believe this manuscript makes a clear and timely contribution to the
-literature on data-driven air quality forecasting and is well matched to your
-readership.  We look forward to receiving your decision.
-
-\bigskip
+Thank you for considering this manuscript for publication in
+\textit{Stochastic Environmental Research and Risk Assessment}. I would be
+grateful for the opportunity to have the work considered by the journal's
+editors and reviewers.
 
 Yours sincerely,
 
-\bigskip\bigskip
+\vspace{6pt}
 
 \noindent
 Federico García Crespí\\
