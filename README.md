@@ -1,118 +1,95 @@
-# P2 — Operational Meteorology
+# SERRA — PM10 forecast-horizon evidence
 
-Canonical programme identity: **P2 — Operational Meteorology** (historically
-E2-MET). The configured remote name `P1_PM10_Meteorology_Hstar` is a historical
-repository alias and is not the current programme number.
+This repository contains the versioned analysis code and documentary evidence
+associated with the SERRA manuscript below.  The repository name and historical
+P2 programme labels are retained for provenance; they do not define a separate
+manuscript.
 
-Experiments and results for the paper:
+## Associated manuscript
 
-**"Meteorological predictors and the useful forecast horizon (H*) for PM10:
-a comparative study under high and moderate autocorrelation regimes"**
+**When descriptive forecast-horizon gains do not imply global evidence of
+incremental meteorological predictability: a multi-site PM10 study**
 
-Target journal: Atmospheric Environment (Elsevier, Q1)
+- **Target journal:** *Stochastic Environmental Research and Risk Assessment*
+- **Manuscript author:** Federico García Crespí
+- **Manuscript source:** `manuscripts/serra_manuscript.tex`
+- **Manuscript PDF:** `manuscripts/serra_manuscript.pdf`
 
----
+Historical manuscript and cover-letter files under `manuscripts/` are retained
+for repository provenance and are not the current SERRA submission materials.
 
-## Experiments
+## Study design
 
-### Madrid — Casa de Campo
-- Period: train 2019–2022 / test 2023 (~354 rolling origins)
-- Model: XGBoost-direct (one model per horizon h=1..24)
-- Conditions: `lags_only` vs `lags_meteo`
-- Meteorological variables: temperature, humidity, pressure, wind speed,
-  wind direction, solar radiation, precipitation
-- Validation: rolling-origin expanding window (origin spacing: 24 h)
-- Benchmark: pure persistence
-- Key result: H*_strict `lags_only`=9h → `lags_meteo`=17h (ΔH*=+8h)
-- lag-1 autocorrelation: ρ₁ = 0.90
+The study evaluates hourly PM10 forecasting at Madrid Casa de Campo and eight
+Irish stations over January--July 2023.  It uses an expanding-window,
+rolling-origin evaluation with forecast origins spaced by 24 h and physical
+horizons $h=1,\ldots,24$.
 
-### Ireland — 8 stations
-- Stations: Birr, Dublin Airport, Dundalk, Pearse St. (Dublin),
-  Ringsend (Dublin), Edenderry, Limerick, Portlaoise
-- Period: train 2020–2022 / test 2023-01 to 2023-08
-  (145–212 origins per station depending on data coverage)
-- Model: same protocol as Madrid
-- Meteorological variables: rain, temperature, wetbulb temperature,
-  dew point, vapour pressure, relative humidity, MSL pressure,
-  wind speed, wind direction (no solar radiation available)
-- Key result: H*_strict mean `lags_only`=21.5h → `lags_meteo`=22.4h (ΔH*=+0.9h)
-- lag-1 autocorrelation: ρ₁ mean = 0.82 (range 0.66–0.89)
+The comparison includes persistence and SARIMA reference models, plus direct
+multi-horizon XGBoost models using either pollutant lags alone or pollutant lags
+augmented with meteorological observations available at the forecast origin.
+The meteorological covariates are an observational information set, not future
+numerical-weather-prediction forecasts.  Irish meteorological covariates use the
+nearest mapped EPA synoptic station documented for each monitoring site.
 
----
+## Frozen results
 
-## Central finding
+- **Madrid:** $H^*_{\mathrm{strict}}$ increases from 9 to 17 h (+8 h); the
+  relaxed descriptor increases from 15 to 17 h (+2 h).
+- **Ireland:** mean strict $H^*$ increases from 21.875 to 22.875 h
+  (+1.000 h); five of eight lags-only stations reach the 24-h boundary; eleven
+  station/condition cases reach $H^*_{\mathrm{strict}}=24$; Henry Street
+  Limerick changes from 17 to 24 h (+7 h).
+- **Inference:** 36 planned site--horizon comparisons are assessed.  Under
+  $q_{\mathrm{overlap}}=0$, global Bonferroni yields 0/36 significant tests.
+  The fixed automatic Newey--West sensitivity also yields 0/36.  Limited
+  station-wise Benjamini--Hochberg signals remain local sensitivity evidence,
+  not the primary multi-site conclusion.
 
-The value of adding meteorological variables depends on the lag-1
-autocorrelation regime of the PM10 series.
+The manuscript treats $H^*$ as descriptive, treats values at 24 h as
+right-censored by $H_{\max}=24$ where appropriate, and distinguishes failure to
+reject from equivalence.  Descriptive horizon extension is therefore kept
+separate from family-wise global attribution of incremental meteorological
+predictability.
 
-- **High autocorrelation (Madrid, ρ₁=0.90):** meteorology breaks the
-  persistence barrier at h=1–2 and extends H*_strict by 8 hours.
-- **Moderate autocorrelation (Ireland, ρ₁≈0.82):** the lags-only model
-  is already competitive across the full 24-hour horizon; meteorological
-  gain is marginal (+0.9h on average).
+## Repository evidence
 
----
+The final SERRA evidence mirrored here includes:
 
-## Repository structure
+- `outputs/tables/serra_table_t2_dm_q0.tex` — primary overlap-based DM-HLN table;
+- `outputs/tables/serra_table_t3_dm_auto_nw.tex` — fixed automatic Newey--West
+  sensitivity table;
+- `outputs/figures/serra_fig1_madrid_skill_curves.png`;
+- `outputs/figures/serra_fig2_ireland_skill_by_station.png`;
+- `manuscripts/serra_manuscript.tex` and `manuscripts/serra_manuscript.pdf`.
 
-```
-P2_Operational_Meteorology/
-├── code/                          # training and evaluation scripts
-│   └── models/                    # XGBoost, ARIMA, persistence, LSTM
-├── data_processed/                # curated input data (raw data not tracked)
-├── data_raw/                      # not tracked — see Data Sources below
-├── results/
-│   ├── e2_met_madrid_pm10/        # metrics, predictions, tables, DM test
-│   ├── e2_met_ireland_pm10/       # per-station and aggregate results
-│   ├── comparison_madrid_ireland/ # comparative figures
-│   └── madrid_sarima/             # SARIMA baseline results
-├── figures/                       # final figures for the paper
-├── manuscripts/                   # Overleaf link and final PDF when available
-├── notes/                         # experimental design documents
-└── reports/                       # audit and setup reports
-```
+The repository also retains versioned analysis code, processed/generated study
+artifacts, figure-generation support, and run metadata.  The Irish station
+evaluations were regenerated from recovered source datasets using the versioned
+analysis pipeline.  The row-level predictions from the originally executed
+Irish computational run were not retained; therefore, the reported Irish
+results correspond to the documented regeneration rather than recovery of the
+original prediction files.
 
----
+## Data and reproducibility
 
-## Data sources
+Raw source observations are not tracked in this repository.  Madrid air-quality
+and meteorological observations are available from the Madrid City Council open
+data portal; Irish air-quality and meteorological observations are available
+from the Irish Environmental Protection Agency.  Processed and regenerated
+study artifacts are versioned only where indicated by the repository manifests
+and result directories.
 
-Raw data is not tracked in this repository.
+The final inferential tables and manuscript materials listed above are the
+documentary evidence associated with the current SERRA paper.  No claim is made
+that the original Irish row-level prediction files are available.
 
-**Madrid — air quality:**
-Ayuntamiento de Madrid, Portal de Datos Abiertos.
-https://datos.madrid.es/portal/site/egob
-Licence: Creative Commons Attribution 4.0 (CC BY 4.0)
-Series: hourly PM10, station Casa de Campo, 2019–2023.
+## Historical materials
 
-**Madrid — meteorology:**
-Ayuntamiento de Madrid, Portal de Datos Abiertos.
-https://datos.madrid.es/portal/site/egob
-Series: hourly meteorological variables, 2019–2023.
-
-**Ireland — air quality and meteorology:**
-Environmental Protection Agency Ireland (EPA).
-https://www.epa.ie/our-services/monitoring--assessment/air/
-Series: hourly PM10 and meteorological variables,
-8 stations, 2020–2023.
-
----
-
-## Reproducibility
-
-Full reproduction instructions will be added prior to journal submission.
-A Zenodo DOI will be registered at that point and linked here.
-
-See `RUN_ORDER.md` for the current execution sequence.
-
----
-
-## Authors
-
-- Federico García Crespi — UMH, Dep. Tecnología Informática y Computación
-- Julio Ramos — j.ramos@umh.es, UMH
-
----
+Earlier P2/E2-MET manuscripts, figures, and reports remain in their historical
+locations for provenance.  They are not the current SERRA manuscript and should
+not be used to infer the frozen results above.
 
 ## License
 
-To be defined prior to submission.
+See `LICENSE`.
