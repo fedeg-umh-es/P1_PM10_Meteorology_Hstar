@@ -1,8 +1,8 @@
 # P3 — Operational Meteorology
 
-Version: 1.3  
-Last updated: 2026-08-01  
-Status: HOLD AND REPAIR  
+Version: 1.4
+Last updated: 2026-08-16
+Status: ACTIVE — F PROVENANCE GATE
 Sequence gate: P3_SEQUENCE_GATE_CLEARED  
 Canonical file: P3_PROJECT_CANON.md
 P2 release decision: [[../P2_Predictability_Bound/P2_Closure_And_P3_Release_Decision]]
@@ -455,25 +455,24 @@ P3 must not become:
 
 ## 17. Current priority
 
-P3 is currently in HOLD AND REPAIR status.
+P3 is currently in ACTIVE — F PROVENANCE GATE status.
 
 P4 documentary closeout is validated and P2 has been explicitly released as a
 sequencing blocker without being declared scientifically complete.
 
-The P3 sequence gate is therefore cleared, but no P3 experiment, manuscript
-repair or figure upload is authorized until a separate P3 resume task.
+The separate P3 resume decision has now been issued through
+docs/ADR_2026-08-16_P3_F_RESUME.md. Authorization is limited to the
+single-origin Aurora 1.5 provenance and availability pilot. Manuscript editing,
+full forecasting experiments, and atmospheric-mechanism experiments remain
+unauthorized.
+
+P3-A remains PARKED.
 
 ---
 
 ## 18. Next minimum action
 
-Finish the Madrid–Ireland manuscript:
-
-1. upload the five regenerated figures;
-2. insert them in Overleaf;
-3. apply the verified numerical corrections;
-4. compile;
-5. perform a final claim–evidence audit.
+Run a single-origin Aurora 1.5 operational-meteorology provenance and availability audit before any forecasting experiment.
 
 This action belongs to a separate P3 resume task. It is not started by the P2
 governance release.
@@ -510,6 +509,17 @@ governance release.
 - **No automatic start**: P3 remains `HOLD AND REPAIR` until a separate resume
   task authorizes work under this canon.
 
+### 2026-08-16 (Version 1.4 — Explicit P3-F Resume Decision)
+
+- **Project identity**: Reconciled as **P3** on `main`.
+- **P3-F status**: Resumed only for provenance and availability auditing.
+- **Operational meteorology**: Aurora 1.5 remains the canonical first
+  operational-meteorology candidate.
+- **GFS**: Remains unauthorized.
+- **Scope boundary**: Full forecasting experiments and manuscript changes remain
+  unauthorized.
+- **P3-A**: Remains **PARKED**.
+
 ---
 
 ## 20. P2 release and P3 sequence gate
@@ -524,5 +534,7 @@ P2 is not a producer or required dependency for P3 primary data, paired
 predictions, configurations, availability contracts, folds, targets,
 `H_strict_max_run` or `H_strict_from_h1`.
 
-P3 may resume only through a separate task. That task must use P3's own primary
-evidence and must not describe any unresolved P2 result as verified.
+The separate P3 resume task has now been issued through
+docs/ADR_2026-08-16_P3_F_RESUME.md. Current authorization is limited to the
+single-origin Aurora 1.5 provenance and availability pilot and must use P3's
+own primary evidence. No unresolved P2 result may be described as verified.
